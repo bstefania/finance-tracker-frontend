@@ -1,10 +1,10 @@
 import "./App.css";
-import { GoogleAuth } from "./utils/googleAuth";
+import SignUp from "./components/SignUp";
 
 function App() {
   return (
     <div className="App">
-      <GoogleAuth/>
+      <SignUp/>
     </div>
   );
 }
