@@ -55,7 +55,7 @@ a, a:visited {
     color: #fff;
 }
 
-input[type="text"],
+input[type="email"],
 input[type="password"],
 button,
 textarea {

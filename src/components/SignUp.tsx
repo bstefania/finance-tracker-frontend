@@ -5,18 +5,18 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signUpWithEmailAndPassword } from "../utils/authentication"
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = "/sign-up ";
 
-const SignUp = () => {
-  const usernameRef = useRef<HTMLInputElement>(null);
+const Signup = () => {
+  const emailRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 
-  const [username, setUsername] = useState("");
-  const [validUsername, setValidUsername] = useState(false);
-  const [usernameFocus, setUsernameFocus] = useState(false);
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
@@ -30,12 +30,12 @@ const SignUp = () => {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    usernameRef.current?.focus();
+    emailRef.current?.focus();
   }, []);
 
   useEffect(() => {
-    setValidUsername(USER_REGEX.test(username));
-  }, [username]);
+    setValidEmail(EMAIL_REGEX.test(email));
+  }, [email]);
 
   useEffect(() => {
     setValidPassword(PWD_REGEX.test(password));
@@ -44,18 +44,19 @@ const SignUp = () => {
 
   useEffect(() => {
     setErrorMessage("");
-  }, [username, password, matchPassword]);
+  }, [email, password, matchPassword]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // if button enabled with JS hack
-    const v1 = USER_REGEX.test(username);
+    const v1 = EMAIL_REGEX.test(email);
     const v2 = PWD_REGEX.test(password);
     if (!v1 || !v2) {
       setErrorMessage("Invalid entry!");
       return;
     }
     // create user ...
+    signUpWithEmailAndPassword({email, password})
     setSuccess(true);
   };
 
@@ -75,36 +76,35 @@ const SignUp = () => {
             {errorMessage}
           </p>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="username">
-              Username:
-              <span className={validUsername ? "valid" : "hide"}>
+            <label htmlFor="email">
+              Email:
+              <span className={validEmail ? "valid" : "hide"}>
                 <FontAwesomeIcon icon={faCheck} />
               </span>
-              <span className={validUsername || !username ? "hide" : "invalid"}>
+              <span className={validEmail || !email ? "hide" : "invalid"}>
                 <FontAwesomeIcon icon={faTimes} />
               </span>
             </label>
             <input
-              type="text"
+              type="email"
               required
-              id="username"
-              ref={usernameRef}
+              id="email"
+              ref={emailRef}
               autoComplete="off"
-              onChange={(e) => setUsername(e.target.value)}
-              onFocus={() => setUsernameFocus(true)}
-              onBlur={() => setUsernameFocus(false)}
+              onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
             />
             <p
               id="uidnote"
               className={
-                usernameFocus && username && !validUsername
+                emailFocus && email && !validEmail
                   ? "instructions"
                   : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              Your username has to have between 4 to 24 characters. It must
-              begin with a letter. Numbers, underscores and hyphens allowed.
+              Your email address must have a valid format consisting of a username, followed by an '@' symbol, and a domain name. 
             </p>
             <label htmlFor="password">
               Password:
@@ -172,7 +172,7 @@ const SignUp = () => {
             </p>
             <button
               disabled={
-                !validUsername || !validPassword || !validMatchPassword
+                !validEmail || !validPassword || !validMatchPassword
                   ? true
                   : false
               }
@@ -194,4 +194,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;
