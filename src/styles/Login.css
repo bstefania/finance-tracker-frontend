@@ -1,0 +1,167 @@
+   .formPage {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     background-color: white;
+     position: absolute;
+     width: 100%;
+     height: 100%;
+   }
+
+   .header {
+    color: #155E63;
+    margin-bottom: 1em;
+   }
+
+   .formDesign {
+     width: 40%;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     background-color: #76B39D;
+     padding: 50px;
+     color: white
+   }
+
+   .formMainDiv {
+     width: 60%;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+   }
+
+   .formDiv {
+     width: 300px;
+     height: fit-content;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 1em;
+     padding: 1em;
+   }
+
+   .externalProviderButton {
+    width: 100%;
+    border-width: thin;
+    border-style: solid;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .providerIcon {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 10px;
+  }
+  
+  .delimiter {
+    width: 100%;
+    margin-bottom: 0.9em;
+  }
+  
+  .delimiter hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    width: 100%;
+  }
+  
+  .delimiter-text {
+    position: relative;
+    top: 1em;
+    display: inline-block;
+    padding: 0 0.5em;
+    font-size: 12px;
+    color: grey;
+    font-weight: 100;
+    background-color: white;
+  }
+
+   form {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-evenly;
+     gap: 5px;
+     flex-grow: 1;
+     padding-bottom: 1em;
+     text-align: left;
+     font-size: 1rem;
+   }
+
+   .formField {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-evenly;
+     gap: 0.5em;
+     margin: 0.25em 0;
+     padding: 0.5em 1em;
+     background-color: #EAE7E7;
+     border: none;
+     align-items: center;
+   }
+
+   .formIcon {
+    color: grey;
+   }
+
+   .forgotPassword {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin: 0.5em 0;
+     font-size: 0.9rem;
+   }
+
+   .instructions {
+     font-size: 0.75rem;
+     border-radius: 0.5rem;
+     background: #757575;
+     color: #fff;
+     padding: 0.25rem;
+     position: relative;
+     bottom: -10px;
+   }
+
+   .instructions>svg {
+     margin-right: 0.25rem;
+   }
+
+   .offscreen {
+     position: absolute;
+     left: -9999px;
+   }
+
+   .hide {
+     display: none;
+   }
+
+   .valid {
+     color: limegreen;
+     margin-left: 0.25rem;
+   }
+
+   .invalid {
+     color: red;
+     margin-left: 0.25rem;
+   }
+
+   .errmsg {
+     background-color: lightpink;
+     color: firebrick;
+     font-weight: bold;
+     padding: 0.5rem;
+     margin-bottom: 0.5rem;
+   }
