@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Login.css";
 import { faEnvelope, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Navbar from "./Navbar";
 
 export default function () {
   const navigate = useNavigate();
@@ -35,83 +36,86 @@ export default function () {
   };
 
   return (
-    <div className="formPage">
-      <div className="formMainDiv">
-        <div className="formDiv">
-          <p ref={errRef} className={errMessage ? "errmsg" : "offscreen"}>
-            {errMessage}
-          </p>
-          <h1 className="header">Log in</h1>
-          <div className="externalProviderButton">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              className="providerIcon"
-              alt=""
-            />
-            <span className="textContainer">Continue with Google </span>
-          </div>
-          <div className="externalProviderButton">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
-              className="providerIcon"
-              alt=""
-            />
-            <span className="textContainer">Continue with Facebook </span>
-          </div>
-
-          <div className="delimiter">
-            <span className="delimiter-text">or log in with email</span>
-            <hr />
-          </div>
-
-          <form onSubmit={handleSubmit}>
-            <div className="formField">
-              <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
-              <input
-                type="email"
-                id="email"
-                ref={emailRef}
-                autoComplete="off"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-                placeholder="Email"
+    <div className="loginPage">
+      <Navbar />
+      <div className="formContainer">
+        <div className="formWrapper">
+          <div className="formContent">
+            <p ref={errRef} className={errMessage ? "errmsg" : "offscreen"}>
+              {errMessage}
+            </p>
+            <h1 className="heading">Log in</h1>
+            <div className="externalProviderButton">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                className="providerIcon"
+                alt=""
               />
+              <span className="textContainer">Continue with Google </span>
+            </div>
+            <div className="externalProviderButton">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
+                className="providerIcon"
+                alt=""
+              />
+              <span className="textContainer">Continue with Facebook </span>
             </div>
 
-            <div className="formField">
-            <FontAwesomeIcon icon={faUnlock} className="formIcon" />
-              <input
-                type="password"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                required
-                placeholder="Password"
-              />
+            <div className="delimiter">
+              <span className="delimiter-text">or log in with email</span>
+              <hr />
             </div>
-            <div className="forgotPassword">
+
+            <form onSubmit={handleSubmit}>
+              <div className="formField">
+                <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+                <input
+                  type="email"
+                  id="email"
+                  ref={emailRef}
+                  autoComplete="off"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  required
+                  placeholder="Email"
+                />
+              </div>
+
+              <div className="formField">
+                <FontAwesomeIcon icon={faUnlock} className="formIcon" />
+                <input
+                  type="password"
+                  id="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  required
+                  placeholder="Password"
+                />
+              </div>
+              <div className="forgotPassword">
+                <span className="line">
+                  {/*put router link here*/}
+                  <a href="#">Forgot your password?</a>
+                </span>
+                <button>Log in</button>
+              </div>
+            </form>
+            <div>
+              Don't have an account?
+              <br />
               <span className="line">
                 {/*put router link here*/}
-                <a href="#">Forgot your password?</a>
+                <a href="#">Sign up</a>
               </span>
-              <button>Log in</button>
             </div>
-          </form>
-          <div>
-            Don't have an account?
-            <br />
-            <span className="line">
-              {/*put router link here*/}
-              <a href="#">Sign up</a>
-            </span>
           </div>
         </div>
-      </div>
-      <div className="formDesign">
-        <h1>Welcome Back!</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-        {/* <img src="login.svg" height="300px" /> */}
+        <div className="formDesign">
+          <h1>Welcome Back!</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+          {/* <img src="login.svg" height="300px" /> */}
+        </div>
       </div>
     </div>
   );

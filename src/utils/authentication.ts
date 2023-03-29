@@ -8,7 +8,6 @@ import {
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { auth } from "../config/firebase"
-import { Provider } from "../types/general";
 
 export const signUpWithEmailAndPassword = async (data: any) => {
   try {
