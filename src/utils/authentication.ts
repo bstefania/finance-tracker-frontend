@@ -34,7 +34,6 @@ export const logInWithEmailAndPassword = async (data: any) => {
     console.log("Logging in with email and password...")
     const res = await signInWithEmailAndPassword(auth, data.email, data.password);
     const user = res.user;
-    return user.getIdToken()
   } catch (error: any) {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -62,7 +61,7 @@ const signUpWithThirdParty = async (provider: GoogleAuthProvider) => {
   }
 }
 
-export const logOutUser = () => {
+export const logOut = () => {
   signOut(auth)
     .then(() => {
       sessionStorage.clear();
