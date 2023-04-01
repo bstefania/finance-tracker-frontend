@@ -10,8 +10,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signUpWithEmailAndPassword } from "../utils/authentication";
 import { Link } from "react-router-dom";
-import "../styles/Login.css";
+import "../styles/Authentication.css";
 import Navbar from "./Navbar";
+import ExternalProvider from "./ExternalProvider";
+import Delimiter from "./Delimiter";
+import ErrorMessage from "./ErrorMessage";
 
 const NAME_REGEX = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -103,35 +106,14 @@ const Signup = () => {
           </p>
         </div>
       ) : (
-        <div className="loginPage">
+        <div className="authenticationPage">
           <Navbar />
           <div className="formContainer">
             <div className="formContent">
+              {errorMessage && <ErrorMessage text={errorMessage}/>}
               <h1 className="heading">Sign up</h1>
-              <div className="externalProviderButton">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                  className="providerIcon"
-                  alt=""
-                />
-                <span className="textContainer">Continue with Google </span>
-              </div>
-              <div className="externalProviderButton">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
-                  className="providerIcon"
-                  alt=""
-                />
-                <span className="textContainer">Continue with Facebook </span>
-              </div>
-
-              <div className="delimiter">
-                <span className="delimiter-text">or sign up with email</span>
-                <hr />
-              </div>
-              <p ref={errRef} className={errorMessage ? "errmsg" : "offscreen"}>
-                {errorMessage}
-              </p>
+              <ExternalProvider/>
+              <Delimiter text="or sign up with email"/>
               <form className="customForm" onSubmit={handleSubmit}>
               <div className="formField">
                   <FontAwesomeIcon icon={faEnvelope} className="formIcon" />

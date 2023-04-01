@@ -2,10 +2,13 @@ import { FormEvent } from "react";
 import { useRef, useState, useEffect } from "react";
 import { logInWithEmailAndPassword } from "../utils/authentication";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import "../styles/Login.css";
+import "../styles/Authentication.css";
 import { faEnvelope, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "./Navbar";
+import ExternalProvider from "./ExternalProvider";
+import Delimiter from "./Delimiter";
+import ErrorMessage from "./ErrorMessage";
 
 export default function () {
   const navigate = useNavigate();
@@ -17,55 +20,34 @@ export default function () {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errMessage, setErrMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     emailRef.current?.focus();
   }, []);
 
   useEffect(() => {
-    setErrMessage("");
+    setErrorMessage("");
   }, [email, password]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setEmail("");
     setPassword("");
+    setErrorMessage("hfpogfdf wsre tgh tfgrg")
     await logInWithEmailAndPassword({ email, password });
     navigate(from, { replace: true });
   };
 
   return (
-    <div className="loginPage">
+    <div className="authenticationPage">
       <Navbar />
         <div className="formContainer">
           <div className="formContent">
-            <p ref={errRef} className={errMessage ? "errmsg" : "offscreen"}>
-              {errMessage}
-            </p>
+          {errorMessage && <ErrorMessage text={errorMessage}/>}
             <h1 className="heading">Log in</h1>
-            <div className="externalProviderButton">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                className="providerIcon"
-                alt=""
-              />
-              <span className="textContainer">Continue with Google </span>
-            </div>
-            <div className="externalProviderButton">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
-                className="providerIcon"
-                alt=""
-              />
-              <span className="textContainer">Continue with Facebook </span>
-            </div>
-
-            <div className="delimiter">
-              <span className="delimiter-text">or log in with email</span>
-              <hr />
-            </div>
-
+            <ExternalProvider/>
+            <Delimiter text="or log in with email"/>
             <form className="customForm" onSubmit={handleSubmit}>
               <div className="formField">
                 <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
@@ -80,7 +62,6 @@ export default function () {
                   placeholder="Email"
                 />
               </div>
-
               <div className="formField">
                 <FontAwesomeIcon icon={faUnlock} className="formIcon" />
                 <input
@@ -94,7 +75,6 @@ export default function () {
               </div>
               <div className="forgotPassword">
                 <span className="line">
-                  {/*put router link here*/}
                   <a href="#">Forgot your password?</a>
                 </span>
                 <button>Log in</button>
@@ -104,7 +84,6 @@ export default function () {
               Don't have an account?
               <br />
               <span className="line">
-                {/*put router link here*/}
                 <Link to="/signup">Sign up</Link>
               </span>
             </div>
