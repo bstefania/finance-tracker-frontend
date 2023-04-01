@@ -46,6 +46,10 @@ button {
   color: white;
 }
 
+button:disabled {
+  opacity: 0.5;
+}
+
 a,
 a:visited {
   color: #155E63;

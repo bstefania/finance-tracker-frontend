@@ -16,13 +16,12 @@ import ExternalProvider from "./ExternalProvider";
 import Delimiter from "./Delimiter";
 import ErrorMessage from "./ErrorMessage";
 
-const NAME_REGEX = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/
+const NAME_REGEX = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Signup = () => {
   const nameRef = useRef<HTMLInputElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
 
   const [name, setName] = useState("");
   const [validName, setValidName] = useState(false);
@@ -66,7 +65,7 @@ const Signup = () => {
 
   const clearName = () => {
     setName("");
-    nameRef.current!.value = ""
+    nameRef.current!.value = "";
   };
 
   const clearEmail = () => {
@@ -95,8 +94,7 @@ const Signup = () => {
       await signUpWithEmailAndPassword({ email, password });
       setSuccess(true);
     } catch (error: any) {
-      if (
-        error.code === "auth/email-already-in-use") {
+      if (error.code === "auth/email-already-in-use") {
         setErrorMessage("Email already in use!");
       } else {
         setErrorMessage("Something went wrong!");
@@ -118,13 +116,13 @@ const Signup = () => {
         <div className="authenticationPage">
           <Navbar />
           <div className="formContainer">
-            {errorMessage && <ErrorMessage text={errorMessage}/>}
+            {errorMessage && <ErrorMessage text={errorMessage} />}
             <div className="formContent">
               <h1 className="heading">Sign up</h1>
-              <ExternalProvider/>
-              <Delimiter text="or sign up with email"/>
+              <ExternalProvider />
+              <Delimiter text="or sign up with email" />
               <form className="customForm" onSubmit={handleSubmit}>
-              <div className="formField">
+                <div className="formField">
                   <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
                   <input
                     type="text"
@@ -141,19 +139,20 @@ const Signup = () => {
                     <FontAwesomeIcon icon={faCheck} />
                   </span>
                   <span className={validName || !name ? "hide" : "invalid"}>
-                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearName} />
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="iconWithAction"
+                      onClick={clearName}
+                    />
                   </span>
                 </div>
                 <p
                   id="uidnote"
-                  className={
-                    name && !validName
-                      ? "instructions"
-                      : "offscreen"
-                  }
+                  className={name && !validName ? "instructions" : "offscreen"}
                 >
                   <FontAwesomeIcon icon={faInfoCircle} />
-                  Your name should start with capital letter and it should contain only letters and spaces.
+                  Your name should start with capital letter and it should
+                  contain only letters and spaces.
                 </p>
                 <div className="formField">
                   <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
@@ -171,15 +170,17 @@ const Signup = () => {
                     <FontAwesomeIcon icon={faCheck} />
                   </span>
                   <span className={validEmail || !email ? "hide" : "invalid"}>
-                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearEmail} />
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="iconWithAction"
+                      onClick={clearEmail}
+                    />
                   </span>
                 </div>
                 <p
                   id="uidnote"
                   className={
-                    email && !validEmail
-                      ? "instructions"
-                      : "offscreen"
+                    email && !validEmail ? "instructions" : "offscreen"
                   }
                 >
                   <FontAwesomeIcon icon={faInfoCircle} />
@@ -204,15 +205,17 @@ const Signup = () => {
                   <span
                     className={validPassword || !password ? "hide" : "invalid"}
                   >
-                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearPassword} />
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="iconWithAction"
+                      onClick={clearPassword}
+                    />
                   </span>
                 </div>
                 <p
                   id="pwdnote"
                   className={
-                    password && !validPassword
-                      ? "instructions"
-                      : "offscreen"
+                    password && !validPassword ? "instructions" : "offscreen"
                   }
                 >
                   <FontAwesomeIcon icon={faInfoCircle} />
@@ -244,7 +247,11 @@ const Signup = () => {
                       validPassword || !matchPassword ? "hide" : "invalid"
                     }
                   >
-                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearConfirmPassword} />
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="iconWithAction"
+                      onClick={clearConfirmPassword}
+                    />
                   </span>
                 </div>
                 <p
@@ -261,7 +268,10 @@ const Signup = () => {
                 <button
                   className="extraMargins"
                   disabled={
-                    !validEmail || !validPassword || !validMatchPassword
+                    (name && !validName) ||
+                    (email && !validEmail) ||
+                    (password && !validPassword) ||
+                    (matchPassword && !validMatchPassword)
                       ? true
                       : false
                   }

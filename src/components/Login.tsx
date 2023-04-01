@@ -16,7 +16,6 @@ export default function () {
   const from = location.state?.from?.pathname || "/";
 
   const emailRef = useRef<HTMLInputElement>(null);
-  const errRef = useRef<HTMLParagraphElement>(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
