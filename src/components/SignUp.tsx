@@ -3,16 +3,27 @@ import {
   faCheck,
   faTimes,
   faInfoCircle,
+  faEnvelope,
+  faUnlock,
+  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { signUpWithEmailAndPassword } from "../utils/authentication"
+import { signUpWithEmailAndPassword } from "../utils/authentication";
+import { Link } from "react-router-dom";
+import "../styles/Login.css";
+import Navbar from "./Navbar";
 
+const NAME_REGEX = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Signup = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
+
+  const [name, setName] = useState("");
+  const [validName, setValidName] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
 
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
@@ -30,8 +41,12 @@ const Signup = () => {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    emailRef.current?.focus();
+    nameRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    setValidName(NAME_REGEX.test(name));
+  }, [name]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
@@ -44,19 +59,37 @@ const Signup = () => {
 
   useEffect(() => {
     setErrorMessage("");
-  }, [email, password, matchPassword]);
+  }, [name, email, password, matchPassword]);
+
+  const clearName = () => {
+    setName("");
+    nameRef.current!.value = ""
+  };
+
+  const clearEmail = () => {
+    setEmail("");
+  };
+
+  const clearPassword = () => {
+    setPassword("");
+  };
+
+  const clearConfirmPassword = () => {
+    setMatchPassword("");
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // if button enabled with JS hack
-    const v1 = EMAIL_REGEX.test(email);
-    const v2 = PWD_REGEX.test(password);
-    if (!v1 || !v2) {
+    const v1 = NAME_REGEX.test(name);
+    const v2 = EMAIL_REGEX.test(email);
+    const v3 = PWD_REGEX.test(password);
+    if (!v1 || !v2 || !v3) {
       setErrorMessage("Invalid entry!");
       return;
     }
     // create user ...
-    signUpWithEmailAndPassword({email, password})
+    signUpWithEmailAndPassword({ email, password });
     setSuccess(true);
   };
 
@@ -70,124 +103,190 @@ const Signup = () => {
           </p>
         </div>
       ) : (
-        <div id="signUpForm">
-          <h1>Sign Up</h1>
-          <p ref={errRef} className={errorMessage ? "errmsg" : "offscreen"}>
-            {errorMessage}
-          </p>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="email">
-              Email:
-              <span className={validEmail ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <span className={validEmail || !email ? "hide" : "invalid"}>
-                <FontAwesomeIcon icon={faTimes} />
-              </span>
-            </label>
-            <input
-              type="email"
-              required
-              id="email"
-              ref={emailRef}
-              autoComplete="off"
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => setEmailFocus(true)}
-              onBlur={() => setEmailFocus(false)}
-            />
-            <p
-              id="uidnote"
-              className={
-                emailFocus && email && !validEmail
-                  ? "instructions"
-                  : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Your email address must have a valid format consisting of a username, followed by an '@' symbol, and a domain name. 
-            </p>
-            <label htmlFor="password">
-              Password:
-              <span className={validPassword ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <span className={validPassword || !password ? "hide" : "invalid"}>
-                <FontAwesomeIcon icon={faTimes} />
-              </span>
-            </label>
-            <input
-              type="password"
-              required
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              onFocus={() => setPasswordFocus(true)}
-              onBlur={() => setPasswordFocus(false)}
-            />
-            <p
-              id="pwdnote"
-              className={
-                passwordFocus && password && !validPassword
-                  ? "instructions"
-                  : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Must include uppercase and lowercase letters, a number and a
-              special character. <br />
-              Allowed special characters: !@#$%
-            </p>
-            <label htmlFor="confirmPassword">
-              Confirm Password:
-              <span
-                className={
-                  validMatchPassword && matchPassword ? "valid" : "hide"
-                }
-              >
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <span
-                className={validPassword || !matchPassword ? "hide" : "invalid"}
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </span>
-            </label>
-            <input
-              type="password"
-              required
-              id="confirmPassword"
-              onChange={(e) => setMatchPassword(e.target.value)}
-              onFocus={() => setMatchPasswordFocus(true)}
-              onBlur={() => setMatchPasswordFocus(false)}
-            />
-            <p
-              id="confirmnote"
-              className={
-                matchPasswordFocus && matchPassword && !validMatchPassword
-                  ? "instructions"
-                  : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              The passwords don't match!
-            </p>
-            <button
-              disabled={
-                !validEmail || !validPassword || !validMatchPassword
-                  ? true
-                  : false
-              }
-            >
-              Sign Up
-            </button>
-          </form>
-          <p>
-            Already registered?
-            <br />
-            <span className="line">
-              {/*put router link here*/}
-              <a href="#">Sign In</a>
-            </span>
-          </p>
+        <div className="loginPage">
+          <Navbar />
+          <div className="formContainer">
+            <div className="formContent">
+              <h1 className="heading">Sign up</h1>
+              <div className="externalProviderButton">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                  className="providerIcon"
+                  alt=""
+                />
+                <span className="textContainer">Continue with Google </span>
+              </div>
+              <div className="externalProviderButton">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
+                  className="providerIcon"
+                  alt=""
+                />
+                <span className="textContainer">Continue with Facebook </span>
+              </div>
+
+              <div className="delimiter">
+                <span className="delimiter-text">or sign up with email</span>
+                <hr />
+              </div>
+              <p ref={errRef} className={errorMessage ? "errmsg" : "offscreen"}>
+                {errorMessage}
+              </p>
+              <form className="customForm" onSubmit={handleSubmit}>
+              <div className="formField">
+                  <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+                  <input
+                    type="text"
+                    required
+                    id="name"
+                    ref={nameRef}
+                    autoComplete="off"
+                    placeholder="Name"
+                    onChange={(e) => setName(e.target.value)}
+                    onFocus={() => setNameFocus(true)}
+                    onBlur={() => setNameFocus(false)}
+                  />
+                  <span className={validName ? "valid" : "hide"}>
+                    <FontAwesomeIcon icon={faCheck} />
+                  </span>
+                  <span className={validName || !name ? "hide" : "invalid"}>
+                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearName} />
+                  </span>
+                </div>
+                <p
+                  id="uidnote"
+                  className={
+                    name && !validName
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                  Your name should start with capital letter and it should contain only letters and spaces.
+                </p>
+                <div className="formField">
+                  <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+                  <input
+                    type="email"
+                    required
+                    id="email"
+                    autoComplete="off"
+                    placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setEmailFocus(true)}
+                    onBlur={() => setEmailFocus(false)}
+                  />
+                  <span className={validEmail ? "valid" : "hide"}>
+                    <FontAwesomeIcon icon={faCheck} />
+                  </span>
+                  <span className={validEmail || !email ? "hide" : "invalid"}>
+                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearEmail} />
+                  </span>
+                </div>
+                <p
+                  id="uidnote"
+                  className={
+                    email && !validEmail
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                  Your email address must have a valid format consisting of a
+                  username, followed by an '@' symbol, and a domain name.
+                </p>
+                <div className="formField">
+                  <FontAwesomeIcon icon={faUnlock} className="formIcon" />
+                  <input
+                    type="password"
+                    required
+                    id="password"
+                    value={password}
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setPasswordFocus(true)}
+                    onBlur={() => setPasswordFocus(false)}
+                  />
+                  <span className={validPassword ? "valid" : "hide"}>
+                    <FontAwesomeIcon icon={faCheck} />
+                  </span>
+                  <span
+                    className={validPassword || !password ? "hide" : "invalid"}
+                  >
+                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearPassword} />
+                  </span>
+                </div>
+                <p
+                  id="pwdnote"
+                  className={
+                    password && !validPassword
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                  Must include uppercase and lowercase letters, a number and a
+                  special character. <br />
+                  Allowed special characters: !@#$%
+                </p>
+                <div className="formField">
+                  <FontAwesomeIcon icon={faLock} className="formIcon" />
+                  <input
+                    type="password"
+                    required
+                    id="confirmPassword"
+                    value={matchPassword}
+                    placeholder="Confirm Password"
+                    onChange={(e) => setMatchPassword(e.target.value)}
+                    onFocus={() => setMatchPasswordFocus(true)}
+                    onBlur={() => setMatchPasswordFocus(false)}
+                  />
+                  <span
+                    className={
+                      validMatchPassword && matchPassword ? "valid" : "hide"
+                    }
+                  >
+                    <FontAwesomeIcon icon={faCheck} />
+                  </span>
+                  <span
+                    className={
+                      validPassword || !matchPassword ? "hide" : "invalid"
+                    }
+                  >
+                    <FontAwesomeIcon icon={faTimes} className="iconWithAction" onClick={clearConfirmPassword} />
+                  </span>
+                </div>
+                <p
+                  id="confirmnote"
+                  className={
+                    matchPassword && !validMatchPassword
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                  The passwords don't match!
+                </p>
+                <button
+                  className="extraMargins"
+                  disabled={
+                    !validEmail || !validPassword || !validMatchPassword
+                      ? true
+                      : false
+                  }
+                >
+                  Sign Up
+                </button>
+              </form>
+              <p>
+                Already registered?
+                <br />
+                <span className="line">
+                  <Link to="/login">Log in</Link>
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </>

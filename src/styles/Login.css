@@ -1,16 +1,16 @@
    .loginPage {
     width: 100%;
+    display: flex;
+    flex-direction: column;
    }
 
    .formContainer {
      display: flex;
-     flex-direction: row;
      justify-content: space-between;
-     align-items: center;
      justify-content: center;
      background-color: white;
-     position: absolute;
      width: 100%;
+     height: 100%;
      text-align: center;
    }
 
@@ -32,22 +32,12 @@
      display: none;
    }
 
-   .formWrapper {
-     width: 60%;
-     height: 100%;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-   }
-
    .formContent {
-     width: 300px;
+     width: 310px;
      height: fit-content;
      display: flex;
      flex-direction: column;
      align-items: center;
-     justify-content: center;
      gap: 1em;
      padding: 1em;
    }
@@ -95,19 +85,8 @@
     background-color: white;
   }
 
-   form {
-     width: 100%;
-     display: flex;
-     flex-direction: column;
-     justify-content: space-evenly;
-     gap: 5px;
-     flex-grow: 1;
-     padding-bottom: 1em;
-     text-align: left;
-     font-size: 1rem;
-   }
-
    .formField {
+    width: 100%;
      display: flex;
      flex-direction: row;
      justify-content: space-evenly;
@@ -123,6 +102,10 @@
     color: grey;
    }
 
+   .extraMargins {
+    margin: 0.75em;
+   }
+
    .forgotPassword {
      display: flex;
      align-items: center;
@@ -132,17 +115,20 @@
    }
 
    .instructions {
+    width: 100%;
      font-size: 0.75rem;
      border-radius: 0.5rem;
-     background: #757575;
+     background: #7f7f7f;
      color: #fff;
      padding: 0.25rem;
-     position: relative;
-     bottom: -10px;
    }
 
    .instructions>svg {
      margin-right: 0.25rem;
+   }
+
+   .iconWithAction {
+    padding-inline: 0.5em;
    }
 
    .offscreen {
@@ -156,12 +142,11 @@
 
    .valid {
      color: limegreen;
-     margin-left: 0.25rem;
    }
 
    .invalid {
      color: red;
-     margin-left: 0.25rem;
+     cursor: pointer;
    }
 
    .errmsg {

@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import { useRef, useState, useEffect } from "react";
 import { logInWithEmailAndPassword } from "../utils/authentication";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../styles/Login.css";
 import { faEnvelope, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,8 +38,7 @@ export default function () {
   return (
     <div className="loginPage">
       <Navbar />
-      <div className="formContainer">
-        <div className="formWrapper">
+        <div className="formContainer">
           <div className="formContent">
             <p ref={errRef} className={errMessage ? "errmsg" : "offscreen"}>
               {errMessage}
@@ -67,7 +66,7 @@ export default function () {
               <hr />
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form className="customForm" onSubmit={handleSubmit}>
               <div className="formField">
                 <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
                 <input
@@ -106,7 +105,7 @@ export default function () {
               <br />
               <span className="line">
                 {/*put router link here*/}
-                <a href="#">Sign up</a>
+                <Link to="/signup">Sign up</Link>
               </span>
             </div>
           </div>
@@ -116,7 +115,6 @@ export default function () {
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
           {/* <img src="login.svg" height="300px" /> */}
         </div>
-      </div>
     </div>
   );
 }
