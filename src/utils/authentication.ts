@@ -10,34 +10,21 @@ import { db } from "../config/firebase";
 import { auth } from "../config/firebase"
 
 export const signUpWithEmailAndPassword = async (data: any) => {
-  try {
-    console.log("Signing up with email and password...")
-    const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
-    const user = res.user;
-    console.log(res)
-    // await addDoc(collection(db, "users"), {
-    //   uid: user.uid,
-    //   name,
-    //   authProvider: "local",
-    //   email,
-    // });
-  } catch (error: any) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-  }
+  console.log("Signing up with email and password...")
+  const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
+  const user = res.user;
+  // await addDoc(collection(db, "users"), {
+  //   uid: user.uid,
+  //   name,
+  //   authProvider: "local",
+  //   email,
+  // });
 }
 
 export const logInWithEmailAndPassword = async (data: any) => {
-  try {
     console.log("Logging in with email and password...")
     const res = await signInWithEmailAndPassword(auth, data.email, data.password);
     const user = res.user;
-  } catch (error: any) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-  }
 }
 
 const signUpWithThirdParty = async (provider: GoogleAuthProvider) => {

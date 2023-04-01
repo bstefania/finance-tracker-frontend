@@ -91,9 +91,18 @@ const Signup = () => {
       setErrorMessage("Invalid entry!");
       return;
     }
-    // create user ...
-    signUpWithEmailAndPassword({ email, password });
-    setSuccess(true);
+    try {
+      await signUpWithEmailAndPassword({ email, password });
+      setSuccess(true);
+    } catch (error: any) {
+      if (
+        error.code === "auth/email-already-in-use") {
+        setErrorMessage("Email already in use!");
+      } else {
+        setErrorMessage("Something went wrong!");
+        console.log(error.code);
+      }
+    }
   };
 
   return (
@@ -109,8 +118,8 @@ const Signup = () => {
         <div className="authenticationPage">
           <Navbar />
           <div className="formContainer">
+            {errorMessage && <ErrorMessage text={errorMessage}/>}
             <div className="formContent">
-              {errorMessage && <ErrorMessage text={errorMessage}/>}
               <h1 className="heading">Sign up</h1>
               <ExternalProvider/>
               <Delimiter text="or sign up with email"/>

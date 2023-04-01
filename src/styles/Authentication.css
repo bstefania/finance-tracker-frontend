@@ -6,6 +6,8 @@
 
  .formContainer {
    display: flex;
+   flex-direction: column;
+   align-items: center;
    justify-content: space-between;
    justify-content: center;
    background-color: white;
@@ -150,9 +152,9 @@
  }
 
  .errmsg {
+  /* width: 100%; */
    background-color: lightpink;
    color: firebrick;
-   font-weight: bold;
    padding: 0.5rem;
-   margin-bottom: 0.5rem;
+   margin-inline: 10rem;
  }

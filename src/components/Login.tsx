@@ -32,68 +32,84 @@ export default function () {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setEmail("");
-    setPassword("");
-    setErrorMessage("hfpogfdf wsre tgh tfgrg")
-    await logInWithEmailAndPassword({ email, password });
-    navigate(from, { replace: true });
+    try {
+      await logInWithEmailAndPassword({ email, password });
+      setEmail("");
+      setPassword("");
+      navigate(from, { replace: true });
+    } catch (error: any) {
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
+      ) {
+        setErrorMessage("Incorrect email or password!");
+      } else if (error.code === "auth/too-many-requests") {
+        setErrorMessage(
+          "Access to this account has been temporarily disabled due to many failed \
+          login attempts. You can immediately restore it by resetting your password or you can try again later."
+        );
+      } else {
+        setErrorMessage("Something went wrong!");
+        console.log(error.code);
+      }
+    }
   };
 
   return (
     <div className="authenticationPage">
       <Navbar />
-        <div className="formContainer">
-          <div className="formContent">
-          {errorMessage && <ErrorMessage text={errorMessage}/>}
-            <h1 className="heading">Log in</h1>
-            <ExternalProvider/>
-            <Delimiter text="or log in with email"/>
-            <form className="customForm" onSubmit={handleSubmit}>
-              <div className="formField">
-                <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
-                <input
-                  type="email"
-                  id="email"
-                  ref={emailRef}
-                  autoComplete="off"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  required
-                  placeholder="Email"
-                />
-              </div>
-              <div className="formField">
-                <FontAwesomeIcon icon={faUnlock} className="formIcon" />
-                <input
-                  type="password"
-                  id="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  required
-                  placeholder="Password"
-                />
-              </div>
-              <div className="forgotPassword">
-                <span className="line">
-                  <a href="#">Forgot your password?</a>
-                </span>
-                <button>Log in</button>
-              </div>
-            </form>
-            <div>
-              Don't have an account?
-              <br />
-              <span className="line">
-                <Link to="/signup">Sign up</Link>
-              </span>
+      <div className="formContainer">
+        {errorMessage && <ErrorMessage text={errorMessage} />}
+        <div className="formContent">
+          <h1 className="heading">Log in</h1>
+          <ExternalProvider />
+          <Delimiter text="or log in with email" />
+          <form className="customForm" onSubmit={handleSubmit}>
+            <div className="formField">
+              <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+              <input
+                type="email"
+                id="email"
+                ref={emailRef}
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+                placeholder="Email"
+              />
             </div>
+            <div className="formField">
+              <FontAwesomeIcon icon={faUnlock} className="formIcon" />
+              <input
+                type="password"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+                placeholder="Password"
+              />
+            </div>
+            <div className="forgotPassword">
+              <span className="line">
+                <a href="#">Forgot your password?</a>
+              </span>
+              <button>Log in</button>
+            </div>
+          </form>
+          <div>
+            Don't have an account?
+            <br />
+            <span className="line">
+              <Link to="/signup">Sign up</Link>
+            </span>
           </div>
         </div>
-        <div className="formDesign">
-          <h1>Welcome Back!</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-          {/* <img src="login.svg" height="300px" /> */}
-        </div>
+      </div>
+      <div className="formDesign">
+        <h1>Welcome Back!</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+        {/* <img src="login.svg" height="300px" /> */}
+      </div>
     </div>
   );
 }
