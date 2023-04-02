@@ -91,7 +91,7 @@ const Signup = () => {
       return;
     }
     try {
-      await signUpWithEmailAndPassword({ email, password });
+      await signUpWithEmailAndPassword({ name, email, password });
       setSuccess(true);
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {
@@ -104,193 +104,176 @@ const Signup = () => {
   };
 
   return (
-    <>
-      {success ? (
-        <div>
-          <h1>Success!</h1>
+    <div className="authenticationPage">
+      <Navbar />
+      <div className="formContainer">
+        {errorMessage && <ErrorMessage text={errorMessage} />}
+        <div className="formContent">
+          <h1 className="heading">Sign up</h1>
+          <ExternalProvider />
+          <Delimiter text="or sign up with email" />
+          <form className="customForm" onSubmit={handleSubmit}>
+            <div className="formField">
+              <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+              <input
+                type="text"
+                required
+                id="name"
+                ref={nameRef}
+                autoComplete="off"
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+                onFocus={() => setNameFocus(true)}
+                onBlur={() => setNameFocus(false)}
+              />
+              <span className={validName ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span className={validName || !name ? "hide" : "invalid"}>
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className="iconWithAction"
+                  onClick={clearName}
+                />
+              </span>
+            </div>
+            <p
+              id="uidnote"
+              className={name && !validName ? "instructions" : "offscreen"}
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              Your name should start with capital letter and it should contain
+              only letters and spaces.
+            </p>
+            <div className="formField">
+              <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+              <input
+                type="email"
+                required
+                id="email"
+                autoComplete="off"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
+              />
+              <span className={validEmail ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span className={validEmail || !email ? "hide" : "invalid"}>
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className="iconWithAction"
+                  onClick={clearEmail}
+                />
+              </span>
+            </div>
+            <p
+              id="uidnote"
+              className={email && !validEmail ? "instructions" : "offscreen"}
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              Your email address must have a valid format consisting of a
+              username, followed by an '@' symbol, and a domain name.
+            </p>
+            <div className="formField">
+              <FontAwesomeIcon icon={faUnlock} className="formIcon" />
+              <input
+                type="password"
+                required
+                id="password"
+                value={password}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setPasswordFocus(true)}
+                onBlur={() => setPasswordFocus(false)}
+              />
+              <span className={validPassword ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span className={validPassword || !password ? "hide" : "invalid"}>
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className="iconWithAction"
+                  onClick={clearPassword}
+                />
+              </span>
+            </div>
+            <p
+              id="pwdnote"
+              className={
+                password && !validPassword ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              Must include uppercase and lowercase letters, a number and a
+              special character. <br />
+              Allowed special characters: !@#$%
+            </p>
+            <div className="formField">
+              <FontAwesomeIcon icon={faLock} className="formIcon" />
+              <input
+                type="password"
+                required
+                id="confirmPassword"
+                value={matchPassword}
+                placeholder="Confirm Password"
+                onChange={(e) => setMatchPassword(e.target.value)}
+                onFocus={() => setMatchPasswordFocus(true)}
+                onBlur={() => setMatchPasswordFocus(false)}
+              />
+              <span
+                className={
+                  validMatchPassword && matchPassword ? "valid" : "hide"
+                }
+              >
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <span
+                className={validPassword || !matchPassword ? "hide" : "invalid"}
+              >
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className="iconWithAction"
+                  onClick={clearConfirmPassword}
+                />
+              </span>
+            </div>
+            <p
+              id="confirmnote"
+              className={
+                matchPassword && !validMatchPassword
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              The passwords don't match!
+            </p>
+            <button
+              className="extraMargins"
+              disabled={
+                (name && !validName) ||
+                (email && !validEmail) ||
+                (password && !validPassword) ||
+                (matchPassword && !validMatchPassword)
+                  ? true
+                  : false
+              }
+            >
+              Sign Up
+            </button>
+          </form>
           <p>
-            <a href="#">Sign In</a>
+            Already registered?
+            <br />
+            <span className="line">
+              <Link to="/login">Log in</Link>
+            </span>
           </p>
         </div>
-      ) : (
-        <div className="authenticationPage">
-          <Navbar />
-          <div className="formContainer">
-            {errorMessage && <ErrorMessage text={errorMessage} />}
-            <div className="formContent">
-              <h1 className="heading">Sign up</h1>
-              <ExternalProvider />
-              <Delimiter text="or sign up with email" />
-              <form className="customForm" onSubmit={handleSubmit}>
-                <div className="formField">
-                  <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
-                  <input
-                    type="text"
-                    required
-                    id="name"
-                    ref={nameRef}
-                    autoComplete="off"
-                    placeholder="Name"
-                    onChange={(e) => setName(e.target.value)}
-                    onFocus={() => setNameFocus(true)}
-                    onBlur={() => setNameFocus(false)}
-                  />
-                  <span className={validName ? "valid" : "hide"}>
-                    <FontAwesomeIcon icon={faCheck} />
-                  </span>
-                  <span className={validName || !name ? "hide" : "invalid"}>
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="iconWithAction"
-                      onClick={clearName}
-                    />
-                  </span>
-                </div>
-                <p
-                  id="uidnote"
-                  className={name && !validName ? "instructions" : "offscreen"}
-                >
-                  <FontAwesomeIcon icon={faInfoCircle} />
-                  Your name should start with capital letter and it should
-                  contain only letters and spaces.
-                </p>
-                <div className="formField">
-                  <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
-                  <input
-                    type="email"
-                    required
-                    id="email"
-                    autoComplete="off"
-                    placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    onFocus={() => setEmailFocus(true)}
-                    onBlur={() => setEmailFocus(false)}
-                  />
-                  <span className={validEmail ? "valid" : "hide"}>
-                    <FontAwesomeIcon icon={faCheck} />
-                  </span>
-                  <span className={validEmail || !email ? "hide" : "invalid"}>
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="iconWithAction"
-                      onClick={clearEmail}
-                    />
-                  </span>
-                </div>
-                <p
-                  id="uidnote"
-                  className={
-                    email && !validEmail ? "instructions" : "offscreen"
-                  }
-                >
-                  <FontAwesomeIcon icon={faInfoCircle} />
-                  Your email address must have a valid format consisting of a
-                  username, followed by an '@' symbol, and a domain name.
-                </p>
-                <div className="formField">
-                  <FontAwesomeIcon icon={faUnlock} className="formIcon" />
-                  <input
-                    type="password"
-                    required
-                    id="password"
-                    value={password}
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    onFocus={() => setPasswordFocus(true)}
-                    onBlur={() => setPasswordFocus(false)}
-                  />
-                  <span className={validPassword ? "valid" : "hide"}>
-                    <FontAwesomeIcon icon={faCheck} />
-                  </span>
-                  <span
-                    className={validPassword || !password ? "hide" : "invalid"}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="iconWithAction"
-                      onClick={clearPassword}
-                    />
-                  </span>
-                </div>
-                <p
-                  id="pwdnote"
-                  className={
-                    password && !validPassword ? "instructions" : "offscreen"
-                  }
-                >
-                  <FontAwesomeIcon icon={faInfoCircle} />
-                  Must include uppercase and lowercase letters, a number and a
-                  special character. <br />
-                  Allowed special characters: !@#$%
-                </p>
-                <div className="formField">
-                  <FontAwesomeIcon icon={faLock} className="formIcon" />
-                  <input
-                    type="password"
-                    required
-                    id="confirmPassword"
-                    value={matchPassword}
-                    placeholder="Confirm Password"
-                    onChange={(e) => setMatchPassword(e.target.value)}
-                    onFocus={() => setMatchPasswordFocus(true)}
-                    onBlur={() => setMatchPasswordFocus(false)}
-                  />
-                  <span
-                    className={
-                      validMatchPassword && matchPassword ? "valid" : "hide"
-                    }
-                  >
-                    <FontAwesomeIcon icon={faCheck} />
-                  </span>
-                  <span
-                    className={
-                      validPassword || !matchPassword ? "hide" : "invalid"
-                    }
-                  >
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="iconWithAction"
-                      onClick={clearConfirmPassword}
-                    />
-                  </span>
-                </div>
-                <p
-                  id="confirmnote"
-                  className={
-                    matchPassword && !validMatchPassword
-                      ? "instructions"
-                      : "offscreen"
-                  }
-                >
-                  <FontAwesomeIcon icon={faInfoCircle} />
-                  The passwords don't match!
-                </p>
-                <button
-                  className="extraMargins"
-                  disabled={
-                    (name && !validName) ||
-                    (email && !validEmail) ||
-                    (password && !validPassword) ||
-                    (matchPassword && !validMatchPassword)
-                      ? true
-                      : false
-                  }
-                >
-                  Sign Up
-                </button>
-              </form>
-              <p>
-                Already registered?
-                <br />
-                <span className="line">
-                  <Link to="/login">Log in</Link>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 

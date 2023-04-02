@@ -1,49 +1,41 @@
 import {
-  GoogleAuthProvider,
   signOut,
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db, externalProviders } from "../config/firebase";
 import { auth } from "../config/firebase"
+import { AuthProviderType } from "../types/authentication";
 
 export const signUpWithEmailAndPassword = async (data: any) => {
-  console.log("Signing up with email and password...")
   const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
   const user = res.user;
-  // await addDoc(collection(db, "users"), {
-  //   uid: user.uid,
-  //   name,
-  //   authProvider: "local",
-  //   email,
-  // });
+
+  await addDoc(collection(db, "users"), {
+    uid: user.uid,
+    name: data.name,
+    email: data.email,
+  });
 }
 
 export const logInWithEmailAndPassword = async (data: any) => {
-    console.log("Logging in with email and password...")
-    const res = await signInWithEmailAndPassword(auth, data.email, data.password);
-    const user = res.user;
+  await signInWithEmailAndPassword(auth, data.email, data.password);
 }
 
-const signUpWithThirdParty = async (provider: GoogleAuthProvider) => {
-  const result = await signInWithPopup(auth, provider);
-  const credential: any = GoogleAuthProvider.credentialFromResult(result);
-  const token = credential.accessToken;
-  const user = result.user;
-  if (user) {
-    // const q = query(collection(db, "users"), where("uid", "==", user.uid));
-    // const docs = await getDocs(q);
-    // if (docs.docs.length === 0) {
-    //   await addDoc(collection(db, "users"), {
-    //     uid: user.uid,
-    //     name: user.displayName,
-    //     authProvider: "google",
-    //     email: user.email,
-    //   });
-    // }
-    console.log("User signed in.")
+export const signInWithThirdParty = async (providerType: AuthProviderType) => {
+  const provider = providerType === AuthProviderType.Google ? externalProviders.google : externalProviders.facebook
+  const res = await signInWithPopup(auth, provider);
+  const user = res.user;
+  const q = query(collection(db, "users"), where("uid", "==", user.uid));
+  const docs = await getDocs(q);
+  if (docs.docs.length === 0) {
+    await addDoc(collection(db, "users"), {
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email,
+    });
   }
 }
 
