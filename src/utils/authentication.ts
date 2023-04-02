@@ -9,15 +9,18 @@ import { db, externalProviders } from "../config/firebase";
 import { auth } from "../config/firebase"
 import { AuthProviderType } from "../types/authentication";
 
+const saveUserDetails = async (uid: string, name: string | null, email: string | null) => {
+  await addDoc(collection(db, "users"), {
+    uid,
+    name,
+    email,
+  });
+}
+
 export const signUpWithEmailAndPassword = async (data: any) => {
   const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
   const user = res.user;
-
-  await addDoc(collection(db, "users"), {
-    uid: user.uid,
-    name: data.name,
-    email: data.email,
-  });
+  saveUserDetails(user.uid, data.name, data.email)  
 }
 
 export const logInWithEmailAndPassword = async (data: any) => {
@@ -31,11 +34,7 @@ export const signInWithThirdParty = async (providerType: AuthProviderType) => {
   const q = query(collection(db, "users"), where("uid", "==", user.uid));
   const docs = await getDocs(q);
   if (docs.docs.length === 0) {
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name: user.displayName,
-      email: user.email,
-    });
+    saveUserDetails(user.uid, user.displayName, user.email)
   }
 }
 
