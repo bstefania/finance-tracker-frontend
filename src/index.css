@@ -1,6 +1,15 @@
+:root {
+  --LIGHT-COLOR: #F0F4F9;
+  --MEDIUM-COLOR: #76B39D;
+  --DARK-COLOR: #155E63;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+  background-color: var(--LIGHT-COLOR);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -13,12 +22,21 @@ body {
 
 html {
   font-family: 'Poppins', sans-serif;
+  width: 100%;
+  height: 100%;
   /* font-size: 16px; */
 }
 
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 .App {
+  height: 100%;
+  width: 100%;
   display: flex;
-  min-height: 100vh;
+  flex-direction: column;
 }
 
 .customForm {
@@ -41,7 +59,7 @@ button {
   margin: 0 0.5em;
   border-radius: 1em;
   font-size: 1rem;
-  background-color: #155E63;
+  background-color: var(--DARK-COLOR);
   border: none;
   color: white;
 }
@@ -52,7 +70,7 @@ button:disabled {
 
 a,
 a:visited {
-  color: #155E63;
+  color: var(--DARK-COLOR);
   text-decoration: none;
 }
 
@@ -64,4 +82,24 @@ textarea {
   padding: 0.5em;
   outline: none;
   background-color: inherit;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+}
+
+.formIcon {
+  color: var(--DARK-COLOR);
+  width: 25px;
+  height: auto;
+ }
+ 
+.logo {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

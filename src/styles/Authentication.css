@@ -69,13 +69,6 @@
   margin-bottom: 0.9em;
 }
 
-.delimiter hr {
-  border: none;
-  height: 1px;
-  background-color: #ccc;
-  width: 100%;
-}
-
 .delimiter-text {
   position: relative;
   top: 1em;
@@ -98,10 +91,6 @@
    background-color: #EAE7E7;
    border: none;
    align-items: center;
- }
-
- .formIcon {
-  color: grey;
  }
 
  .extraMargins {

@@ -56,7 +56,7 @@ export default function () {
 
   return (
     <div className="authenticationPage">
-      <Navbar />
+      <Navbar header={""}/>
       <div className="formContainer">
         {errorMessage && <ErrorMessage text={errorMessage} />}
         <div className="formContent">

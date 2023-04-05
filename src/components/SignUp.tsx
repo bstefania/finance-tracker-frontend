@@ -105,7 +105,6 @@ const Signup = () => {
 
   return (
     <div className="authenticationPage">
-      <Navbar />
       <div className="formContainer">
         {errorMessage && <ErrorMessage text={errorMessage} />}
         <div className="formContent">
