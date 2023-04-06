@@ -1,5 +1,6 @@
 :root {
   --LIGHT-COLOR: #F0F4F9;
+  --LIGHT-COLOR-SECONDARY: #d5e1ee;
   --MEDIUM-COLOR: #76B39D;
   --DARK-COLOR: #155E63;
 }
@@ -98,8 +99,40 @@ hr {
  }
  
 .logo {
-  width: fit-content;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  gap: 0.5em;
+  position: relative;
+  width: fit-content;
+}
+.logo span {
+  font-weight: 600;
+}
+
+.logoSvgBackground, .logoSvg {
+  background-color: var(--DARK-COLOR);
+  border-radius: 0.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoSvg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.logoSvgBackground {
+  background-color: var(--MEDIUM-COLOR);
+  width: 1.75em;
+  height: 1.75em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transform: rotate(20deg) translate(-9%, -4.5%);
+}
+.logoIcon {
+  color: white
 }

@@ -44,41 +44,43 @@ function Sidebar() {
       </div>
       <div className="content">
         <ul className="pages">
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faHouse} className="formIcon" />
             {showTitle && <p>Home</p>}
           </li>
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faWallet} className="formIcon" />
             {showTitle && <p>Wallet</p>}
           </li>
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faCreditCard} className="formIcon" />
             {showTitle && <p>Spendings</p>}
           </li>
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faPiggyBank} className="formIcon" />
             {showTitle && <p>Savings</p>}
 
           </li>
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faMoneyBillTrendUp} className="formIcon" />
             {showTitle && <p className=''>Investments</p>}
           </li>
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faUserGroup} className="formIcon" />
             {showTitle && <p>Friends</p>}
           </li>
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faGears} className="formIcon" />
             {showTitle && <p>Settings</p>}
           </li>
-          <li className="pageRef">
+          <li>
             <FontAwesomeIcon icon={faCalendarDays} className="formIcon" />
             {showTitle && <p>Calendar</p>}
           </li>
         </ul>
+        <div className="pageRef">
         <FontAwesomeIcon icon={faCircleUser} className="formIcon" />
+        </div>
       </div>
     </div>
   )

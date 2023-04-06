@@ -1,6 +1,6 @@
 .sidebar {
   background-color: white;
-  width: 75px;
+  width: 60px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,14 +22,15 @@
 .header {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-content: flex-start;
   width: 100%;
   height: fit-content;
 }
 
 .logoAndButton {
-  width: 100%;
+  /* width: 100%; */
   position: relative;
+  padding: 0.5em 1em;
 }
 
 .openButton {
@@ -52,13 +53,14 @@
   width: 0.5rem;
 }
 
-.content, .logoAndButton {
-  padding: 0.5em 1em;
+.logoAndButton {
+  padding: 1em;
 }
 
 .content {
+  width: 100%;
+  height: 100%;
   display: flex;
-  width: fit-content;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -68,12 +70,22 @@
 
 .pages {
   display: flex;
+  width: 100%;
   flex-direction: column;
-  gap: 1em;
 }
 
 .pageRef {
+  width: 100%;
+}
+
+.sidebar li, .sidebar .pageRef {
+  padding: 0.5em;
   display: flex;
   gap: 0.5em;
   align-items: center;
+  border: 7px solid white;
+}
+
+.sidebar li:hover, .sidebar .pageRef:hover {
+  background-color: var(--LIGHT-COLOR-SECONDARY);
 }
