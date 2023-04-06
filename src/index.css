@@ -9,7 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   width: 100%;
-  background-color: var(--LIGHT-COLOR);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -37,6 +36,7 @@ html {
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: var(--LIGHT-COLOR);
 }
 
 .customForm {
@@ -93,13 +93,13 @@ hr {
 
 .formIcon {
   color: var(--DARK-COLOR);
-  width: 25px;
+  width: 1.75em;
   height: auto;
  }
  
 .logo {
-  height: auto;
+  width: fit-content;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }

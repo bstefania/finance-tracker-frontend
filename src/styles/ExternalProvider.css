@@ -1,5 +1,26 @@
 .externalProvider {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+}
+
+.externalProviderButton {
+  width: 100%;
+  border-width: thin;
+  border-style: solid;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.providerIcon {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 10px;
 }

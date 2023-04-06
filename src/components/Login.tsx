@@ -10,7 +10,7 @@ import ExternalProvider from "./ExternalProvider";
 import Delimiter from "./Delimiter";
 import ErrorMessage from "./ErrorMessage";
 
-export default function () {
+const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -112,3 +112,5 @@ export default function () {
     </div>
   );
 }
+
+export default Login;

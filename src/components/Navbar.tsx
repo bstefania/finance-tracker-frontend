@@ -21,7 +21,7 @@ const Navbar = (props: NavbarProps) => {
         </>
       ) : (
         <>
-          <Logo />
+          <Logo name="true"/>
           <div className="nav-elements">
             <ul>
               <li>
