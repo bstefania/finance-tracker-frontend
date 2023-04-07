@@ -11,10 +11,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signUpWithEmailAndPassword } from "../utils/authentication";
 import { Link } from "react-router-dom";
 import "../styles/Authentication.css";
-import Navbar from "./Navbar";
-import ExternalProvider from "./ExternalProvider";
-import Delimiter from "./Delimiter";
-import ErrorMessage from "./ErrorMessage";
+import Navbar from "../components/Navbar";
+import ExternalProvider from "../components/ExternalProvider";
+import Delimiter from "../components/Delimiter";
+import ErrorMessage from "../components/ErrorMessage";
 
 const NAME_REGEX = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

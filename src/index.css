@@ -38,6 +38,7 @@ html {
   display: flex;
   flex-direction: column;
   background-color: var(--LIGHT-COLOR);
+  align-items: center;
 }
 
 .customForm {

@@ -88,4 +88,5 @@
 
 .sidebar li:hover, .sidebar .pageRef:hover {
   background-color: var(--LIGHT-COLOR-SECONDARY);
+  border-left-width: 10px;
 }

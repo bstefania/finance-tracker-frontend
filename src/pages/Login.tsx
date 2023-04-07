@@ -5,10 +5,10 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../styles/Authentication.css";
 import { faEnvelope, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Navbar from "./Navbar";
-import ExternalProvider from "./ExternalProvider";
-import Delimiter from "./Delimiter";
-import ErrorMessage from "./ErrorMessage";
+import Navbar from "../components/Navbar";
+import ExternalProvider from "../components/ExternalProvider";
+import Delimiter from "../components/Delimiter";
+import ErrorMessage from "../components/ErrorMessage";
 
 const Login = () => {
   const navigate = useNavigate();

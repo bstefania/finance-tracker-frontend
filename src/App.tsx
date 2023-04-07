@@ -1,13 +1,13 @@
 import "./App.css";
-import Login from "./components/Login"
+import Login from "./pages/Login"
 import { Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout";
-import Missing from "./components/Missing";
-import Balance from "./components/Balance";
-import Home from "./components/Home";
+import Missing from "./pages/Missing";
+import Balance from "./pages/Balance";
+import Home from "./pages/Home";
 import RequireAuth from "./components/RequireAuth";
-import LinkPage from "./components/LinkPage";
-import Signup from './components/Signup';
+import LinkPage from "./pages/LinkPage";
+import Signup from './pages/Signup';
 
 function App() {
   return (

@@ -5,7 +5,6 @@ import {
   faAngleLeft,
   faAngleRight,
   faCalendarDays,
-  faCaretRight,
   faCircleUser,
   faCreditCard,
   faGears,
@@ -18,8 +17,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 function Sidebar() {
-  const [sidenavOpen, setSidenavOpen] = useState(true)
-  const [showTitle, setShowTitles] = useState(true)
+  const [sidenavOpen, setSidenavOpen] = useState(false)
+  const [showTitle, setShowTitles] = useState(false)
 
   const toggleSideNav = () => {
     setSidenavOpen(!sidenavOpen)
