@@ -64,6 +64,7 @@ button {
   background-color: var(--DARK-COLOR);
   border: none;
   color: white;
+  cursor: pointer;
 }
 
 button:disabled {
