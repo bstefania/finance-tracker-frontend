@@ -1,7 +1,6 @@
 
 .navbar {
-  padding: 0.5em 0;
-  margin: 0.5em;
+  padding: 2em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,7 +21,7 @@ img {
 
 
 .nav-elements ul li {
-  padding: 1em;
+  padding: var(--MAIN-PADDING);
 }
 
 /*

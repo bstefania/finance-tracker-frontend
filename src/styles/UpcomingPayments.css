@@ -2,7 +2,7 @@
   width: 100%;
   height: 300px;
   background-color: white;
-  padding: 1em;
+  padding: var(--MAIN-PADDING);
   display: flex;
   flex-direction: column;
   align-items: center;

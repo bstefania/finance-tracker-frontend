@@ -9,6 +9,7 @@
 .home {
   flex-grow: 1;
   height: 100%;
+  width: 100%;
   margin-left: 75px;
   display: flex;
   align-items: center;
@@ -18,7 +19,7 @@
 article {
   display: flex;
   flex-direction: column;
-  padding: 1em 5em;
+  padding: var(--MAIN-PADDING) 5em;
   width: 100%;
 }
 

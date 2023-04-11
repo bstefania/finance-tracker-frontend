@@ -25,11 +25,11 @@
   align-content: flex-start;
   width: 100%;
   height: fit-content;
+  position: relative;
+
 }
 
 .logoAndButton {
-  /* width: 100%; */
-  position: relative;
   padding: 0.5em 1em;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .logoAndButton {
-  padding: 1em;
+  padding: var(--MAIN-PADDING);
 }
 
 .content {

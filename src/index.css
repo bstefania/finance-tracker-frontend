@@ -3,6 +3,7 @@
   --LIGHT-COLOR-SECONDARY: #d5e1ee;
   --MEDIUM-COLOR: #76B39D;
   --DARK-COLOR: #155E63;
+  --MAIN-PADDING: 1em;
 }
 
 body {
@@ -136,5 +137,5 @@ hr {
   transform: rotate(20deg) translate(-9%, -4.5%);
 }
 .logoIcon {
-  color: white
+  color: white;
 }
