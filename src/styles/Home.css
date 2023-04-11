@@ -1,22 +1,19 @@
 .page {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .home {
-  flex-grow: 1;
   height: 100%;
   width: 100%;
-  margin-left: 75px;
+  padding-left: 75px;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
 article {
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: var(--MAIN-PADDING) 5em;
@@ -30,6 +27,8 @@ article {
 }
 
 main {
+  width: 100%;
+  min-width: 700px;
   flex-grow: 1;
   flex-direction: column;
   display: flex;
