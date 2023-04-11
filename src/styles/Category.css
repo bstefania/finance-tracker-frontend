@@ -1,0 +1,28 @@
+.category {
+  display: flex;
+  gap: 1em;
+}
+
+.iconParent {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(209, 250, 209);
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryTitle {
+  font-size: 0.75rem;
+}
+
+.icon {
+  width: 100%;
+  height: ;
+}

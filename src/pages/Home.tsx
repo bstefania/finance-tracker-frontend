@@ -7,7 +7,7 @@ import Transactions from '../components/Transactions'
 import MoneyCard from '../components/MoneyCard'
 import UpcomingPayments from '../components/UpcomingPayments'
 import MonthlyExpenses from '../components/MonthlyExpenses'
-import { faMoneyBillTrendUp, faPiggyBank, faWallet } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyBillTransfer, faMoneyBillTrendUp, faPiggyBank, faWallet } from '@fortawesome/free-solid-svg-icons'
 import "../styles/MoneyCard.css"
 
 const Home = () => {
@@ -43,8 +43,11 @@ const Home = () => {
               <li>
                 <MoneyCard title="Invested" percentage="50%" amount="50.000" icon={faMoneyBillTrendUp}/>
               </li>
+              <li>
+                <MoneyCard title="Credit" percentage="0%" amount="0" icon={faMoneyBillTransfer}/>
+              </li>
             </ul>
-            {/* <Transactions type="all"/> */}
+            <Transactions type="all"/>
           </main>
           <div className="rightSidebar">
             <MonthlyExpenses/>

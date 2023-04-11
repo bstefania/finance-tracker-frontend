@@ -1,8 +1,8 @@
 
 
 .moneyCard {
-  width: 225px;
   height: 130px;
+  min-width: 200px;
   border-radius: 1em;
   background-color: white;
   padding: 1em;

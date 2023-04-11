@@ -32,19 +32,20 @@ main {
   flex-grow: 1;
   flex-direction: column;
   display: flex;
+  gap: 1em;
 }
 
 
 .home ul {
   width: 100%;
   display: flex;
-  width: fit-content;
   gap: 1em;
   justify-content: space-between;
 }
 
 .home li {
   list-style: none;
+  flex-grow: 1;
 }
 
 .transactions {
@@ -54,7 +55,7 @@ main {
 .rightSidebar {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 400px;
   height: 100%;
   gap: 1em;
   /* padding: 1em; */
