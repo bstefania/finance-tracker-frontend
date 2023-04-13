@@ -16,7 +16,7 @@ article {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: var(--MAIN-PADDING) 5em;
+  padding: var(--MAIN-PADDING) 3em;
   width: 100%;
 }
 

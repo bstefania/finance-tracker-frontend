@@ -1,30 +1,30 @@
 .authenticationPage {
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
- }
+}
 
- .formContainer {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: space-between;
-   justify-content: center;
-   width: 100%;
-   height: 100%;
-   text-align: center;
- }
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
 
- .heading {
-  color: #155E63;
+.heading {
+  color: #155e63;
   margin-bottom: 1em;
- }
+}
 
- .formDesign {
-   /* width: 40%; */
-   /* height: 100%;
+.formDesign {
+  /* width: 40%; */
+  /* height: 100%;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -32,100 +32,98 @@
    background-color: #76B39D;
    padding: 50px;
    color: white; */
-   display: none;
- }
-
- .formContent {
-   width: 350px;
-   height: fit-content;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 0.5em;
-   padding: var(--MAIN-PADDING) 2em;
-   border-radius: 1em;
- }
-
-.delimiter {
-  width: 100%;
-  margin-bottom: 0.9em;
+  display: none;
 }
 
-.delimiter-text {
-  position: relative;
-  top: 1em;
-  display: inline-block;
-  padding: 0 0.5em;
-  font-size: 12px;
-  color: grey;
-  font-weight: 100;
-  background-color: white;
+.formContent {
+  width: 320px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  padding: var(--MAIN-PADDING);
+  border-radius: 1em;
 }
 
- .formField {
-  width: 100%;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-evenly;
-   gap: 0.5em;
-   margin: 0.25em 0;
-   padding: 0.5em 1em;
-   background-color: #EAE7E7;
-   border: none;
-   align-items: center;
- }
+.customForm {
+  flex-grow: 1;
+  padding-bottom: var(--MAIN-PADDING);
+}
 
- .extraMargins {
+.formField {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5em;
+  margin: 0.25em 0;
+  padding: 0.5em 1em;
+  background-color: #eae7e7;
+  align-items: center;
+}
+
+.formField input,
+textarea {
+  border: none;
+  width: 100%;
+  padding: 0.25em;
+  font-size: 1rem;
+  outline: none;
+  background-color: inherit;
+  justify-content: baseline;
+}
+
+.extraMargins {
   margin: 0.75em;
- }
+}
 
- .forgotPassword {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   margin: 0.5em 0;
-   font-size: 0.9rem;
- }
+.forgotPassword {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5em 0;
+  font-size: 0.9rem;
+}
 
- .instructions {
+.instructions {
   width: 100%;
-   font-size: 0.75rem;
-   border-radius: 0.5rem;
-   background: #7f7f7f;
-   color: #fff;
-   padding: 0.25rem;
- }
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #7f7f7f;
+  color: white;
+  padding: 0.25rem;
+}
 
- .instructions>svg {
-   margin-right: 0.25rem;
- }
+.instructions > svg {
+  margin-right: 0.25rem;
+}
 
- .iconWithAction {
+.iconWithAction {
   padding-inline: 0.5em;
- }
+}
 
- .offscreen {
-   position: absolute;
-   left: -9999px;
- }
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
 
- .hide {
-   display: none;
- }
+.hide {
+  display: none;
+}
 
- .valid {
-   color: limegreen;
- }
+.valid {
+  color: limegreen;
+}
 
- .invalid {
-   color: red;
-   cursor: pointer;
- }
+.invalid {
+  color: red;
+  cursor: pointer;
+}
 
- .errmsg {
-  /* width: 100%; */
-   background-color: lightpink;
-   color: firebrick;
-   padding: 0.5rem;
-   margin-inline: 10rem;
- }
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  padding: 0.5rem;
+  margin-inline: 10rem;
+}

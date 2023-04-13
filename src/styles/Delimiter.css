@@ -6,6 +6,7 @@
   color: grey;
   font-size: 0.75rem;
   font-weight: 100;
+  margin: 1em;
 }
 
 .separator::before,

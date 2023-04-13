@@ -65,7 +65,7 @@ const Login = () => {
           <Delimiter text="or log in with email" />
           <form className="customForm" onSubmit={handleSubmit}>
             <div className="formField">
-              <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+              <FontAwesomeIcon icon={faEnvelope} className="icon" />
               <input
                 type="email"
                 id="email"
@@ -78,7 +78,7 @@ const Login = () => {
               />
             </div>
             <div className="formField">
-              <FontAwesomeIcon icon={faUnlock} className="formIcon" />
+              <FontAwesomeIcon icon={faUnlock} className="icon" />
               <input
                 type="password"
                 id="password"

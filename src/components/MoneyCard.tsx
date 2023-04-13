@@ -18,7 +18,7 @@ function MoneyCard(props: MoneyCardProps) {
         <span>{props.percentage}</span>
         </div>
         <div className="design">
-          <FontAwesomeIcon icon={props.icon} className="formIcon"/>
+          <FontAwesomeIcon icon={props.icon} className="icon icon--large"/>
         </div>
       </div>
       <span className="amount">{props.amount} EUR</span>

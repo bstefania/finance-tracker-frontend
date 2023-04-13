@@ -6,6 +6,7 @@ import {
   faEnvelope,
   faUnlock,
   faLock,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signUpWithEmailAndPassword } from "../utils/authentication";
@@ -114,7 +115,7 @@ const Signup = () => {
           <Delimiter text="or sign up with email" />
           <form className="customForm" onSubmit={handleSubmit}>
             <div className="formField">
-              <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+              <FontAwesomeIcon icon={faUser} className="icon" />
               <input
                 type="text"
                 required
@@ -146,7 +147,7 @@ const Signup = () => {
               only letters and spaces.
             </p>
             <div className="formField">
-              <FontAwesomeIcon icon={faEnvelope} className="formIcon" />
+              <FontAwesomeIcon icon={faEnvelope} className="icon" />
               <input
                 type="email"
                 required
@@ -177,7 +178,7 @@ const Signup = () => {
               username, followed by an '@' symbol, and a domain name.
             </p>
             <div className="formField">
-              <FontAwesomeIcon icon={faUnlock} className="formIcon" />
+              <FontAwesomeIcon icon={faUnlock} className="icon" />
               <input
                 type="password"
                 required
@@ -211,7 +212,7 @@ const Signup = () => {
               Allowed special characters: !@#$%
             </p>
             <div className="formField">
-              <FontAwesomeIcon icon={faLock} className="formIcon" />
+              <FontAwesomeIcon icon={faLock} className="icon" />
               <input
                 type="password"
                 required

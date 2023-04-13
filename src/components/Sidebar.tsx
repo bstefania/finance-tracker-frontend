@@ -35,7 +35,7 @@ function Sidebar() {
           <div className="openButton" onClick={toggleSideNav}>
             <FontAwesomeIcon
               icon={sidenavOpen ? faAngleLeft : faAngleRight}
-              className="formIcon smallIcon"
+              className="icon icon--small"
             />
           </div>
         </div>
@@ -44,41 +44,41 @@ function Sidebar() {
       <div className="content">
         <ul className="pages">
           <li>
-            <FontAwesomeIcon icon={faHouse} className="formIcon" />
+            <FontAwesomeIcon icon={faHouse} className="icon icon--large" />
             {showTitle && <p>Home</p>}
           </li>
           <li>
-            <FontAwesomeIcon icon={faWallet} className="formIcon" />
+            <FontAwesomeIcon icon={faWallet} className="icon icon--large" />
             {showTitle && <p>Wallet</p>}
           </li>
           <li>
-            <FontAwesomeIcon icon={faCreditCard} className="formIcon" />
+            <FontAwesomeIcon icon={faCreditCard} className="icon icon--large" />
             {showTitle && <p>Spendings</p>}
           </li>
           <li>
-            <FontAwesomeIcon icon={faPiggyBank} className="formIcon" />
+            <FontAwesomeIcon icon={faPiggyBank} className="icon icon--large" />
             {showTitle && <p>Savings</p>}
 
           </li>
           <li>
-            <FontAwesomeIcon icon={faMoneyBillTrendUp} className="formIcon" />
+            <FontAwesomeIcon icon={faMoneyBillTrendUp} className="icon icon--large" />
             {showTitle && <p className=''>Investments</p>}
           </li>
           <li>
-            <FontAwesomeIcon icon={faUserGroup} className="formIcon" />
+            <FontAwesomeIcon icon={faUserGroup} className="icon icon--large" />
             {showTitle && <p>Friends</p>}
           </li>
           <li>
-            <FontAwesomeIcon icon={faGears} className="formIcon" />
+            <FontAwesomeIcon icon={faGears} className="icon icon--large" />
             {showTitle && <p>Settings</p>}
           </li>
           <li>
-            <FontAwesomeIcon icon={faCalendarDays} className="formIcon" />
+            <FontAwesomeIcon icon={faCalendarDays} className="icon icon--large" />
             {showTitle && <p>Calendar</p>}
           </li>
         </ul>
         <div className="pageRef">
-        <FontAwesomeIcon icon={faCircleUser} className="formIcon" />
+        <FontAwesomeIcon icon={faCircleUser} className="icon icon--large" />
         </div>
       </div>
     </div>
