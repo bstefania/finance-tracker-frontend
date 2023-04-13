@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import "../styles/Transactions.css"
 import Category from "./Category"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
+import TransactionDetails from './TransactionDetails'
 type TransactionsProps = {
   type: string
 }
@@ -25,12 +26,19 @@ const data = [
 ]
 
 function Transactions(props: TransactionsProps) {
+  const [transactionDetailsVisible, setTransactionDetailsVisible] = useState(false)
+  
+  const toggleModal = () => {
+    setTransactionDetailsVisible(!transactionDetailsVisible)
+  }
+
   return (
     <div className="transactions">
       <div className="header">
         <h1>Recent transactions</h1>
-        <button>+ Add</button>
+        <button onClick={toggleModal}>+ Add</button>
       </div>
+      <TransactionDetails show={transactionDetailsVisible} toggleModal={toggleModal}/>
       <table>
         <thead>
           <tr>

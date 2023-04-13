@@ -99,10 +99,6 @@ textarea {
   margin-right: 0.25rem;
 }
 
-.iconWithAction {
-  padding-inline: 0.5em;
-}
-
 .offscreen {
   position: absolute;
   left: -9999px;

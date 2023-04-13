@@ -87,6 +87,11 @@ hr {
   height: auto;
  }
 
+ .iconWithAction {
+  padding-left: 0.5em;
+  cursor: pointer;
+}
+
  .icon--large {
   width: 1.5rem;
  }
