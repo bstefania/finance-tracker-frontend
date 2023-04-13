@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Delimiter.css"
 
 type DelimiterProps = {
   text: string
@@ -6,10 +7,8 @@ type DelimiterProps = {
 
 function Delimiter(props: DelimiterProps) {
   return (
-    <div className="delimiter">
-      <span className="delimiter-text">{props.text}</span>
-      <hr />
-    </div>
+    <div className="separator">{props.text}</div>
+
   );
 }
 
