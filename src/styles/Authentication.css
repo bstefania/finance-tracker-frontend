@@ -63,17 +63,6 @@
   align-items: center;
 }
 
-.formField input,
-textarea {
-  border: none;
-  width: 100%;
-  padding: 0.25em;
-  font-size: 1rem;
-  outline: none;
-  background-color: inherit;
-  justify-content: baseline;
-}
-
 .extraMargins {
   margin: 0.75em;
 }

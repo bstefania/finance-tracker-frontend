@@ -7,6 +7,7 @@
   --DARK-COLOR: #155E63;
   --MAIN-PADDING: 1em;
   --SEPARATOR-COLOR: #ccc;
+  --BORDER-COLOR: #ccc;
 }
 
 * {
@@ -140,6 +141,31 @@ hr {
   color: white;
 }
 
-.dropdown {
+
+input,
+textarea, select {
+  border: none;
   width: 100%;
+  padding: 0.25em;
+  font-size: 1rem;
+  outline: none;
+  background-color: inherit;
+  justify-content: baseline;
+}
+
+select:focus {
+  outline: none;
+}
+
+option[value=""][disabled] {
+  display: none;
+}
+
+select option {
+  padding: 10px;
+}
+
+.invalidField {
+  color: red;
+  background-color: rgb(255, 208, 216);
 }

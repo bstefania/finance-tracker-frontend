@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { FormEvent, useState } from "react"
 import "../styles/TransactionDetails.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -9,23 +9,60 @@ import {
   faNoteSticky,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
-import Select from "react-select"
-
-interface OptionType {
-  label: string
-  value: string
-}
+import Dropdown, {Option} from "./Dropdown"
 
 function TransactionDetails(props: any) {
-  const options: OptionType[] = [
+  const transactionTypes = ["Expense", "Saving", "Investment", "Income"]
+
+  const options: Option[] = [
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ]
 
-  const [category, setCategory] = useState(null)
+  const [selectedType, setSelectedType] = useState(transactionTypes[0])
+  const [category, setCategory] = useState<Option | null>(null)
+  const [validCategory, setValidCategory] = useState(true)
+  const [amount, setAmount] = useState(0)
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
-  const [sharedWith, setSharedWith] = useState<OptionType[]>([])
+  const [sharedWith, setSharedWith] = useState<Option[]>([])
+  const [note, setNote] = useState(null)
+
+  const validateCategory = () => {
+    if (!category) {
+      setValidCategory(false)
+      return false
+    }
+    return true
+  }
+
+  const validateAmount = () => {
+    if (!amount || amount < 1) return false
+    return true
+  }
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    try {
+      if (!validateCategory() || !validateAmount()) {
+        console.log("Incorrect input data!")
+        return
+      }
+
+    const data = {
+      subcategory: (category as Option).value,
+      amount,
+      date,
+      sharedWith: sharedWith.map((users) => users.value),
+      note
+    }
+    console.log(data)
+    props.toggleModal()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className={`modalBackground ${props.show ? "hide" : ""}`}>
@@ -39,21 +76,25 @@ function TransactionDetails(props: any) {
           />
         </div>
         <div className="body">
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="type">
-              <span className="selected">Expense</span>
-              <span>Saving</span>
-              <span>Investment</span>
-              <span>Income</span>
+              {transactionTypes.map((transactionType) => (
+                <span
+                  key={transactionType}
+                  className={selectedType === transactionType ? "selected" : ""}
+                  onClick={() => setSelectedType(transactionType)}
+                >
+                  {transactionType}
+                </span>
+              ))}
             </div>
-            <div className="modalField">
+            <div className={`modalField ${!validCategory && "invalidField"}`}>
               <FontAwesomeIcon icon={faList} className="icon" />
-              <Select
-                className="dropdown"
-                value={category}
-                onChange={(option: any) => setCategory(option)}
-                options={options}
+              <Dropdown
+                isSearchable
                 placeholder="Category"
+                options={options}
+                onChange={(option: any) => { setCategory(option); setValidCategory(true) }}
               />
             </div>
             <div className="modalField">
@@ -64,34 +105,44 @@ function TransactionDetails(props: any) {
                 min="1"
                 required
                 placeholder="Amount"
+                onChange={(e) => setAmount(parseFloat(e.target.value))}
               />
             </div>
             <div className="modalField">
               <FontAwesomeIcon icon={faCalendarDays} className="icon" />
-              <input type="date" id="date" value={date} onChange={(event) => setDate(event.target.value)} placeholder="Date" />
+              <input
+                type="date"
+                id="date"
+                value={date}
+                onChange={(event) => setDate(event.target.value)}
+                placeholder="Date"
+              />
             </div>
             <div className="modalField">
               <FontAwesomeIcon icon={faUserPlus} className="icon" />
-              <Select
+              <Dropdown
+                isSearchable
                 isMulti
-                className="dropdown"
-                value={sharedWith}
-                onChange={(option: any) => setSharedWith(option)}
-                options={options}
                 placeholder="Shared with"
+                options={options}
+                onChange={(option: any) => setSharedWith(option)}
               />
             </div>
             <div className="modalField">
               <FontAwesomeIcon icon={faNoteSticky} className="icon" />
-              <textarea id="note" placeholder="Note..." />
+              <textarea
+                id="note"
+                placeholder="Note..."
+                onChange={(note: any) => setNote(note)}
+              />
+            </div>
+            <div className="actions">
+              <button type="button" className="button--secondary" onClick={props.toggleModal}>
+                Cancel
+              </button>
+              <button type="submit">Save</button>
             </div>
           </form>
-        </div>
-        <div className="footer">
-          <button className="button--secondary" onClick={props.toggleModal}>
-            Cancel
-          </button>
-          <button>Save</button>
         </div>
       </div>
     </div>

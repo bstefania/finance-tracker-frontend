@@ -17,8 +17,8 @@
   background-color: white;
   padding: 1em;
   border: 1px solid #888;
-  border-top: 5px solid var(--DARK-COLOR);
-  width: 40%;
+  width: auto;
+  border-radius: 0.5em;
 }
 
 .modalContent .header {
@@ -34,16 +34,15 @@
   width: 100%;
   display: flex;
   gap: 0.5em;
-  min-height: 38px;
+  margin: 0.25em 0;
+  padding: 0.5em 1em;
+  align-items: center;
+  border: 1px solid var(--BORDER-COLOR);
+  border-radius: 0.5em;
 }
 
-.modalField input, textarea {
-  width: 100%;
-  font-size: 1rem;
-  padding: 10px 8px;
-  border: 1px solid hsl(0, 0%, 80%);
-  border-radius: 4px;
-  resize: none;
+.modalField:focus {
+  outline: black;
 }
 
 .modalField:has(textarea) {
@@ -51,7 +50,7 @@
 }
 
 .modalField:has(textarea) .icon {
-  padding: 10px 0px;
+  padding: 5px 0px;
 }
 
 .type {
@@ -75,7 +74,12 @@
   color: white;
 }
 
-.type span:hover {
+.selected:hover {
+  background-color: var(--MEDIUM-COLOR);
+  color: white;
+}
+
+.type span:not(.selected):hover {
   background-color: var(--LIGHT-COLOR-SECONDARY);
 }
 
@@ -83,7 +87,7 @@
   background-color: none;
 }
 
-.footer {
+.actions {
   width: 100%;
   display: flex;
   justify-content: flex-end;
