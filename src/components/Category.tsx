@@ -5,7 +5,7 @@ import "../styles/Category.css"
 
 type CategoryProps = {
   category: string,
-  subCategory: string
+  categoryGroup: string
 }
 
 function Category(props: CategoryProps) {
@@ -15,8 +15,8 @@ function Category(props: CategoryProps) {
       <FontAwesomeIcon icon={faBook} className="icon"/>
       </div>
       <div className="details">
-        <span className="categoryTitle">{props.category}</span>
-        <span>{props.subCategory}</span>
+        <span className="categoryTitle">{props.categoryGroup}</span>
+        <span>{props.category}</span>
       </div>
     </div>
   )

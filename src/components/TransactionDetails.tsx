@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react"
+import React, { FormEvent, useEffect, useState } from "react"
 import "../styles/TransactionDetails.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -10,6 +10,8 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
 import Dropdown, {Option} from "./Dropdown"
+import { axiosPrivate } from "../api/axios"
+import { Category } from "../types/database"
 
 function TransactionDetails(props: any) {
   const transactionTypes = ["Expense", "Saving", "Investment", "Income"]
@@ -20,6 +22,8 @@ function TransactionDetails(props: any) {
     { value: "vanilla", label: "Vanilla" },
   ]
 
+  const [categories, setCategories] = useState<Option[]>([])
+
   const [selectedType, setSelectedType] = useState(transactionTypes[0])
   const [category, setCategory] = useState<Option | null>(null)
   const [validCategory, setValidCategory] = useState(true)
@@ -27,6 +31,24 @@ function TransactionDetails(props: any) {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
   const [sharedWith, setSharedWith] = useState<Option[]>([])
   const [note, setNote] = useState(null)
+
+  useEffect(() => {
+    getCategories()
+  }, [])
+  
+  const getCategories = () => {
+    axiosPrivate.get("/categories").then(res => {
+      const categoryOptions = res.data.data.map((category: Category, index: string) => {
+        return {
+          value: category.id,
+          label: category.name
+        }
+      })
+      setCategories(categoryOptions)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
 
   const validateCategory = () => {
     if (!category) {
@@ -51,21 +73,25 @@ function TransactionDetails(props: any) {
       }
 
     const data = {
-      subcategory: (category as Option).value,
+      type: selectedType,
+      categoryId: (category as Option).value,
       amount,
       date,
       sharedWith: sharedWith.map((users) => users.value),
       note
     }
     console.log(data)
-    props.toggleModal()
+    axiosPrivate.post("/transactions", data).then(res => {
+      console.log(res.data)
+      props.toggleModal()
+    })
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    <div className={`modalBackground ${props.show ? "hide" : ""}`}>
+    <div className={`modalBackground ${props.show ? "" : "hide"}`}>
       <div className="modalContent">
         <div className="header">
           <h1>Add transaction</h1>
@@ -93,7 +119,7 @@ function TransactionDetails(props: any) {
               <Dropdown
                 isSearchable
                 placeholder="Category"
-                options={options}
+                options={categories}
                 onChange={(option: any) => { setCategory(option); setValidCategory(true) }}
               />
             </div>
