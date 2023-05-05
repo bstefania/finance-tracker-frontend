@@ -1,50 +1,58 @@
-import React, { useEffect, useState } from "react";
-import "../styles/Transactions.css";
-import Category from "./Category";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons";
-import TransactionDetails from "./TransactionDetails";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { Transaction } from "../types/database";
+import React, { useEffect, useState } from "react"
+import "../styles/Transactions.css"
+import Category from "./Category"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
+import TransactionDetails from "./TransactionDetails"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
+import { Transaction } from "../types/database"
 
 type TransactionsProps = {
-  type: string;
-};
+  type: string
+}
 
 function Transactions(props: TransactionsProps) {
   const [transactionDetailsVisible, setTransactionDetailsVisible] =
-    useState(false);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const axiosPrivate = useAxiosPrivate();
+    useState(false)
+  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
+    getTransactions()
+  }, [])
+
+  const getTransactions = () => {
     axiosPrivate
       .get("/transactions")
       .then((res: any) => {
-        console.log(res.data);
-        setTransactions(res.data.data);
+        console.log(res.data)
+        if (res.data.data) {
+          setTransactions(res.data.data)
+        }
       })
       .catch((err: any) => {
-        console.log(err);
-      });
-  }, []);
+        console.log(err)
+      })
+  }
 
-  const toggleModal = () => {
-    setTransactionDetailsVisible(!transactionDetailsVisible);
-  };
+  const toggleModal = (listChanged?: boolean) => {
+    setTransactionDetailsVisible(!transactionDetailsVisible)
+    if (listChanged) {
+      getTransactions()
+    }
+  }
 
-  if (transactions.length === 0) return <h3>No transactions found</h3>;
-  else
-    return (
-      <div className="transactions">
-        <div className="header">
-          <h1>Recent transactions</h1>
-          <button onClick={toggleModal}>+ Add</button>
-        </div>
-        <TransactionDetails
-          show={transactionDetailsVisible}
-          toggleModal={toggleModal}
-        />
+  return (
+    <div className="transactions">
+      <div className="header">
+        <h1>Recent transactions</h1>
+        <button onClick={() => toggleModal()}>+ Add</button>
+      </div>
+      <TransactionDetails
+        show={transactionDetailsVisible}
+        toggleModal={toggleModal}
+      />
+      <div className="fixTableHead">
         <table>
           <thead>
             <tr>
@@ -91,12 +99,16 @@ function Transactions(props: TransactionsProps) {
                     </div>
                   </td>
                 </tr>
-              );
+              )
             })}
           </tbody>
         </table>
       </div>
-    );
+      {transactions.length === 0 && (
+        <div className="notFound">No transactions found</div>
+      )}
+    </div>
+  )
 }
 
-export default Transactions;
+export default Transactions

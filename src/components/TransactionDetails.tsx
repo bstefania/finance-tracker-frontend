@@ -15,13 +15,6 @@ import { Category } from "../types/database"
 
 function TransactionDetails(props: any) {
   const transactionTypes = ["Expense", "Saving", "Investment", "Income"]
-
-  const options: Option[] = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ]
-
   const [categories, setCategories] = useState<Option[]>([])
 
   const [selectedType, setSelectedType] = useState(transactionTypes[0])
@@ -63,7 +56,7 @@ function TransactionDetails(props: any) {
     return true
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     try {
@@ -76,15 +69,14 @@ function TransactionDetails(props: any) {
       type: selectedType,
       categoryId: (category as Option).value,
       amount,
-      date,
+      createdAt: new Date(date),
       sharedWith: sharedWith.map((users) => users.value),
       note
     }
-    console.log(data)
-    axiosPrivate.post("/transactions", data).then(res => {
-      console.log(res.data)
-      props.toggleModal()
-    })
+
+    await axiosPrivate.post("/transactions", data)
+    props.toggleModal(true)
+    
     } catch (error) {
       console.log(error)
     }
@@ -150,7 +142,7 @@ function TransactionDetails(props: any) {
                 isSearchable
                 isMulti
                 placeholder="Shared with"
-                options={options}
+                options={[]}
                 onChange={(option: any) => setSharedWith(option)}
               />
             </div>
