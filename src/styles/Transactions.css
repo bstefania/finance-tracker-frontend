@@ -72,7 +72,7 @@ tr:last-child td {
 }
 
 .saving {
-  color: yellow;
+  color: rgb(230, 207, 0);
 }
 
 .columnWithAction {

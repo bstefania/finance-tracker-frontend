@@ -69,3 +69,11 @@
   border: 1px solid #ccc;
   border-radius: 0.5em;
 }
+
+.newListItem {
+  color: var(--DARK-COLOR);
+  cursor: pointer;
+  text-align: center;
+  padding: 0.25em;
+  border: solid 1px var(--BORDER-COLOR);
+}

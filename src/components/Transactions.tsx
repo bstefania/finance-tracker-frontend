@@ -48,10 +48,9 @@ function Transactions(props: TransactionsProps) {
         <h1>Recent transactions</h1>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
-      <TransactionDetails
-        show={transactionDetailsVisible}
+      {transactionDetailsVisible && <TransactionDetails
         toggleModal={toggleModal}
-      />
+      /> }
       <div className="fixTableHead">
         <table>
           <thead>
