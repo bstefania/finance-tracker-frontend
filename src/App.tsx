@@ -3,7 +3,7 @@ import Login from "./pages/Login"
 import { Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout";
 import Missing from "./pages/Missing";
-import Balance from "./pages/Balance";
+import Wallet from "./pages/Wallet";
 import Home from "./pages/Home";
 import RequireAuth from "./components/RequireAuth";
 import LinkPage from "./pages/LinkPage";
@@ -22,7 +22,7 @@ function App() {
         { /* protected routes */}
         <Route element={<RequireAuth />}>
           <Route path="/" element={<Home />}/>
-          <Route path="balance" element={<Balance />}/>
+          <Route path="wallet" element={<Wallet />}/>
         </Route>
 
         <Route path="missing" element={<Missing />}/>

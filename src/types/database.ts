@@ -56,3 +56,26 @@ export type Category = {
   owner: User,
   sharedWith: User[],
 }
+
+export enum IncomeSourceTypes {
+  Active = 'Active',
+  Passive = 'Passive'
+}
+
+export enum Recurrence {
+  Daily = 'Daily',
+  Monthly = 'Monthly',
+  Quarterly = 'Quarterly',
+  Yearly = 'Yearly'
+} 
+
+export type IncomeSource = {
+  id: string,
+  category: Category,
+  name: string,
+  amount: number,
+  type: IncomeSourceTypes,
+  recurrence: Recurrence,
+  payDay: string,
+  sharedWith: User[]
+}

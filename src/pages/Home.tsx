@@ -2,13 +2,13 @@ import { useNavigate, useLocation, Link } from "react-router-dom"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
-import "../styles/Home.css"
+import "../styles/Pages.css"
 import Transactions from '../components/Transactions'
 import MoneyCard from '../components/MoneyCard'
-import UpcomingPayments from '../components/UpcomingPayments'
-import MonthlyExpenses from '../components/MonthlyExpenses'
 import { faMoneyBillTransfer, faMoneyBillTrendUp, faPiggyBank, faWallet } from '@fortawesome/free-solid-svg-icons'
 import "../styles/MoneyCard.css"
+import MonthlyTransactions from '../components/MonthlyTransactions'
+import UpcomingTransactions from '../components/UpcomingTransactions'
 
 const Home = () => {
   // const navigate = useNavigate();
@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <div className="page">
       <Sidebar />
-      <div className="home">
+      <div className="page-content">
         <Navbar header="Home" />
         <article>
           <section className="mainSection">
@@ -47,11 +47,11 @@ const Home = () => {
                 <MoneyCard title="Credit" percentage="0%" amount="0" icon={faMoneyBillTransfer}/>
               </li>
             </ul>
-            <Transactions type="all"/>
+            <Transactions/>
           </main>
           <div className="rightSidebar">
-            <MonthlyExpenses/>
-            <UpcomingPayments/>
+            <MonthlyTransactions/>
+            <UpcomingTransactions/>
           </div>
           </section>
           <section className="plans"></section>

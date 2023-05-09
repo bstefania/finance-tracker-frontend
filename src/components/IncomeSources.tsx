@@ -1,70 +1,62 @@
 import React, { useEffect, useState } from "react"
-import "../styles/Transactions.css"
+import "../styles/IncomeSources.css"
 import "../styles/Table.css"
 import Category from "./Category"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
 import TransactionDetails from "./TransactionDetails"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
-import { Transaction, TransactionType } from "../types/database"
+import { IncomeSource, TransactionType } from "../types/database"
 
-type TransactionsProps = {
+type IncomeSourcesProps = {
   type?: TransactionType
 }
 
-function Transactions({type}: TransactionsProps) {
-  const [transactionDetailsVisible, setTransactionDetailsVisible] =
+function IncomeSources({}: IncomeSourcesProps) {
+  const [incomeSourcesDetailsVisible, setTransactionDetailsVisible] =
     useState(false)
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [incomeSources, setIncomeSources] = useState<IncomeSource[]>([])
   const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
-    getTransactions()
+    getIncomeSources()
   }, [])
 
-  const getTransactions = () => {
-    axiosPrivate
-      .get("/transactions")
-      .then((res: any) => {
-        console.log(res.data)
-        if (res.data.data) {
-          setTransactions(res.data.data)
-        }
-      })
-      .catch((err: any) => {
-        console.log(err)
-      })
+  const getIncomeSources = () => {
+    return []
   }
 
   const toggleModal = (listChanged?: boolean) => {
-    setTransactionDetailsVisible(!transactionDetailsVisible)
+    setTransactionDetailsVisible(!incomeSourcesDetailsVisible)
     if (listChanged) {
-      getTransactions()
+      getIncomeSources()
     }
   }
 
   return (
     <div className="table-div">
       <div className="header">
-        <h1>Recent transactions</h1>
+        <h1>Income Sources</h1>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
-      {transactionDetailsVisible && <TransactionDetails
-        toggleModal={toggleModal}
-      /> }
+      {incomeSourcesDetailsVisible && (
+        <TransactionDetails toggleModal={toggleModal} />
+      )}
       <div className="fixTableHead">
-        <table className='transactions-table'>
+        <table className='income-sources-table'>
           <thead>
             <tr>
               <th>Category</th>
+              <th>Name</th>
               <th>Amount</th>
               <th>Type</th>
-              <th>Date</th>
+              <th>Recurring</th>
+              <th>Pay day</th>
               <th>Shared With</th>
             </tr>
           </thead>
           <tbody>
-            {transactions.map((val, index) => {
+            {incomeSources.map((val, index) => {
               return (
                 <tr key={val.id}>
                   <td>
@@ -73,16 +65,11 @@ function Transactions({type}: TransactionsProps) {
                       categoryGroup={val.category.categoryGroup.name}
                     />
                   </td>
-                  <td className={val.type.toLowerCase()}>{val.amount} EUR</td>
+                  <td>{val.name}</td>
+                  <td className="income">{val.amount} EUR</td>
                   <td>{val.type}</td>
-                  <td>
-                    {new Date(val.createdAt).toLocaleDateString("en-us", {
-                      weekday: "long",
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </td>
+                  <td>{val.recurrence}</td>
+                  <td>10th of each month</td>
                   <td>
                     <div className="columnWithAction">
                       {val.sharedWith.length ? (
@@ -104,11 +91,11 @@ function Transactions({type}: TransactionsProps) {
           </tbody>
         </table>
       </div>
-      {transactions.length === 0 && (
-        <div className="notFound">No transactions found</div>
+      {incomeSources.length === 0 && (
+        <div className="notFound">No recurrent income sources found</div>
       )}
     </div>
   )
 }
 
-export default Transactions
+export default IncomeSources

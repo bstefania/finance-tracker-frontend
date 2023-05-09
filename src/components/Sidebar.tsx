@@ -15,6 +15,7 @@ import {
   faWallet,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from 'react-router-dom'
 
 function Sidebar() {
   const [sidenavOpen, setSidenavOpen] = useState(false)
@@ -44,12 +45,17 @@ function Sidebar() {
       <div className="content">
         <ul className="pages">
           <li>
+          <Link to="/">
             <FontAwesomeIcon icon={faHouse} className="icon icon--large" />
             {showTitle && <p>Home</p>}
+            </Link>
           </li>
           <li>
+            
+            <Link to="/wallet">
             <FontAwesomeIcon icon={faWallet} className="icon icon--large" />
             {showTitle && <p>Wallet</p>}
+            </Link>
           </li>
           <li>
             <FontAwesomeIcon icon={faCreditCard} className="icon icon--large" />
