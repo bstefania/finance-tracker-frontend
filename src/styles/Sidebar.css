@@ -17,6 +17,7 @@
 
  .sidebar--open {
   width: 200px; /* Set the width of the sidenav to show it */  
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 } 
 
 .sidebar .header {

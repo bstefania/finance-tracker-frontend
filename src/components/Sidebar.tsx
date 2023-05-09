@@ -58,11 +58,13 @@ function Sidebar() {
           <li>
             <FontAwesomeIcon icon={faPiggyBank} className="icon icon--large" />
             {showTitle && <p>Savings</p>}
-
           </li>
           <li>
-            <FontAwesomeIcon icon={faMoneyBillTrendUp} className="icon icon--large" />
-            {showTitle && <p className=''>Investments</p>}
+            <FontAwesomeIcon
+              icon={faMoneyBillTrendUp}
+              className="icon icon--large"
+            />
+            {showTitle && <p className="">Investments</p>}
           </li>
           <li>
             <FontAwesomeIcon icon={faUserGroup} className="icon icon--large" />
@@ -73,12 +75,16 @@ function Sidebar() {
             {showTitle && <p>Settings</p>}
           </li>
           <li>
-            <FontAwesomeIcon icon={faCalendarDays} className="icon icon--large" />
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              className="icon icon--large"
+            />
             {showTitle && <p>Calendar</p>}
           </li>
         </ul>
         <div className="pageRef">
-        <FontAwesomeIcon icon={faCircleUser} className="icon icon--large" />
+          <FontAwesomeIcon icon={faCircleUser} className="icon icon--large" />
+          {showTitle && <p>Account</p>}
         </div>
       </div>
     </div>
