@@ -25,8 +25,13 @@
   z-index: 1;
 }
 
+.dropdown-group {
+  font-weight: 600;
+}
+
 .dropdown-item {
   padding: 5px;
+  padding-left: 10px;
   cursor: pointer;
 }
 

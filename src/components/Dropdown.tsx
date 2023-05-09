@@ -15,7 +15,8 @@ export type Option = {
 
 type DropdownProps = {
   placeholder: string
-  options: Option[]
+  options: Option[] | Record<string, Option[]>
+  groups?: boolean
   isMulti?: boolean
   isSearchable?: boolean
   onChange: (newValue: Option[] | Option) => void
@@ -25,6 +26,7 @@ type DropdownProps = {
 const Dropdown = ({
   placeholder,
   options,
+  groups = false,
   isMulti = false,
   isSearchable = false,
   addItem,
@@ -57,6 +59,7 @@ const Dropdown = ({
       window.removeEventListener("click", handler)
     }
   })
+
   const handleInputClick = (e: any) => {
     setShowMenu(!showMenu)
   }
@@ -134,15 +137,44 @@ const Dropdown = ({
     setSearchValue(e.target.value)
   }
 
+  const filterOptions = (options: Option[]) => {
+    return options.filter(
+      (option) =>
+        option.label.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
+    )
+  }
+
   const getOptions = () => {
     if (!searchValue) {
       return options
     }
 
-    return options.filter(
-      (option) =>
-        option.label.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
-    )
+    if (!groups) {
+      return filterOptions(options as Option[])
+    } else {
+      return Object.entries(options as Record<string, Option[]>).flatMap(
+        ([group, options]) => {
+          const filteredOptions = filterOptions(options)
+          if (filteredOptions) {
+            return { group: filterOptions }
+          } else {
+            return {}
+          }
+        }
+      )
+    }
+  }
+
+  const optionsDiv = (options: Option[]) => {
+    return options.map((option) => (
+      <div
+        onClick={() => onItemClick(option)}
+        key={option.value}
+        className={`dropdown-item ${isSelected(option) && "selected"}`}
+      >
+        {option.label}
+      </div>
+    ))
   }
 
   return (
@@ -165,16 +197,21 @@ const Dropdown = ({
               <input onChange={onSearch} value={searchValue} ref={searchRef} />
             </div>
           )}
-          {getOptions().map((option) => (
-            <div
-              onClick={() => onItemClick(option)}
-              key={option.value}
-              className={`dropdown-item ${isSelected(option) && "selected"}`}
-            >
-              {option.label}
-            </div>
-          ))}
-          <div className="newListItem" onClick={addItem}>+ Add new</div>
+          {!groups
+            ? optionsDiv(getOptions() as Option[])
+            : Object.entries(options as Record<string, Option[]>).map(
+                ([group, options]) => (
+                  <div>
+                    <div key={group} className="dropdown-group">
+                      {group}
+                    </div>
+                    {optionsDiv(options)}
+                  </div>
+                )
+              )}
+          <div className="newListItem" onClick={addItem}>
+            + Add new
+          </div>
         </div>
       )}
     </div>

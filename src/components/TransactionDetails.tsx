@@ -16,7 +16,7 @@ import NewCategory from "./NewCategory"
 
 function TransactionDetails(props: any) {
   const transactionTypes = ["Expense", "Saving", "Investment", "Income"]
-  const [categories, setCategories] = useState<Option[]>([])
+  const [categories, setCategories] = useState<Record<string, Option[]>>({})
 
   const [selectedType, setSelectedType] = useState(transactionTypes[0])
   const [category, setCategory] = useState<Option | null>(null)
@@ -31,23 +31,29 @@ function TransactionDetails(props: any) {
     getCategories()
   }, [])
 
-  const getCategories = () => {
-    axiosPrivate
-      .get("/categories")
-      .then((res) => {
-        const categoryOptions = res.data.data.map(
-          (category: Category, index: string) => {
-            return {
-              value: category.id,
-              label: category.name,
-            }
-          }
-        )
-        setCategories(categoryOptions)
+  const getCategories = async () => {
+    try {
+      const res = await axiosPrivate.get("/categories")
+
+      const categoryOptions: Record<string, Option[]> = {}
+
+      res.data.data.forEach((category: Category, index: string) => {
+        const categoryGroup = category.categoryGroup.name
+        const data = {
+          value: category.id,
+          label: category.name,
+        }
+        if (categoryGroup in categoryOptions) {
+          categoryOptions[categoryGroup].push(data)
+        } else {
+          categoryOptions[categoryGroup] = [data]
+        }
       })
-      .catch((err) => {
-        console.log(err)
-      })
+
+      setCategories(categoryOptions)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const toggleNewCategory = (listChanged?: boolean) => {
@@ -77,11 +83,8 @@ function TransactionDetails(props: any) {
     }
   }
 
-  return newCategory ? (
-    <Modal
-      title={"New transaction"}
-      toggleModal={props.toggleModal}
-    >
+  return !newCategory ? (
+    <Modal title={"New transaction"} toggleModal={props.toggleModal}>
       <div className="body">
         <form onSubmit={handleSubmit}>
           <div className="type">
@@ -101,6 +104,7 @@ function TransactionDetails(props: any) {
               isSearchable
               placeholder="Select Category"
               options={categories}
+              groups={true}
               addItem={toggleNewCategory}
               onChange={(option: any) => {
                 setCategory(option)
@@ -160,7 +164,7 @@ function TransactionDetails(props: any) {
       </div>
     </Modal>
   ) : (
-    <NewCategory show={newCategory} toggleModal={toggleNewCategory}/>
+    <NewCategory show={newCategory} toggleModal={toggleNewCategory} />
   )
 }
 
