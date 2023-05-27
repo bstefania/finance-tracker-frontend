@@ -1,8 +1,23 @@
 export enum TransactionType {
   Income = "Income",
   Expense = "Expense",
-  Saving = "Saving",
-  Investment = "Investment"
+  Savings = "Savings",
+  Investments = "Investments",
+  Credit = "Credit"
+}
+
+type WealthCategory = {
+  value: number,
+  percentage: number
+}
+
+export type Wealth = {
+  total: number,
+  category: {
+    wallet: WealthCategory,
+    savings: WealthCategory,
+    investments: WealthCategory
+  }
 }
 
 export type User = {

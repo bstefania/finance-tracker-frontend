@@ -19,14 +19,14 @@ const Balance = () => {
         <article>
           <section className="mainSection">
             <main>
+              <Transactions type={TransactionType.Income} />
               <IncomeSources />
-              <Transactions type={TransactionType.Expense} />
             </main>
             <div className="rightSidebar">
               <MoneyCard
-                title="In wallet"
-                percentage="15%"
-                amount="15.000"
+                type={TransactionType.Income}
+                percentage={0}
+                amount={0}
                 icon={faWallet}
               />
               <MonthlyTransactions type={TransactionType.Expense} />

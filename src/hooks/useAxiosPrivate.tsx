@@ -1,4 +1,4 @@
-import { axiosPrivate } from "../api/axios";
+import { customAxios } from "../api/axios";
 import { useEffect } from "react";
 import useAuth from "./useAuth";
 
@@ -7,7 +7,7 @@ const useAxiosPrivate = () => {
 
     useEffect(() => {
 
-        const requestIntercept = axiosPrivate.interceptors.request.use(
+        const requestIntercept = customAxios.interceptors.request.use(
             async config => {
               const token = await auth?.getIdToken()
                 if (!config.headers['Authorization']) {
@@ -17,11 +17,11 @@ const useAxiosPrivate = () => {
             }, (error) => Promise.reject(error)
         );
         return () => {
-            axiosPrivate.interceptors.request.eject(requestIntercept);
+            customAxios.interceptors.request.eject(requestIntercept);
         }
     }, [auth])
 
-    return axiosPrivate;
+    return customAxios;
 }
 
 export default useAxiosPrivate;

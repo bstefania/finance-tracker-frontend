@@ -1,6 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react"
 import Modal from "./Modal"
-import { axiosPrivate } from "../api/axios"
 import { CategoryGroup } from "../types/database"
 import Dropdown, { Option } from "./Dropdown"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -10,12 +9,15 @@ import {
   faList,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
 
 type NewCategoryProps = {
   show: boolean
   toggleModal: (listChanged?: boolean) => void
 }
 function NewCategory({ toggleModal }: NewCategoryProps) {
+  const axiosPrivate = useAxiosPrivate()
+
   const [categoryGroups, setCategoryGroups] = useState([])
   const [name, setName] = useState("")
   const [categoryGroup, setCategoryGroup] = useState<Option | null>(null)

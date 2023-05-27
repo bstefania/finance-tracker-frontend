@@ -26,7 +26,6 @@ function Transactions({type}: TransactionsProps) {
     axiosPrivate
       .get("/transactions")
       .then((res: any) => {
-        console.log(res.data)
         if (res.data.data) {
           setTransactions(res.data.data)
         }

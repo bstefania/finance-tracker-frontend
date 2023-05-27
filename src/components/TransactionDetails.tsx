@@ -9,12 +9,14 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
 import Dropdown, { Option } from "./Dropdown"
-import { axiosPrivate } from "../api/axios"
 import { Category } from "../types/database"
 import Modal from "./Modal"
 import NewCategory from "./NewCategory"
+import useAxiosPrivate from "../hooks/useAxiosPrivate"
 
 function TransactionDetails(props: any) {
+
+  const axiosPrivate = useAxiosPrivate()
   const transactionTypes = ["Expense", "Saving", "Investment", "Income"]
   const [categories, setCategories] = useState<Record<string, Option[]>>({})
 

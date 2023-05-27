@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import './config/firebaseConfig';
 import { AuthProvider } from "./context/AuthProvider"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { WealthProvider } from './context/WealthProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,9 +15,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <AuthProvider>
+      <WealthProvider>
       <Routes>
         <Route path="/*" element={<App />}/>
       </Routes>
+      </WealthProvider>
     </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
