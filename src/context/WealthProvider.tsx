@@ -16,7 +16,6 @@ export const WealthProvider = ({ children }: { children: React.ReactNode }) => {
   const [wealth, setWealth] = useState<Wealth | null>(null);
 
   useEffect(() => {
-    console.log("hree4")
     getWealth().then(data => {
       setWealth(data)
     })

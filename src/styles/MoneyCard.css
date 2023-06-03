@@ -38,3 +38,24 @@
 .amount {
   font-size: 1.25rem;
 }
+
+.currentAmount {
+  align-items: baseline;
+  display: flex;
+  gap: 0.5em;
+}
+
+.editIcon {
+  display: none;
+  cursor: pointer;
+  color: grey;
+  padding-inline: 0.25em;
+}
+
+.currentAmount:hover .editIcon {
+  display: block;
+}
+
+.editField {
+border-bottom: 1px solid lightgray;
+}

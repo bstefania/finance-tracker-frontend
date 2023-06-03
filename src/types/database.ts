@@ -1,9 +1,23 @@
+export enum MoneyCardType {
+  Income = "income",
+  Savings = "savings",
+  Investments = "investments",
+  Credit = "credit"
+}
+
 export enum TransactionType {
-  Income = "Income",
-  Expense = "Expense",
-  Savings = "Savings",
-  Investments = "Investments",
-  Credit = "Credit"
+  Income = "income",
+  Expense = "expense",
+  Savings = "savings",
+  Investments = "investments",
+  Credit = "credit"
+}
+
+export type BaseWealth = {
+  income?: number,
+  savings?: number,
+  investments?: number
+  credit?: number
 }
 
 type WealthCategory = {
@@ -14,9 +28,10 @@ type WealthCategory = {
 export type Wealth = {
   total: number,
   category: {
-    wallet: WealthCategory,
+    income: WealthCategory,
     savings: WealthCategory,
     investments: WealthCategory
+    credit: WealthCategory
   }
 }
 
@@ -73,15 +88,15 @@ export type Category = {
 }
 
 export enum IncomeSourceTypes {
-  Active = 'Active',
-  Passive = 'Passive'
+  Active = 'active',
+  Passive = 'passive'
 }
 
 export enum Recurrence {
-  Daily = 'Daily',
-  Monthly = 'Monthly',
-  Quarterly = 'Quarterly',
-  Yearly = 'Yearly'
+  Daily = 'daily',
+  Monthly = 'monthly',
+  Quarterly = 'quarterly',
+  Yearly = 'yearly'
 } 
 
 export type IncomeSource = {

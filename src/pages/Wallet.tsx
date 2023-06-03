@@ -7,7 +7,7 @@ import { faWallet } from "@fortawesome/free-solid-svg-icons"
 import "../styles/MoneyCard.css"
 import MonthlyTransactions from "../components/MonthlyTransactions"
 import UpcomingTransactions from "../components/UpcomingTransactions"
-import { TransactionType } from "../types/database"
+import { MoneyCardType, TransactionType } from "../types/database"
 import IncomeSources from "../components/IncomeSources"
 
 const Balance = () => {
@@ -24,10 +24,7 @@ const Balance = () => {
             </main>
             <div className="rightSidebar">
               <MoneyCard
-                type={TransactionType.Income}
-                percentage={0}
-                amount={0}
-                icon={faWallet}
+                type={MoneyCardType.Income}
               />
               <MonthlyTransactions type={TransactionType.Expense} />
               <UpcomingTransactions type={TransactionType.Expense} />

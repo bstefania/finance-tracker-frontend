@@ -3,15 +3,10 @@ import Sidebar from "../components/Sidebar";
 import "../styles/Pages.css";
 import Transactions from "../components/Transactions";
 import MoneyCard from "../components/MoneyCard";
-import {
-  faMoneyBillTrendUp,
-  faPiggyBank,
-  faWallet,
-} from "@fortawesome/free-solid-svg-icons";
 import "../styles/MoneyCard.css";
 import MonthlyTransactions from "../components/MonthlyTransactions";
 import UpcomingTransactions from "../components/UpcomingTransactions";
-import { TransactionType } from "../types/database";
+import { MoneyCardType, TransactionType } from "../types/database";
 import useWealth from "../hooks/useWealth";
 
 const Home = () => {
@@ -28,26 +23,17 @@ const Home = () => {
               <ul>
                 <li>
                   <MoneyCard
-                    type={TransactionType.Income}
-                    percentage={wealth?.category.wallet.percentage}
-                    amount={wealth?.category.wallet.value}
-                    icon={faWallet}
+                    type={MoneyCardType.Income}
                   />
                 </li>
                 <li>
                   <MoneyCard
-                    type={TransactionType.Savings}
-                    percentage={wealth?.category.savings.percentage}
-                    amount={wealth?.category.savings.value}
-                    icon={faPiggyBank}
+                    type={MoneyCardType.Savings}
                   />
                 </li>
                 <li>
                   <MoneyCard
-                    type={TransactionType.Investments}
-                    percentage={wealth?.category.investments.percentage}
-                    amount={wealth?.category.investments.value}
-                    icon={faMoneyBillTrendUp}
+                    type={MoneyCardType.Investments}
                   />
                 </li>
               </ul>

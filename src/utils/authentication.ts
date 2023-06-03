@@ -15,9 +15,10 @@ const saveUserDetails = async (uid: string, name: string | null, email: string |
     name,
     email,
     wealth: {
-      wallet: 0,
+      income: 0,
       savings: 0,
-      investments: 0
+      investments: 0,
+      credit: 0
     }
   });
 }

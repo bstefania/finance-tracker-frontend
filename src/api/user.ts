@@ -16,11 +16,12 @@
 //   },
 // }
 
+import { BaseWealth, Wealth } from "../types/database";
 import { customAxios } from "./axios";
 
 export const adjustWealth = (data: any) => {
-  const total = data.wallet + data.savings + data.invesments;
-
+  const total = data.income + data.savings + data.investments + data.credit;
+  console.log(data.income , data.savings , data.investments , data.credit)
   const getPercentage = (total: number, part: number) => {
     return total > 0 ? (part / total) * 100 : 0
   }
@@ -28,9 +29,9 @@ export const adjustWealth = (data: any) => {
   return {
     total,
     category: {
-      wallet: {
-        value: data.wallet,
-        percentage: getPercentage(total, data.wallet),
+      income: {
+        value: data.income,
+        percentage: getPercentage(total, data.income),
       },
       savings: {
         value: data.savings,
@@ -38,16 +39,24 @@ export const adjustWealth = (data: any) => {
       },
       investments: {
         value: data.investments,
-        percentage: getPercentage(total, data.invesments),
+        percentage: getPercentage(total, data.investments),
       },
+      credit: {
+        value: data.cred,
+        percentage: getPercentage(total, data.credit),
+      }
     },
   };
 }
 
-export const getWealth = async () => {
+export const getWealth = async (): Promise<Wealth> => {
   const res = await customAxios.get("/wealth")
-  console.log(res)
   const data = res.data.data.wealth;
   return adjustWealth(data)
 };
 
+export const patchWealth = async (newValues: BaseWealth) => {
+  const res = await customAxios.patch("/wealth", newValues)
+  const data = res.data.data.wealth;
+  return adjustWealth(data)
+} 
