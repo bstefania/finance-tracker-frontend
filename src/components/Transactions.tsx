@@ -7,6 +7,7 @@ import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
 import TransactionDetails from "./TransactionDetails"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import { Transaction, TransactionType } from "../types/database"
+import { euro } from "../utils/numberFormat"
 
 type TransactionsProps = {
   type?: TransactionType
@@ -72,7 +73,7 @@ function Transactions({type}: TransactionsProps) {
                       categoryGroup={val.category.categoryGroup.name}
                     />
                   </td>
-                  <td className={val.type.toLowerCase()}>{val.amount} EUR</td>
+                  <td className={val.type.toLowerCase()}>{euro.format(val.amount)}</td>
                   <td>{val.type}</td>
                   <td>
                     {new Date(val.createdAt).toLocaleDateString("en-us", {

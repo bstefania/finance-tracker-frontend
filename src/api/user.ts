@@ -21,7 +21,6 @@ import { customAxios } from "./axios";
 
 export const adjustWealth = (data: any) => {
   const total = data.income + data.savings + data.investments + data.credit;
-  console.log(data.income , data.savings , data.investments , data.credit)
   const getPercentage = (total: number, part: number) => {
     return total > 0 ? (part / total) * 100 : 0
   }

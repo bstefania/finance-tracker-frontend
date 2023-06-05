@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { patchWealth } from "../api/user";
 import { MoneyCardType, TransactionType } from "../types/database";
 import useWealth from "../hooks/useWealth";
-import useOutsideClick from "../hooks/useOutsideClick";
+import { euro, formatDecimals } from "../utils/numberFormat";
 
 type MoneyCardProps = {
   type: MoneyCardType;
@@ -73,7 +73,7 @@ const MoneyCard = (props: MoneyCardProps) => {
       <div className="description">
         <div className="text">
           <span className="title">{details[props.type].title}</span>
-          <span>{wealth?.category[props.type].percentage}%</span>
+          <span>{formatDecimals(wealth?.category[props.type].percentage)}%</span>
         </div>
         <div className="design">
           <FontAwesomeIcon
@@ -95,7 +95,7 @@ const MoneyCard = (props: MoneyCardProps) => {
           />
         ) : (
           <div className="currentAmount">
-            <span>{wealth?.category[props.type].value} EUR </span>
+            <span>{euro.format(wealth?.category[props.type].value ?? 0)} </span>
             <FontAwesomeIcon
               icon={faPencil}
               className="editIcon"
