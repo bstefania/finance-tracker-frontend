@@ -181,3 +181,29 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.radioButtons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.radioButtons input {
+  width: fit-content;
+}
+
+.radioButtons label {
+  display: flex;
+  cursor: pointer;
+  gap: 0.25em;
+}
+
+input[type=radio] {
+  accent-color: var(--DARK-COLOR);
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

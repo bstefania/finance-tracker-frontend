@@ -13,14 +13,17 @@ import { Category } from "../types/database"
 import Modal from "./Modal"
 import NewCategory from "./NewCategory"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
+import ExpenseTransaction from "./ExpenseTransaction"
+import InvestmentsTransaction from "./InvestmentsTransaction"
+import SavingsTransaction from "./SavingsTransaction"
 
 function TransactionDetails(props: any) {
 
   const axiosPrivate = useAxiosPrivate()
-  const transactionTypes = ["Expense", "Saving", "Investment", "Income"]
+  const transactionTypes = ["expense", "savings", "investments", "income"]
   const [categories, setCategories] = useState<Record<string, Option[]>>({})
 
-  const [selectedType, setSelectedType] = useState(transactionTypes[0])
+  const [selectedType, setSelectedType] = useState(transactionTypes[2])
   const [category, setCategory] = useState<Option | null>(null)
   const [amount, setAmount] = useState(0)
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
@@ -28,6 +31,13 @@ function TransactionDetails(props: any) {
   const [note, setNote] = useState(null)
 
   const [newCategory, setNewCategory] = useState(false)
+
+  const TransactionComponent: Record<string, JSX.Element> = {
+    expense: <ExpenseTransaction/>,
+    savings: <SavingsTransaction/>,
+    investments: <InvestmentsTransaction/>,
+    // income: undefined
+  }
 
   useEffect(() => {
     getCategories()
@@ -100,6 +110,7 @@ function TransactionDetails(props: any) {
               </span>
             ))}
           </div>
+          {TransactionComponent[selectedType]}
           <div className="modalField">
             <FontAwesomeIcon icon={faList} className="icon" />
             <Dropdown
