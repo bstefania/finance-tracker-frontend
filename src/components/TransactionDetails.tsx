@@ -23,7 +23,7 @@ function TransactionDetails(props: any) {
   const [source, setSource] = useState<TransactionSource>(TransactionSource.Income);
   const [categories, setCategories] = useState<Record<string, Option[]>>({})
 
-  const [selectedType, setSelectedType] = useState(transactionTypes[2])
+  const [selectedType, setSelectedType] = useState(transactionTypes[0])
   const [category, setCategory] = useState<Option | null>(null)
   const [amount, setAmount] = useState(0)
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
@@ -128,6 +128,7 @@ function TransactionDetails(props: any) {
             <input
               type="number"
               id="amount"
+              step="0.01"
               min="1"
               required
               placeholder="Amount"
