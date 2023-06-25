@@ -1,26 +1,33 @@
-import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
-import Dropdown from './Dropdown'
+import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { TransactionSource } from "../types/database";
+import Dropdown from "./Dropdown";
 
-function ExpenseTransaction() {
-
-  const [sources, setSources] = useState([{label: 'Wallet', value: 'income'}, {label: 'Savings', value: 'savings'}])
-  const [source, setSource] = useState(null)
-  return (
-    <div className="modalField">
-    <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
-    <Dropdown
-      isSearchable
-      placeholder="Select Source"
-      options={sources}
-      groups={false}
-      onChange={(option: any) => {
-        setSource(option)
-      }}
-    />
-  </div>
-  )
+type ExpenseTransactionProps = {
+  setSource: Dispatch<SetStateAction<TransactionSource>>
 }
 
-export default ExpenseTransaction
+function ExpenseTransaction({setSource}: ExpenseTransactionProps) {
+  const [sources, setSources] = useState([
+    { label: "Wallet", value: TransactionSource.Income },
+    { label: "Savings", value: TransactionSource.Savings },
+  ]);
+
+  return (
+    <div className="modalField">
+      <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
+      <Dropdown
+        isSearchable
+        placeholder="Select Source"
+        options={sources}
+        groups={false}
+        onChange={(option: any) => {
+          setSource(option.value);
+        }}
+      />
+    </div>
+  );
+}
+
+export default ExpenseTransaction;

@@ -9,18 +9,18 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
 import Dropdown, { Option } from "./Dropdown"
-import { Category } from "../types/database"
+import { Category, TransactionSource } from "../types/database"
 import Modal from "./Modal"
 import NewCategory from "./NewCategory"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import ExpenseTransaction from "./ExpenseTransaction"
 import InvestmentsTransaction from "./InvestmentsTransaction"
-import SavingsTransaction from "./SavingsTransaction"
 
 function TransactionDetails(props: any) {
 
   const axiosPrivate = useAxiosPrivate()
   const transactionTypes = ["expense", "savings", "investments", "income"]
+  const [source, setSource] = useState<TransactionSource>(TransactionSource.Income);
   const [categories, setCategories] = useState<Record<string, Option[]>>({})
 
   const [selectedType, setSelectedType] = useState(transactionTypes[2])
@@ -33,10 +33,8 @@ function TransactionDetails(props: any) {
   const [newCategory, setNewCategory] = useState(false)
 
   const TransactionComponent: Record<string, JSX.Element> = {
-    expense: <ExpenseTransaction/>,
-    savings: <SavingsTransaction/>,
+    expense: <ExpenseTransaction setSource={setSource}/>,
     investments: <InvestmentsTransaction/>,
-    // income: undefined
   }
 
   useEffect(() => {
@@ -81,6 +79,7 @@ function TransactionDetails(props: any) {
     try {
       const data = {
         type: selectedType,
+        source: source,
         categoryId: (category as Option).value,
         amount,
         createdAt: new Date(date),

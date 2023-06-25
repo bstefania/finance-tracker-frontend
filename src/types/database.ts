@@ -20,6 +20,12 @@ export type BaseWealth = {
   credit?: number
 }
 
+export enum TransactionSource {
+  Income = "income",
+  Savings = "savings",
+  Investments = "investments"
+}
+
 type WealthCategory = {
   value: number,
   percentage: number
