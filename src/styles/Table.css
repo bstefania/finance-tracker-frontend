@@ -43,7 +43,7 @@ tr:last-child td {
   color: red;
 }
 
-.investment {
+.investments {
   color: green;
 }
 
@@ -51,7 +51,7 @@ tr:last-child td {
   color: rgb(4, 89, 193);
 }
 
-.saving {
+.savings {
   color: rgb(230, 207, 0);
 }
 
