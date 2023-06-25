@@ -15,10 +15,14 @@ import NewCategory from "./NewCategory"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import ExpenseTransaction from "./ExpenseTransaction"
 import InvestmentsTransaction from "./InvestmentsTransaction"
+import useWealth from "../hooks/useWealth"
 
 function TransactionDetails(props: any) {
 
   const axiosPrivate = useAxiosPrivate()
+
+  const { fetchWealth } = useWealth()
+
   const transactionTypes = ["expense", "savings", "investments", "income"]
   const [source, setSource] = useState<TransactionSource>(TransactionSource.Income);
   const [categories, setCategories] = useState<Record<string, Option[]>>({})
@@ -88,6 +92,7 @@ function TransactionDetails(props: any) {
       }
 
       await axiosPrivate.post("/transactions", data)
+      fetchWealth()
       props.toggleModal(true)
     } catch (error) {
       console.log(error)
