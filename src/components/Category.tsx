@@ -1,4 +1,4 @@
-import { faBook } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import "../styles/Category.css"
@@ -12,7 +12,7 @@ function Category(props: CategoryProps) {
   return (
     <div className="category">
       <div className="iconParent">
-      <FontAwesomeIcon icon={faBook} className="icon"/>
+      <FontAwesomeIcon icon={faMoneyBill} className="icon"/>
       </div>
       <div className="details">
         <span className="categoryTitle">{props.categoryGroup}</span>
