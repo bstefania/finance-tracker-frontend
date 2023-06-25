@@ -201,10 +201,10 @@ const Dropdown = ({
             ? optionsDiv(getOptions() as Option[])
             : Object.entries(options as Record<string, Option[]>).map(
                 ([group, options]) => (
-                  <div>
-                    <div key={group} className="dropdown-group">
+                  <div key={group}>
+                    <span className="dropdown-group">
                       {group}
-                    </div>
+                    </span>
                     {optionsDiv(options)}
                   </div>
                 )
