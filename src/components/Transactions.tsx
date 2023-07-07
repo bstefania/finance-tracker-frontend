@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import "../styles/Transactions.css"
-import "../styles/Table.css"
+import "../styles/Transactions.scss"
+import "../styles/Table.scss"
 import Category from "./Category"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
@@ -46,7 +46,7 @@ function Transactions({type}: TransactionsProps) {
   return (
     <div className="table-div">
       <div className="header">
-        <h1>Recent transactions</h1>
+        <h2>Recent transactions</h2>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
       {transactionDetailsVisible && <TransactionDetails

@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signUpWithEmailAndPassword } from "../utils/authentication";
 import { Link } from "react-router-dom";
-import "../styles/Authentication.css";
+import "../styles/Authentication.scss";
 import Navbar from "../components/Navbar";
 import ExternalProvider from "../components/ExternalProvider";
 import Delimiter from "../components/Delimiter";

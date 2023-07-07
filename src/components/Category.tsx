@@ -1,7 +1,7 @@
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import "../styles/Category.css"
+import "../styles/Category.scss"
 
 type CategoryProps = {
   category: string,

@@ -2,7 +2,7 @@ import { FormEvent } from "react";
 import { useRef, useState, useEffect } from "react";
 import { logInWithEmailAndPassword } from "../utils/authentication";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import "../styles/Authentication.css";
+import "../styles/Authentication.scss";
 import { faEnvelope, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../components/Navbar";

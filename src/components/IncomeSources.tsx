@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import "../styles/IncomeSources.css"
-import "../styles/Table.css"
+import "../styles/IncomeSources.scss"
+import "../styles/Table.scss"
 import Category from "./Category"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
@@ -36,7 +36,7 @@ function IncomeSources({}: IncomeSourcesProps) {
   return (
     <div className="table-div">
       <div className="header">
-        <h1>Income Sources</h1>
+        <h2>Income Sources</h2>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
       {incomeSourcesDetailsVisible && (

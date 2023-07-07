@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Delimiter.css"
+import "../styles/Delimiter.scss"
 
 type DelimiterProps = {
   text: string

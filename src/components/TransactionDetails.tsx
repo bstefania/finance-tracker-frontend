@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react"
-import "../styles/TransactionDetails.css"
+import "../styles/TransactionDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCalendarDays,

@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/ExternalProvider.css"
+import "../styles/ExternalProvider.scss"
 import { AuthProviderType } from "../types/authentication";
 import { signInWithThirdParty } from "../utils/authentication";
 
