@@ -28,7 +28,7 @@ article {
 
 main {
   width: 100%;
-  min-width: 700px;
+  min-width: 600px;
   flex-grow: 1;
   flex-direction: column;
   display: flex;
@@ -55,7 +55,7 @@ main {
 .rightSidebar {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 500px;
   height: 100%;
   gap: 1em;
   /* padding: 1em; */

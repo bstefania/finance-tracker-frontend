@@ -37,6 +37,18 @@ body {
   align-items: center;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.header h2 {
+  flex-grow: 1;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
 form {
   width: 100%;
   display: flex;
@@ -51,7 +63,7 @@ button {
   width: fit-content;
   padding: 0.5em 1.5em;
   margin: 0 0.5em;
-  border-radius: 1em;
+  border-radius: 0.5em;
   font-size: 1rem;
   background-color: var(--DARK-COLOR);
   border: none;

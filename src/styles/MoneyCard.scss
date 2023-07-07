@@ -1,0 +1,51 @@
+
+
+.moneyCard {
+  /* padding: var(--MAIN-PADDING); */
+  display: flex;
+}
+
+.title {
+  flex-grow: 1;
+  color: grey;
+  display: flex;
+  gap: 0.5em;
+}
+
+.amount {
+  font-size: 1.25rem;
+}
+
+.currentAmount {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  text-align: right;
+}
+
+.value {
+  display: flex;
+}
+
+.percentage-income {
+  font-size: 1rem;
+  color: grey;
+  border: solid 1px red;
+  border-radius: 0.5em;
+  padding: 0 0.25em;
+}
+
+.editIcon {
+  display: none;
+  cursor: pointer;
+  color: grey;
+  padding-inline: 0.25em;
+}
+
+.currentAmount:hover .editIcon {
+  display: block;
+}
+
+.editField {
+border-bottom: 1px solid lightgray;
+}

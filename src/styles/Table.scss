@@ -3,21 +3,11 @@
   min-height: 470px;
   max-height: 500px;
   background-color: white;
-  border-radius: 1em;
+  border-radius: 0.5em;
   padding: 1.5em;
   display: flex;
   flex-direction: column;
   gap: 1em;
-}
-
-.header {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.header h1 {
-  flex-grow: 1;
 }
 
 table {
