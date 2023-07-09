@@ -1,16 +1,19 @@
-import React from 'react'
-import "../styles/UpcomingPayments.css"
-import { TransactionType } from '../types/database'
+import React from "react";
+import "../styles/UpcomingPayments.scss";
+import { TransactionType } from "../types/database";
 
 type UpcomingTransactionsProps = {
-  type?: TransactionType
-}
+  type?: TransactionType;
+};
 
-function UpcomingTransactions({type}: UpcomingTransactionsProps) {
+function UpcomingTransactions({ type }: UpcomingTransactionsProps) {
   return (
     <div className="upcomingPayments">
-      <h1>Upcoming transactions</h1>
-    </div>  )
+      <div className="header">
+        <h2>Upcoming transactions</h2>
+      </div>
+    </div>
+  );
 }
 
-export default UpcomingTransactions
+export default UpcomingTransactions;

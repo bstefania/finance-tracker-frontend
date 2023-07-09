@@ -4,7 +4,7 @@
   border-radius: 0.5em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.25em;
 }
 .wealth > .header {
   flex-direction: column;
@@ -18,7 +18,7 @@
 .wealth ul {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0;
 }
 
 .wealth li:not(:last-of-type) {

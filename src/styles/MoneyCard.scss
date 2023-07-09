@@ -1,7 +1,7 @@
 
 
 .moneyCard {
-  /* padding: var(--MAIN-PADDING); */
+  padding: 1em 0;
   display: flex;
 }
 
@@ -9,6 +9,7 @@
   flex-grow: 1;
   color: grey;
   display: flex;
+  align-items: center;
   gap: 0.5em;
 }
 
@@ -25,14 +26,6 @@
 
 .value {
   display: flex;
-}
-
-.percentage-income {
-  font-size: 1rem;
-  color: grey;
-  border: solid 1px red;
-  border-radius: 0.5em;
-  padding: 0 0.25em;
 }
 
 .editIcon {

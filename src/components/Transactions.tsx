@@ -74,7 +74,7 @@ function Transactions({type}: TransactionsProps) {
                     />
                   </td>
                   <td className={val.type.toLowerCase()}>{euro.format(val.amount)}</td>
-                  <td>{val.type.charAt(0).toUpperCase() + val.type.slice(1)}</td>
+                  <td><span className={`label-${val.type}`}>{val.type.charAt(0).toUpperCase() + val.type.slice(1)}</span></td>
                   <td>
                     {new Date(val.createdAt).toLocaleDateString("en-us", {
                       weekday: "long",

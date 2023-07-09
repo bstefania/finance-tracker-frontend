@@ -8,6 +8,10 @@
   --MAIN-PADDING: 1em;
   --SEPARATOR-COLOR: #ccc;
   --BORDER-COLOR: #ccc;
+  --INCOME-COLOR: rgb(101,172,132);
+  --EXPENSE-COLOR: rgb(228, 84, 84);
+  --SAVINGS-COLOR: rgb(227,175,130);
+  --INVESTMENTS-COLOR:rgb(47, 124, 219);
 }
 
 * {
@@ -218,4 +222,39 @@ input[type=radio] {
 .disabled {
   pointer-events: none;
   opacity: 0.5;
+}
+
+%label {
+  font-size: 14px;
+  font-weight:500;
+  // height: 18px;
+  border-radius: 0.25em;
+  padding: 0 0.5em;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.label-income {
+  @extend %label;
+  color: var(--INCOME-COLOR);
+  background-color: rgba(101,172,132,0.2);
+}
+
+.label-expense {
+  @extend %label;
+  color: var(--EXPENSE-COLOR);
+  background-color: rgba(213, 35, 35, 0.2);
+}
+
+.label-savings {
+  @extend %label;
+  color: var(--SAVINGS-COLOR);
+  background-color: rgba(227,175,130, 0.2);
+}
+
+.label-investments {
+  @extend %label;
+  color: var(--INVESTMENTS-COLOR);
+  background-color: rgb(4, 89, 193, 0.2);
 }

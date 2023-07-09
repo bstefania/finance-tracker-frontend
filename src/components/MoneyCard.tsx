@@ -70,17 +70,11 @@ const MoneyCard = (props: MoneyCardProps) => {
 
   return (
     <div className="moneyCard">
-      <div className="description">
-        <div className="text">
-          <span className="title">{details[props.type].title}</span>
-          <span>{formatDecimals(wealth?.category[props.type].percentage)}%</span>
-        </div>
-        <div className="design">
-          <FontAwesomeIcon
-            icon={details[props.type].icon}
-            className="icon icon--large"
-          />
-        </div>
+      <div className="title">
+        <span>{details[props.type].title}</span>
+        <span className={`label-${props.type}`}>
+          {formatDecimals(wealth?.category[props.type].percentage)}%
+        </span>
       </div>
       <div className="amount">
         {editMode ? (
@@ -95,12 +89,16 @@ const MoneyCard = (props: MoneyCardProps) => {
           />
         ) : (
           <div className="currentAmount">
-            <span>{euro.format(wealth?.category[props.type].value ?? 0)} </span>
-            <FontAwesomeIcon
-              icon={faPencil}
-              className="editIcon"
-              onClick={toggleEditMode}
-            />
+            <div className="value">
+              <span>
+                {euro.format(wealth?.category[props.type].value ?? 0)}{" "}
+              </span>
+              <FontAwesomeIcon
+                icon={faPencil}
+                className="editIcon"
+                onClick={toggleEditMode}
+              />
+            </div>
           </div>
         )}
       </div>
