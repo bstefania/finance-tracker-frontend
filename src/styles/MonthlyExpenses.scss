@@ -1,10 +1,16 @@
 .monthlyExpenses {
   width: 100%;
-  height: 300px;
   background-color: white;
   padding: var(--MAIN-PADDING);
   display: flex;
+  gap: 0.5em;
   flex-direction: column;
   align-items: center;
   border-radius: 0.5em;
+}
+
+.donut {
+  padding: 1em 1em;
+  border: rgba(128, 128, 128, 0.178) solid 1px;
+  height: 100%;
 }
