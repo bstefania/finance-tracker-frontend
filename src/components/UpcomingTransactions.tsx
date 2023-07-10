@@ -12,6 +12,9 @@ function UpcomingTransactions({ type }: UpcomingTransactionsProps) {
       <div className="header">
         <h2>Upcoming transactions</h2>
       </div>
+      <div className="notFound">
+        <span>Nothing found in the next 30 days.</span>
+      </div>
     </div>
   );
 }
