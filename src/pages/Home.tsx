@@ -42,7 +42,7 @@ const Home = () => {
                   </li>
                 </ul>
               </div>
-              <MonthlyTransactions />
+              <MonthlyTransactions type={TransactionType.Expense}/>
               <UpcomingTransactions />
             </div>
           </section>

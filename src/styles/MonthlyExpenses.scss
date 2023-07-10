@@ -13,4 +13,20 @@
   padding: 1em 1em;
   border: rgba(128, 128, 128, 0.178) solid 1px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.filters {
+  display: flex;
+  gap: 2em;
+  justify-content: flex-end;
+
+  .filter {
+    border: solid 1px var(--BORDER-COLOR);
+    padding-inline: 0.5em;
+    border-radius: 0.25em;
+    width: 50%;
+  }
 }
