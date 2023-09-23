@@ -11,7 +11,7 @@
 
 .donut {
   padding: 1em 1em;
-  border: rgba(128, 128, 128, 0.178) solid 1px;
+  border: var(--BORDER-COLOR) solid 1px;
   height: 100%;
   display: flex;
   flex-direction: column;
