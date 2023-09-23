@@ -61,6 +61,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
   const createCategoryGroup = async () => {
     const data = {
       name: newCategoryGroupName,
+      color: groupColor,
       sharedWith: sharedWith.map((users) => users.value),
     }
 
@@ -73,6 +74,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
     try {
       const data: any = {
         name,
+        color: color,
         sharedWith: sharedWith.map((users) => users.value),
       }
 
