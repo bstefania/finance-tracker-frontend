@@ -29,7 +29,8 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
   const [newCategoryGroup, setNewCategoryGroup] = useState(false)
   const [newCategoryGroupName, setNewCategoryGroupName] = useState('')
   const [color, setColor] = useState(getRandomColor())
-  
+  const [groupColor, setGroupColor] = useState(getRandomColor())
+
   useEffect(() => {
     getCategoryGroups()
   }, [])
@@ -118,6 +119,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
                 placeholder="New category group"
                 onChange={(e) => setNewCategoryGroupName(e.target.value)}
               />
+              <ColorPicker color={groupColor} setColor={setGroupColor}></ColorPicker>
             </div>
           )}
           <div className="modalField">
