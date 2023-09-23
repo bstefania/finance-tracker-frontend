@@ -5,18 +5,21 @@ import "../styles/Category.scss"
 
 type CategoryProps = {
   category: string,
+  color: string,
   categoryGroup: string
 }
 
-function Category(props: CategoryProps) {
+function Category({category, color, categoryGroup}: CategoryProps) {
   return (
     <div className="category">
-      <div className="iconParent">
-      <FontAwesomeIcon icon={faMoneyBill} className="icon"/>
+      <div className="iconParent circle" style={{backgroundColor: color}}>
+        <div className="iconBackground circle">
+          <FontAwesomeIcon icon={faMoneyBill} className="icon"/>
+        </div>
       </div>
       <div className="details">
-        <span className="categoryTitle">{props.categoryGroup}</span>
-        <span>{props.category}</span>
+        <span className="categoryTitle">{categoryGroup}</span>
+        <span>{category}</span>
       </div>
     </div>
   )

@@ -71,6 +71,7 @@ function Transactions({type}: TransactionsProps) {
                     <Category
                       category={val.category.name}
                       categoryGroup={val.category.categoryGroup.name}
+                      color={val.category.color}
                     />
                   </td>
                   <td className={val.type.toLowerCase()}>{euro.format(val.amount)}</td>

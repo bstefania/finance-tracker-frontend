@@ -4,13 +4,15 @@
 }
 
 .iconParent {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgb(209, 250, 209);
-    display: flex;
-    align-items: center;
-    justify-content: center;  
+  width: 40px;
+  height: 40px;
+  background-color: rgb(209, 250, 209);
+
+    .iconBackground {
+      width: 25px;
+      height: 25px;
+      background-color: rgb(255, 255, 255);
+    }
 }
 
 .details {

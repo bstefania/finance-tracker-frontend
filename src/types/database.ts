@@ -88,6 +88,7 @@ export type CategoryInput = {
 export type Category = {
   id: string,
   name: string,
+  color: string,
   categoryGroup: CategoryGroup,
   owner: User,
   sharedWith: User[],
