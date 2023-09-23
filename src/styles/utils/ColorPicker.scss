@@ -1,0 +1,29 @@
+.color-picker-button { 
+  border-radius: 50%;
+  width: 30px;
+  height: 25px;
+  border: var(--BORDER-COLOR) solid 1px;
+  position: relative;
+  cursor: pointer;
+}
+
+.color-picker-button .color-picker-parent {
+  position: absolute;
+  z-index: 1;
+  top: 170%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &::after {
+    color: white;
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    border-width: 10px;
+    border-style: solid;
+    transform: translate(-50%, 50%) rotate(45deg);;
+    box-shadow: 7px 7px 7px 7px rgba(112, 111, 111, 0.8);
+    z-index: -1;
+  }
+}
