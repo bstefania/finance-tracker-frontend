@@ -10,11 +10,15 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
+import ColorPicker from "./utils/ColorPicker"
+import { getRandomColor } from "../utils/colorPicker"
+
 
 type NewCategoryProps = {
   show: boolean
   toggleModal: (listChanged?: boolean) => void
 }
+
 function NewCategory({ toggleModal }: NewCategoryProps) {
   const axiosPrivate = useAxiosPrivate()
 
@@ -24,7 +28,8 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
   const [sharedWith, setSharedWith] = useState<Option[]>([])
   const [newCategoryGroup, setNewCategoryGroup] = useState(false)
   const [newCategoryGroupName, setNewCategoryGroupName] = useState('')
-
+  const [color, setColor] = useState(getRandomColor())
+  
   useEffect(() => {
     getCategoryGroups()
   }, [])
@@ -124,6 +129,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               placeholder="Category"
               onChange={(e) => setName(e.target.value)}
             />
+            <ColorPicker color={color} setColor={setColor} />
           </div>
           <div className="modalField">
             <FontAwesomeIcon icon={faUserPlus} className="icon" />
