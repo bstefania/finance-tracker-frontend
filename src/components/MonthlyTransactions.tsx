@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/MonthlyExpenses.scss";
 import { TransactionType } from "../types/database";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { euro } from "../utils/numberFormat";
 import Dropdown from "./Dropdown";
+import { Amounts, getAmounts } from "../api/transactions";
 
 type MonthlyTransactionsProps = {
   type?: TransactionType;
@@ -17,30 +18,53 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
     { label: "Investments", value: TransactionType.Investments },
   ];
   const [selectedType, setType] = useState(type ?? availableTypes[1]);
+  const [series, setSeries] = useState<number[]>([])  // amounts
+  const [labels, setLabels] = useState<string[]>([])  // categories
+  const [colors, setColors] = useState<string[]>([])
 
-  const series = [55, 20, 1, 30, 4, 33, 43];
+
+  useEffect(() => {    
+    getAmounts()
+    .then((data: any) => {
+        constructChartData(data)
+    })
+    .catch((err: any) => {
+      window.alert(err)
+    })
+}, [])
+ 
+  const constructChartData = (data: Amounts) => {
+    const seriesArr: number[] = []
+    const labelsArr: string[] = []
+    const colorsArr: string[] = []
+
+    Object.entries(data).forEach(([categoryGroup, categories]) => {
+      Object.entries(categories).forEach(([category, values]) => {
+        seriesArr.push(values.amount)
+        labelsArr.push(category)
+        colorsArr.push(values.color)
+      })
+    })
+
+    setSeries(seriesArr)
+    setColors(colorsArr)
+    setLabels(labelsArr)
+  }
+
   const options: ApexOptions = {
     chart: {
       type: "donut",
     },
-    labels: ["A", "B", "C", "D", "E", "F", "G"],
-    colors: [
-      "#008082",
-      "#008d7c",
-      "#1b986e",
-      "#48a259",
-      "#72a93f",
-      "#9ead20",
-      "#cdad00",
-      "#ffa600",
-    ],
+    labels: labels,
+    colors: colors,
     legend: {
-      show: false,
+      show: true,
+      position: "bottom"
     },
     dataLabels: {
       enabled: true,
       style: {
-        colors: ["#808080"],
+        colors: ["#000"],
         fontSize: "14px",
         fontFamily: "Poppins, sans-serif",
       },
@@ -54,7 +78,7 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
         borderRadius: 5,
         borderWidth: 1,
         borderColor: "#fff",
-        opacity: 0.4,
+        opacity: 0.7,
         dropShadow: {
           enabled: false,
         },
