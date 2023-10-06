@@ -13,7 +13,7 @@ import { signUpWithEmailAndPassword } from "../utils/authentication";
 import { Link } from "react-router-dom";
 import "../styles/Authentication.scss";
 import Navbar from "../components/Navbar";
-import external-provider from "../components/external-provider";
+import ExternalProvider from "../components/ExternalProvider";
 import Delimiter from "../components/Delimiter";
 import ErrorMessage from "../components/ErrorMessage";
 
@@ -111,7 +111,7 @@ const Signup = () => {
         {errorMessage && <ErrorMessage text={errorMessage} />}
         <div className="formContent">
           <h1 className="heading">Sign up</h1>
-          <external-provider />
+          <ExternalProvider />
           <Delimiter text="or sign up with email" />
           <form className="customForm" onSubmit={handleSubmit}>
             <div className="formField">

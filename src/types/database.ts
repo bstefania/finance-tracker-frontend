@@ -1,4 +1,4 @@
-export enum moneyCardType {
+export enum MoneyCardType {
   Income = "income",
   Savings = "savings",
   Investments = "investments",

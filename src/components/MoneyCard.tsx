@@ -7,15 +7,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { patchWealth } from "../api/user";
-import { moneyCardType, TransactionType } from "../types/database";
+import { MoneyCardType, TransactionType } from "../types/database";
 import useWealth from "../hooks/useWealth";
 import { euro, formatDecimals } from "../utils/numberFormat";
 
-type moneyCardProps = {
-  type: moneyCardType;
+type MoneyCardProps = {
+  type: MoneyCardType;
 };
 
-const moneyCard = (props: moneyCardProps) => {
+const MoneyCard = (props: MoneyCardProps) => {
   const { wealth, setWealth } = useWealth();
   const [editMode, setEditMode] = useState(false);
   const [amount, setAmount] = useState(wealth?.category[props.type].value);
@@ -106,4 +106,4 @@ const moneyCard = (props: moneyCardProps) => {
   );
 };
 
-export default moneyCard;
+export default MoneyCard;
