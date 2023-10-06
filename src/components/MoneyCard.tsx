@@ -7,15 +7,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { patchWealth } from "../api/user";
-import { MoneyCardType, TransactionType } from "../types/database";
+import { moneyCardType, TransactionType } from "../types/database";
 import useWealth from "../hooks/useWealth";
 import { euro, formatDecimals } from "../utils/numberFormat";
 
-type MoneyCardProps = {
-  type: MoneyCardType;
+type moneyCardProps = {
+  type: moneyCardType;
 };
 
-const MoneyCard = (props: MoneyCardProps) => {
+const moneyCard = (props: moneyCardProps) => {
   const { wealth, setWealth } = useWealth();
   const [editMode, setEditMode] = useState(false);
   const [amount, setAmount] = useState(wealth?.category[props.type].value);
@@ -69,7 +69,7 @@ const MoneyCard = (props: MoneyCardProps) => {
   };
 
   return (
-    <div className="moneyCard">
+    <div className="money-card">
       <div className="title">
         <span>{details[props.type].title}</span>
         <span className={`label-${props.type}`}>
@@ -80,7 +80,7 @@ const MoneyCard = (props: MoneyCardProps) => {
         {editMode ? (
           <input
             type="number"
-            className="editField"
+            className="edit-field"
             ref={inputRef}
             autoFocus
             value={amount}
@@ -88,14 +88,14 @@ const MoneyCard = (props: MoneyCardProps) => {
             onKeyDown={updateWealth}
           />
         ) : (
-          <div className="currentAmount">
+          <div className="current-amount">
             <div className="value">
               <span>
                 {euro.format(wealth?.category[props.type].value ?? 0)}{" "}
               </span>
               <FontAwesomeIcon
                 icon={faPencil}
-                className="editIcon"
+                className="edit-icon"
                 onClick={toggleEditMode}
               />
             </div>
@@ -106,4 +106,4 @@ const MoneyCard = (props: MoneyCardProps) => {
   );
 };
 
-export default MoneyCard;
+export default moneyCard;

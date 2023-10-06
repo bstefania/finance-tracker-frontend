@@ -11,13 +11,13 @@ type ModalProps = {
 
 function Modal({ children, title, toggleModal }: ModalProps) {
   return (
-    <div className={"modalBackground"}>
-      <div className="modalContent">
+    <div className={"modal-background"}>
+      <div className="modal-content">
         <div className="header">
           <h1>{title}</h1>
           <FontAwesomeIcon
             icon={faClose}
-            className="iconWithAction"
+            className="icon-with-action"
             onClick={() => toggleModal()}
           />
         </div>

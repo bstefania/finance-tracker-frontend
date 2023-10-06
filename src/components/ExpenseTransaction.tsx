@@ -15,7 +15,7 @@ function ExpenseTransaction({setSource}: ExpenseTransactionProps) {
   ]);
 
   return (
-    <div className="modalField">
+    <div className="modal-field">
       <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
       <Dropdown
         isSearchable

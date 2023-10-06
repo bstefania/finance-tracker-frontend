@@ -128,7 +128,7 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
   };
 
   return (
-    <div className="monthlyExpenses">
+    <div className="monthly-expenses">
       <div className="header">
         <h2>Monthly transactions</h2>
       </div>

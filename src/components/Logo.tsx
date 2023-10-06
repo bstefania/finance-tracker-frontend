@@ -6,9 +6,9 @@ import useAuth from "../hooks/useAuth";
 const Logo = (props: any) => {
   return (
     <div className="logo">
-      <div className="logoSvgBackground"/>
+      <div className="logo-svg-background"/>
         <div className="logoSvg">
-          <FontAwesomeIcon icon={faChartSimple} className="logoIcon" />
+          <FontAwesomeIcon icon={faChartSimple} className="logo-icon" />
         </div>
       {props.name && <span>WiseWallet</span>}
     </div>

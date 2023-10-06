@@ -52,7 +52,7 @@ function Transactions({type}: TransactionsProps) {
       {transactionDetailsVisible && <TransactionDetails
         toggleModal={toggleModal}
       /> }
-      <div className="fixTableHead">
+      <div className="fix-table-head">
         <table className='transactions-table'>
           <thead>
             <tr>
@@ -85,17 +85,17 @@ function Transactions({type}: TransactionsProps) {
                     })}
                   </td>
                   <td>
-                    <div className="columnWithAction">
+                    <div className="column-with-action">
                       {val.sharedWith.length ? (
-                        <div className="userDiv">
-                          <FontAwesomeIcon icon={faUser} className="userIcon" />
+                        <div className="user-div">
+                          <FontAwesomeIcon icon={faUser} className="user-icon" />
                         </div>
                       ) : (
                         <div></div>
                       )}
                       <FontAwesomeIcon
                         icon={faEllipsisVertical}
-                        className="iconAction"
+                        className="icon-action"
                       />
                     </div>
                   </td>
@@ -106,7 +106,7 @@ function Transactions({type}: TransactionsProps) {
         </table>
       </div>
       {transactions.length === 0 && (
-        <div className="notFound">No transactions found</div>
+        <div className="not-found">No transactions found</div>
       )}
     </div>
   )

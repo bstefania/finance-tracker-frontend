@@ -3,12 +3,12 @@
   gap: 1em;
 }
 
-.iconParent {
+.icon-parent {
   width: 40px;
   height: 40px;
   background-color: rgb(209, 250, 209);
 
-    .iconBackground {
+    .icon-background {
       width: 25px;
       height: 25px;
       background-color: rgb(255, 255, 255);
@@ -20,6 +20,6 @@
   flex-direction: column;
 }
 
-.categoryTitle {
+.category-title {
   font-size: 0.75rem;
 }

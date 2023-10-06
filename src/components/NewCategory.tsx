@@ -99,7 +99,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
       <div className="body">
         <form onSubmit={handleSubmit}>
           {!newCategoryGroup ? (
-            <div className="modalField">
+            <div className="modal-field">
               <FontAwesomeIcon icon={faList} className="icon" />
               <Dropdown
                 isSearchable
@@ -112,7 +112,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               />
             </div>
           ) : (
-            <div className="modalField">
+            <div className="modal-field">
               <FontAwesomeIcon icon={faFolderTree} className="icon" />
               <input
                 type="text"
@@ -124,7 +124,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               <ColorPicker color={groupColor} setColor={setGroupColor}></ColorPicker>
             </div>
           )}
-          <div className="modalField">
+          <div className="modal-field">
             <FontAwesomeIcon icon={faFolder} className="icon" />
             <input
               type="text"
@@ -135,7 +135,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
             />
             <ColorPicker color={color} setColor={setColor} />
           </div>
-          <div className="modalField">
+          <div className="modal-field">
             <FontAwesomeIcon icon={faUserPlus} className="icon" />
             <Dropdown
               isSearchable

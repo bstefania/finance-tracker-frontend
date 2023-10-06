@@ -2,12 +2,12 @@ import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
 import "../styles/Pages.scss"
 import Transactions from "../components/Transactions"
-import MoneyCard from "../components/MoneyCard"
+import moneyCard from "../components/moneyCard"
 import { faWallet } from "@fortawesome/free-solid-svg-icons"
-import "../styles/MoneyCard.scss"
+import "../styles/moneyCard.scss"
 import MonthlyTransactions from "../components/MonthlyTransactions"
 import UpcomingTransactions from "../components/UpcomingTransactions"
-import { MoneyCardType, TransactionType } from "../types/database"
+import { moneyCardType, TransactionType } from "../types/database"
 import IncomeSources from "../components/IncomeSources"
 
 const Balance = () => {
@@ -23,8 +23,8 @@ const Balance = () => {
               <IncomeSources />
             </main>
             <div className="rightSidebar">
-              <MoneyCard
-                type={MoneyCardType.Income}
+              <moneyCard
+                type={moneyCardType.Income}
               />
               <MonthlyTransactions type={TransactionType.Expense} />
               <UpcomingTransactions type={TransactionType.Expense} />

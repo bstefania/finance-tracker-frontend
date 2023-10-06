@@ -8,7 +8,7 @@ function SavingsTransaction() {
   const [sources, setSources] = useState([{label: 'Wallet', value: 'income'}])
   const [source, setSource] = useState(null)
   return (
-    <div className="modalField">
+    <div className="modal-field">
     <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
     <Dropdown
       isSearchable

@@ -115,7 +115,7 @@ function TransactionDetails(props: any) {
             ))}
           </div>
           {TransactionComponent[selectedType]}
-          <div className="modalField">
+          <div className="modal-field">
             <FontAwesomeIcon icon={faList} className="icon" />
             <Dropdown
               isSearchable
@@ -128,7 +128,7 @@ function TransactionDetails(props: any) {
               }}
             />
           </div>
-          <div className="modalField">
+          <div className="modal-field">
             <FontAwesomeIcon icon={faMoneyBill} className="icon" />
             <input
               type="number"
@@ -140,7 +140,7 @@ function TransactionDetails(props: any) {
               onChange={(e) => setAmount(parseFloat(e.target.value))}
             />
           </div>
-          <div className="modalField">
+          <div className="modal-field">
             <FontAwesomeIcon icon={faCalendarDays} className="icon" />
             <input
               type="date"
@@ -150,7 +150,7 @@ function TransactionDetails(props: any) {
               placeholder="Date"
             />
           </div>
-          <div className="modalField">
+          <div className="modal-field">
             <FontAwesomeIcon icon={faUserPlus} className="icon" />
             <Dropdown
               isSearchable
@@ -160,7 +160,7 @@ function TransactionDetails(props: any) {
               onChange={(option: any) => setSharedWith(option)}
             />
           </div>
-          <div className="modalField">
+          <div className="modal-field">
             <FontAwesomeIcon icon={faNoteSticky} className="icon" />
             <textarea
               id="note"

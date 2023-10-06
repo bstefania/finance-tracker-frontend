@@ -78,7 +78,7 @@ const Dropdown = ({
                 onClick={(e) => onTagRemove(e, option)}
                 className="dropdown-tag-close"
               >
-                <FontAwesomeIcon icon={faXmark} className="iconWithAction" />
+                <FontAwesomeIcon icon={faXmark} className="icon-with-action" />
               </span>
             </div>
           ))}
@@ -185,7 +185,7 @@ const Dropdown = ({
           <div className="dropdown-tool">
             <FontAwesomeIcon
               icon={!showMenu ? faChevronDown : faChevronUp}
-              className="iconWithAction"
+              className="icon-with-action"
             />
           </div>
         </div>
@@ -210,7 +210,7 @@ const Dropdown = ({
                 )
               )}
           {addItem && (
-            <div className="newListItem" onClick={addItem}>
+            <div className="new-list-item" onClick={addItem}>
               + Add new
             </div>
           )}

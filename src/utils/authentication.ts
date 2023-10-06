@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
-import { db, externalProviders } from "../config/firebase";
+import { db, external-providers } from "../config/firebase";
 import { auth } from "../config/firebase"
 import { AuthProviderType } from "../types/authentication";
 
@@ -34,7 +34,7 @@ export const logInWithEmailAndPassword = async (data: any) => {
 }
 
 export const signInWithThirdParty = async (providerType: AuthProviderType) => {
-  const provider = providerType === AuthProviderType.Google ? externalProviders.google : externalProviders.facebook
+  const provider = providerType === AuthProviderType.Google ? external-providers.google : external-providers.facebook
   const res = await signInWithPopup(auth, provider);
   const user = res.user;
   const q = query(collection(db, "users"), where("uid", "==", user.uid));

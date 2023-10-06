@@ -31,9 +31,9 @@ function Sidebar() {
   return (
     <div className={`sidebar ${sidenavOpen ? "sidebar--open" : ""}`}>
       <div className="header">
-        <div className="logoAndButton">
+        <div className="logo-and-button">
           <Logo name={showTitle} />
-          <div className="openButton" onClick={toggleSideNav}>
+          <div className="open-button" onClick={toggleSideNav}>
             <FontAwesomeIcon
               icon={sidenavOpen ? faAngleLeft : faAngleRight}
               className="icon icon--small"
@@ -88,7 +88,7 @@ function Sidebar() {
             {showTitle && <p>Calendar</p>}
           </li>
         </ul>
-        <div className="pageRef">
+        <div className="page-ref">
           <FontAwesomeIcon icon={faCircleUser} className="icon icon--large" />
           {showTitle && <p>Account</p>}
         </div>

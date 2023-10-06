@@ -8,7 +8,6 @@ type DelimiterProps = {
 function Delimiter(props: DelimiterProps) {
   return (
     <div className="separator">{props.text}</div>
-
   );
 }
 

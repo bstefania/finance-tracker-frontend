@@ -8,11 +8,11 @@ type UpcomingTransactionsProps = {
 
 function UpcomingTransactions({ type }: UpcomingTransactionsProps) {
   return (
-    <div className="upcomingPayments">
+    <div className="upcoming-payments">
       <div className="header">
         <h2>Upcoming transactions</h2>
       </div>
-      <div className="notFound">
+      <div className="not-found">
         <span>Nothing found in the next 30 days.</span>
       </div>
     </div>

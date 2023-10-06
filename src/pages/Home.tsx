@@ -3,11 +3,11 @@ import Sidebar from "../components/Sidebar";
 import "../styles/Pages.scss";
 import "../styles/Home.scss";
 import Transactions from "../components/Transactions";
-import MoneyCard from "../components/MoneyCard";
-import "../styles/MoneyCard.scss";
+import moneyCard from "../components/moneyCard";
+import "../styles/moneyCard.scss";
 import MonthlyTransactions from "../components/MonthlyTransactions";
 import UpcomingTransactions from "../components/UpcomingTransactions";
-import { MoneyCardType, TransactionType } from "../types/database";
+import { moneyCardType, TransactionType } from "../types/database";
 import useWealth from "../hooks/useWealth";
 import { euro } from "../utils/numberFormat";
 
@@ -32,13 +32,13 @@ const Home = () => {
                 </div>
                 <ul>
                   <li>
-                    <MoneyCard type={MoneyCardType.Income} />
+                    <moneyCard type={moneyCardType.Income} />
                   </li>
                   <li>
-                    <MoneyCard type={MoneyCardType.Savings} />
+                    <moneyCard type={moneyCardType.Savings} />
                   </li>
                   <li>
-                    <MoneyCard type={MoneyCardType.Investments} />
+                    <moneyCard type={moneyCardType.Investments} />
                   </li>
                 </ul>
               </div>

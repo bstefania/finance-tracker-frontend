@@ -17,7 +17,7 @@ function InvestmentsTransaction() {
 
   return (
     <>
-      <div className="radioButtons">
+      <div className="radio-buttons">
         <label>
           <input
             type="radio"
@@ -46,7 +46,7 @@ function InvestmentsTransaction() {
           Loss
         </label>
       </div>
-      <div className={"modalField " + (selectedOption !== "deposit" ? "disabled": "")}>
+      <div className={"modal-field " + (selectedOption !== "deposit" ? "disabled": "")}>
         <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
         <Dropdown
           isSearchable

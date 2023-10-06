@@ -5,7 +5,7 @@ type ErrorMessageProps = {
 }
 
 function ErrorMessage(props: ErrorMessageProps) {
-  return <p className="errmsg">{props.text}</p>;
+  return <p className="error-message">{props.text}</p>;
 }
 
 export default ErrorMessage;

@@ -1,6 +1,6 @@
 
 
-.moneyCard {
+.money-card {
   padding: 1em 0;
   display: flex;
 }
@@ -17,7 +17,7 @@
   font-size: 1.25rem;
 }
 
-.currentAmount {
+.current-amount {
   display: flex;
   flex-direction: column;
   align-items: right;
@@ -28,17 +28,17 @@
   display: flex;
 }
 
-.editIcon {
+.edit-icon {
   display: none;
   cursor: pointer;
   color: grey;
   padding-inline: 0.25em;
 }
 
-.currentAmount:hover .editIcon {
+.current-amount:hover .edit-icon {
   display: block;
 }
 
-.editField {
+.edit-field {
 border-bottom: 1px solid lightgray;
 }

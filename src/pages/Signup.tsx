@@ -13,7 +13,7 @@ import { signUpWithEmailAndPassword } from "../utils/authentication";
 import { Link } from "react-router-dom";
 import "../styles/Authentication.scss";
 import Navbar from "../components/Navbar";
-import ExternalProvider from "../components/ExternalProvider";
+import external-provider from "../components/external-provider";
 import Delimiter from "../components/Delimiter";
 import ErrorMessage from "../components/ErrorMessage";
 
@@ -111,7 +111,7 @@ const Signup = () => {
         {errorMessage && <ErrorMessage text={errorMessage} />}
         <div className="formContent">
           <h1 className="heading">Sign up</h1>
-          <ExternalProvider />
+          <external-provider />
           <Delimiter text="or sign up with email" />
           <form className="customForm" onSubmit={handleSubmit}>
             <div className="formField">
@@ -133,7 +133,7 @@ const Signup = () => {
               <span className={validName || !name ? "hide" : "invalid"}>
                 <FontAwesomeIcon
                   icon={faTimes}
-                  className="iconWithAction"
+                  className="icon-with-action"
                   onClick={clearName}
                 />
               </span>
@@ -164,7 +164,7 @@ const Signup = () => {
               <span className={validEmail || !email ? "hide" : "invalid"}>
                 <FontAwesomeIcon
                   icon={faTimes}
-                  className="iconWithAction"
+                  className="icon-with-action"
                   onClick={clearEmail}
                 />
               </span>
@@ -195,7 +195,7 @@ const Signup = () => {
               <span className={validPassword || !password ? "hide" : "invalid"}>
                 <FontAwesomeIcon
                   icon={faTimes}
-                  className="iconWithAction"
+                  className="icon-with-action"
                   onClick={clearPassword}
                 />
               </span>
@@ -235,7 +235,7 @@ const Signup = () => {
               >
                 <FontAwesomeIcon
                   icon={faTimes}
-                  className="iconWithAction"
+                  className="icon-with-action"
                   onClick={clearConfirmPassword}
                 />
               </span>

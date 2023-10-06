@@ -6,7 +6,7 @@ import "../styles/Authentication.scss";
 import { faEnvelope, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../components/Navbar";
-import ExternalProvider from "../components/ExternalProvider";
+import external-provider from "../components/external-provider";
 import Delimiter from "../components/Delimiter";
 import ErrorMessage from "../components/ErrorMessage";
 
@@ -61,7 +61,7 @@ const Login = () => {
         {errorMessage && <ErrorMessage text={errorMessage} />}
         <div className="formContent">
           <h1 className="heading">Log in</h1>
-          <ExternalProvider />
+          <external-provider />
           <Delimiter text="or log in with email" />
           <form className="customForm" onSubmit={handleSubmit}>
             <div className="formField">

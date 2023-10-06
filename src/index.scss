@@ -104,7 +104,7 @@ hr {
   height: auto;
  }
 
- .iconWithAction {
+ .icon-with-action {
   padding-left: 0.5em;
   cursor: pointer;
 }
@@ -129,7 +129,7 @@ hr {
   font-weight: 600;
 }
 
-.logoSvgBackground, .logoSvg {
+.logo-svg-background, .logoSvg {
   background-color: var(--DARK-COLOR);
   border-radius: 0.4em;
   display: flex;
@@ -142,7 +142,7 @@ hr {
   height: 1.5em;
 }
 
-.logoSvgBackground {
+.logo-svg-background {
   background-color: var(--MEDIUM-COLOR);
   width: 1.75em;
   height: 1.75em;
@@ -153,7 +153,7 @@ hr {
   transform: rotate(20deg) translate(-9%, -4.5%);
 }
 
-.logoIcon {
+.logo-icon {
   color: white;
 }
 
@@ -198,18 +198,18 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.radioButtons {
+.radio-buttons {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-around;
 }
 
-.radioButtons input {
+.radio-buttons input {
   width: fit-content;
 }
 
-.radioButtons label {
+.radio-buttons label {
   display: flex;
   cursor: pointer;
   gap: 0.25em;

@@ -3,7 +3,7 @@
   gap: 1em;
 }
 
-.modalField {
+.modal-field {
   width: 100%;
   display: flex;
   gap: 0.5em;
@@ -14,15 +14,15 @@
   border-radius: 0.5em;
 }
 
-.modalField:focus {
+.modal-field:focus {
   outline: black;
 }
 
-.modalField:has(textarea) {
+.modal-field:has(textarea) {
   align-items: flex-start;
 }
 
-.modalField:has(textarea) .icon {
+.modal-field:has(textarea) .icon {
   padding: 5px 0px;
 }
 

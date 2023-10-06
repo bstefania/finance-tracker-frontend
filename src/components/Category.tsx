@@ -12,13 +12,13 @@ type CategoryProps = {
 function Category({category, color, categoryGroup}: CategoryProps) {
   return (
     <div className="category">
-      <div className="iconParent circle" style={{backgroundColor: color}}>
-        <div className="iconBackground circle">
+      <div className="icon-parent circle" style={{backgroundColor: color}}>
+        <div className="icon-background circle">
           <FontAwesomeIcon icon={faMoneyBill} className="icon"/>
         </div>
       </div>
       <div className="details">
-        <span className="categoryTitle">{categoryGroup}</span>
+        <span className="category-title">{categoryGroup}</span>
         <span>{category}</span>
       </div>
     </div>

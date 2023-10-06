@@ -30,11 +30,11 @@
   border-bottom: 1px solid #ccc;
 }
 
-.logoAndButton {
+.logo-and-button {
   padding: 0.5em 1em;
 }
 
-.openButton {
+.open-button {
   font-size: 1.5rem;
   border-radius: 50%;
   position: absolute;
@@ -50,7 +50,7 @@
   justify-content: center;
 }
 
-.logoAndButton {
+.logo-and-button {
   padding: var(--MAIN-PADDING);
 }
 
@@ -71,11 +71,11 @@
   flex-direction: column;
 }
 
-.pageRef {
+.page-ref {
   width: 100%;
 }
 
-.sidebar li, .sidebar .pageRef {
+.sidebar li, .sidebar .page-ref {
   padding: 0.5em;
   display: flex;
   gap: 0.5em;
@@ -83,7 +83,7 @@
   border: 7px solid white;
 }
 
-.sidebar li:hover, .sidebar .pageRef:hover {
+.sidebar li:hover, .sidebar .page-ref:hover {
   background-color: var(--LIGHT-COLOR-SECONDARY);
   border-left-width: 10px;
 }
