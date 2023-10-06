@@ -3,7 +3,6 @@ import Sidebar from "../components/Sidebar"
 import "../styles/Pages.scss"
 import Transactions from "../components/Transactions"
 import MoneyCard from "../components/MoneyCard"
-import { faWallet } from "@fortawesome/free-solid-svg-icons"
 import "../styles/MoneyCard.scss"
 import MonthlyTransactions from "../components/MonthlyTransactions"
 import UpcomingTransactions from "../components/UpcomingTransactions"
@@ -17,12 +16,12 @@ const Balance = () => {
       <div className="page-content">
         <Navbar header="Wallet" />
         <article>
-          <section className="mainSection">
+          <section className="main-section">
             <main>
               <Transactions type={TransactionType.Income} />
               <IncomeSources />
             </main>
-            <div className="rightSidebar">
+            <div className="right-sidebar">
               <MoneyCard
                 type={MoneyCardType.Income}
               />

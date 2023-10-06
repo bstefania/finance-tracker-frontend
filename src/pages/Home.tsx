@@ -20,11 +20,11 @@ const Home = () => {
       <div className="page-content">
         <Navbar header="Home" />
         <article>
-          <section className="mainSection">
+          <section className="main-section">
             <main>
               <Transactions />
             </main>
-            <div className="rightSidebar">
+            <div className="right-sidebar">
             <div className="wealth">
                 <div className="header">
                   <h2>Total Balance</h2>
