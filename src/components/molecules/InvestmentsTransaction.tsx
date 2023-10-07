@@ -1,7 +1,7 @@
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "../atoms/Dropdown";
 
 function InvestmentsTransaction() {
   const [sources, setSources] = useState([

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import "../styles/Dropdown.scss";
+import "../../styles/atoms/Dropdown.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import Logo from "./Logo"
-import "../styles/Sidebar.scss"
+import Logo from "../atoms/Logo"
+import "../../styles/molecules/Sidebar.scss"
 import {
   faAngleLeft,
   faAngleRight,

@@ -1,8 +1,8 @@
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { TransactionSource } from "../types/database";
-import Dropdown from "./Dropdown";
+import { TransactionSource } from "../../types/database";
+import Dropdown from "../atoms/Dropdown";
 
 type ExpenseTransactionProps = {
   setSource: Dispatch<SetStateAction<TransactionSource>>

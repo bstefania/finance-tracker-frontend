@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import "../styles/IncomeSources.scss"
-import "../styles/Table.scss"
-import Category from "./Category"
+import "../../styles/organisms/IncomeSources.scss"
+import "../../styles/utils/Table.scss"
+import Category from "../atoms/Category"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
 import TransactionDetails from "./TransactionDetails"
-import useAxiosPrivate from "../hooks/useAxiosPrivate"
-import { IncomeSource, TransactionType } from "../types/database"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import { IncomeSource, TransactionType } from "../../types/database"
 
 type IncomeSourcesProps = {
   type?: TransactionType

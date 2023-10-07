@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/external-provider.scss"
-import { AuthProviderType } from "../types/authentication";
-import { signInWithThirdParty } from "../utils/authentication";
+import "../../styles/utils/ExternalProvider.scss"
+import { AuthProviderType } from "../../types/authentication";
+import { signInWithThirdParty } from "../../utils/authentication";
 
 function externalProvider() {
   return (

@@ -1,11 +1,11 @@
 import "./App.scss";
 import Login from "./pages/Login"
 import { Routes, Route } from "react-router-dom"
-import Layout from "./components/Layout";
+import Layout from "./components/organisms/Layout";
 import Missing from "./pages/Missing";
 import Wallet from "./pages/Wallet";
 import Home from "./pages/Home";
-import RequireAuth from "./components/RequireAuth";
+import RequireAuth from "./components/utils/RequireAuth";
 import LinkPage from "./pages/LinkPage";
 import Signup from './pages/Signup';
 

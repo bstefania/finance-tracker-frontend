@@ -8,7 +8,7 @@ const app = initializeApp(config)
 const analytics = getAnalytics(app)
 
 // Add or Remove authentification methods here.
-export const external-providers = {
+export const externalProviders = {
     google: new GoogleAuthProvider().addScope("https://www.googleapis.com/auth/contacts.readonly"),
     facebook: new FacebookAuthProvider(),
 };

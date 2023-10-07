@@ -2,13 +2,13 @@ import { FormEvent } from "react";
 import { useRef, useState, useEffect } from "react";
 import { logInWithEmailAndPassword } from "../utils/authentication";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import "../styles/Authentication.scss";
+import "../styles/utils/Authentication.scss";
 import { faEnvelope, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Navbar from "../components/Navbar";
-import ExternalProvider from "../components/ExternalProvider";
-import Delimiter from "../components/Delimiter";
-import ErrorMessage from "../components/ErrorMessage";
+import Navbar from "../components/molecules/Navbar";
+import ExternalProvider from "../components/utils/ExternalProvider";
+import Delimiter from "../components/atoms/Delimiter";
+import ErrorMessage from "../components/atoms/ErrorMessage";
 
 const Login = () => {
   const navigate = useNavigate();

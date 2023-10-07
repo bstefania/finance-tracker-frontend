@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react"
-import "../styles/TransactionDetails.scss"
+import "../../styles/organisms/TransactionDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCalendarDays,
@@ -8,14 +8,14 @@ import {
   faNoteSticky,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
-import Dropdown, { Option } from "./Dropdown"
-import { Category, TransactionSource } from "../types/database"
-import Modal from "./Modal"
-import NewCategory from "./NewCategory"
-import useAxiosPrivate from "../hooks/useAxiosPrivate"
-import ExpenseTransaction from "./ExpenseTransaction"
-import InvestmentsTransaction from "./InvestmentsTransaction"
-import useWealth from "../hooks/useWealth"
+import Dropdown, { Option } from "../atoms/Dropdown"
+import { Category, TransactionSource } from "../../types/database"
+import Modal from "../atoms/Modal"
+import NewCategory from "../molecules/NewCategory"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import ExpenseTransaction from "../molecules/ExpenseTransaction"
+import InvestmentsTransaction from "../molecules/InvestmentsTransaction"
+import useWealth from "../../hooks/useWealth"
 
 function TransactionDetails(props: any) {
 

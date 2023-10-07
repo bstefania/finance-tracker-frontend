@@ -6,10 +6,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
-import { patchWealth } from "../api/user";
-import { MoneyCardType, TransactionType } from "../types/database";
-import useWealth from "../hooks/useWealth";
-import { euro, formatDecimals } from "../utils/numberFormat";
+import { patchWealth } from "../../api/user";
+import { MoneyCardType, TransactionType } from "../../types/database";
+import useWealth from "../../hooks/useWealth";
+import { euro, formatDecimals } from "../../utils/numberFormat";
 
 type MoneyCardProps = {
   type: MoneyCardType;

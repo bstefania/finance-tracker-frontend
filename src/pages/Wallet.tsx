@@ -1,13 +1,13 @@
-import Navbar from "../components/Navbar"
-import Sidebar from "../components/Sidebar"
-import "../styles/Pages.scss"
-import Transactions from "../components/Transactions"
-import MoneyCard from "../components/MoneyCard"
-import "../styles/MoneyCard.scss"
-import MonthlyTransactions from "../components/MonthlyTransactions"
-import UpcomingTransactions from "../components/UpcomingTransactions"
+import Navbar from "../components/molecules/Navbar"
+import Sidebar from "../components/molecules/Sidebar"
+import "../styles/pages/Pages.scss"
+import Transactions from "../components/organisms/Transactions"
+import MoneyCard from "../components/molecules/MoneyCard"
+import "../styles/molecules/MoneyCard.scss"
+import MonthlyTransactions from "../components/molecules/MonthlyTransactions"
+import UpcomingTransactions from "../components/organisms/UpcomingTransactions"
 import { MoneyCardType, TransactionType } from "../types/database"
-import IncomeSources from "../components/IncomeSources"
+import IncomeSources from "../components/organisms/IncomeSources"
 
 const Balance = () => {
   return (

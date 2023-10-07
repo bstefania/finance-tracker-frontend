@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from "react"
-import Modal from "./Modal"
-import { CategoryGroup } from "../types/database"
-import Dropdown, { Option } from "./Dropdown"
+import Modal from "../atoms/Modal"
+import { CategoryGroup } from "../../types/database"
+import Dropdown, { Option } from "../atoms/Dropdown"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faFolder,
@@ -9,9 +9,9 @@ import {
   faList,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons"
-import useAxiosPrivate from "../hooks/useAxiosPrivate"
-import ColorPicker from "./utils/ColorPicker"
-import { getRandomColor } from "../utils/colorPicker"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import ColorPicker from "../utils/ColorPicker"
+import { getRandomColor } from "../../utils/colorPicker"
 
 
 type NewCategoryProps = {

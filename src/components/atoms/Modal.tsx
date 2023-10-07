@@ -1,6 +1,6 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import "../styles/Modal.scss"
+import "../../styles/atoms/Modal.scss"
 import React from "react"
 
 type ModalProps = {

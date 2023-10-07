@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Logo from "./Logo";
-import "../styles/Navbar.scss";
-import { logOut } from "../utils/authentication";
-import useAuth from "../hooks/useAuth";
+import Logo from "../atoms/Logo";
+import "../../styles/molecules/Navbar.scss";
+import { logOut } from "../../utils/authentication";
+import useAuth from "../../hooks/useAuth";
 
 type NavbarProps = {
   header: string;
