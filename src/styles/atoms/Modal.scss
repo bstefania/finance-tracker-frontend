@@ -1,3 +1,5 @@
+@use "../variables.scss" as vars;
+
 .modal-background {
   position: fixed;
   z-index: 1;
@@ -16,13 +18,12 @@
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 1em;
-  border: 1px solid #888;
   min-width: 550px;
   width: auto;
-  border-radius: 0.5em;
-}
+  border-radius: vars.$border-radius;
 
-.modal-content .header {
-  display: flex;
-  justify-content: space-between;
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
 }

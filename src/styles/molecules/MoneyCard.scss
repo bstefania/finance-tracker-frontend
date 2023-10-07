@@ -1,4 +1,4 @@
-
+@use "../variables.scss" as vars;
 
 .money-card {
   padding: 1em 0;
@@ -7,14 +7,14 @@
 
 .title {
   flex-grow: 1;
-  color: grey;
+  color: vars.$text-color-secondary;
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
 
 .amount {
-  font-size: 1.25rem;
+  font-size: vars.$font-size-20;
 }
 
 .current-amount {
@@ -31,8 +31,8 @@
 .edit-icon {
   display: none;
   cursor: pointer;
-  color: grey;
-  padding-inline: 0.25em;
+  color: vars.$text-color-secondary;
+  padding-inline: vars.$text-padding;
 }
 
 .current-amount:hover .edit-icon {
@@ -40,5 +40,5 @@
 }
 
 .edit-field {
-border-bottom: 1px solid lightgray;
+border-bottom: 1px solid vars.$separator-color;
 }

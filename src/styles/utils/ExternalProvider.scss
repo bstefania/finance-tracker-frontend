@@ -1,3 +1,5 @@
+@use "../variables.scss" as vars;
+
 .external-provider {
   width: 100%;
   display: flex;
@@ -9,9 +11,9 @@
   width: 100%;
   border-width: thin;
   border-style: solid;
-  padding: 0.5em var(--MAIN-PADDING);
-  font-size: 1rem;
-  border-radius: 0.5em;
+  padding: 0.5em vars.$main-padding;
+  font-size: vars.$font-size-16;
+  border-radius: vars.$border-radius;
   cursor: pointer;
   display: flex;
   flex-direction: row;

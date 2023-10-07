@@ -1,13 +1,13 @@
-import { faClose } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import "../../styles/atoms/Modal.scss"
-import React from "react"
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../styles/atoms/Modal.scss";
+import "../../styles/common.scss";
 
 type ModalProps = {
-  children: any
-  title: string
-  toggleModal: (listChanged?: boolean) => void
-}
+  children: any;
+  title: string;
+  toggleModal: (listChanged?: boolean) => void;
+};
 
 function Modal({ children, title, toggleModal }: ModalProps) {
   return (
@@ -24,7 +24,7 @@ function Modal({ children, title, toggleModal }: ModalProps) {
         {children}
       </div>
     </div>
-  )
+  );
 }
 
-export default Modal
+export default Modal;

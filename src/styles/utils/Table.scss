@@ -1,9 +1,11 @@
+@use "../variables.scss" as vars;
+
 .table-div {
   width: 100%;
   min-height: 470px;
   max-height: 500px;
-  background-color: white;
-  border-radius: 0.5em;
+  background-color: #fff;
+  border-radius: vars.$border-radius;
   padding: 1.5em;
   display: flex;
   flex-direction: column;
@@ -11,7 +13,6 @@
 }
 
 table {
-  /* table-layout: fixed; */
   width: 100%;
   border-collapse: collapse;
 }
@@ -22,7 +23,7 @@ th, td {
 }
 
 th, td {
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid vars.$separator-color;
 }
 
 tr:last-child td {
@@ -48,7 +49,7 @@ tr:last-child td {
 }
 
 .user-icon {
-  color: white;
+  color: #fff;
 }
 
 .icon-action {
@@ -59,7 +60,7 @@ tr:last-child td {
 }
 
 tbody tr:hover {
-  background-color: var(--LIGHT-COLOR);
+  background-color: vars.$light-color;
   border-left-width: 10px;
 }
 
@@ -93,6 +94,5 @@ tbody tr:hover .icon-action {
 .fix-table-head thead th {
   position: sticky;
   top: 0;
-  background: white;
-
+  background: #fff;
 }

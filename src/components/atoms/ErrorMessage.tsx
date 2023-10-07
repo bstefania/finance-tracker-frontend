@@ -1,4 +1,4 @@
-import React from "react";
+import "../../styles/atoms/ErrorMessage.scss"
 
 type ErrorMessageProps = {
   text: string

@@ -1,3 +1,5 @@
+@use "../variables.scss" as vars;
+
 .sidebar {
   background-color: white;
   width: 60px;
@@ -27,7 +29,7 @@
   width: 100%;
   height: fit-content;
   position: relative;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid vars.$border-color;
 }
 
 .logo-and-button {
@@ -35,7 +37,7 @@
 }
 
 .open-button {
-  font-size: 1.5rem;
+  font-size: vars.$font-size-24;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -44,14 +46,14 @@
   border: 3px solid white;
   width: 25px;
   height: 25px;
-  background-color: var(--LIGHT-COLOR);
+  background-color: vars.$light-color;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .logo-and-button {
-  padding: var(--MAIN-PADDING);
+  padding: vars.$main-padding;
 }
 
 .content {
@@ -84,6 +86,6 @@
 }
 
 .sidebar li:hover, .sidebar .page-ref:hover {
-  background-color: var(--LIGHT-COLOR-SECONDARY);
+  background-color: vars.$light-color-secondary;
   border-left-width: 10px;
 }

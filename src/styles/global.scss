@@ -1,0 +1,118 @@
+@use "./variables.scss" as vars;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root, .App {
+  min-height: 100vh;
+}
+
+html {
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: vars.$font-size-16;
+  align-items: center;
+  gap: 0.25em;
+}
+
+a,
+a:visited {
+  color: vars.$dark-color;
+  text-decoration: none;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: vars.$separator-color;
+  width: 100%;
+}
+
+input,
+textarea, select {
+  border: none;
+  width: 100%;
+  padding: vars.$text-padding;
+  font-size: vars.$font-size-16;
+  outline: none;
+  background-color: inherit;
+  justify-content: baseline;
+}
+
+// select:focus {
+//   outline: none;
+// }
+
+// option[value=""][disabled] {
+//   display: none;
+// }
+
+// select option {
+//   padding: 10px;
+// }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button {
+  width: fit-content;
+  padding: 0.5em 1.5em;
+  margin: 0 0.5em;
+  border-radius: 0.5em;
+  font-size: vars.$font-size-16;
+  background-color: vars.$dark-color;
+  border: none;
+  color: white;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.button--secondary {
+  background-color: white;
+  color: black;
+  border: 1px solid vars.$dark-color; 
+}
+
+// classes 
+
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: vars.$light-color;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  h2 {
+    flex-grow: 1;
+    font-size: vars.$font-size-20;
+    font-weight: 700;
+  }
+}

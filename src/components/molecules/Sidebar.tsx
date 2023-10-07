@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Logo from "../atoms/Logo"
-import "../../styles/molecules/Sidebar.scss"
 import {
   faAngleLeft,
   faAngleRight,
@@ -16,6 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from 'react-router-dom'
+import "../../styles/molecules/Sidebar.scss"
 
 function Sidebar() {
   const [sidenavOpen, setSidenavOpen] = useState(false)
@@ -32,7 +32,7 @@ function Sidebar() {
     <div className={`sidebar ${sidenavOpen ? "sidebar--open" : ""}`}>
       <div className="header">
         <div className="logo-and-button">
-          <Logo name={showTitle} />
+          <Logo showName={showTitle} />
           <div className="open-button" onClick={toggleSideNav}>
             <FontAwesomeIcon
               icon={sidenavOpen ? faAngleLeft : faAngleRight}

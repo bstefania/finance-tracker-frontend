@@ -18,7 +18,7 @@ import Delimiter from "../components/atoms/Delimiter";
 import ErrorMessage from "../components/atoms/ErrorMessage";
 
 const NAME_REGEX = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/;
-const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Signup = () => {

@@ -1,12 +1,14 @@
+@use "../variables.scss" as vars;
+
 .dropdown-container {
   text-align: left;
   position: relative;
   width: 100%;
-  font-size: 1rem;
+  font-size: vars.$font-size-16;
 }
 
 .dropdown-input {
-  padding: 0.25em;
+  padding: vars.$text-padding;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,11 +19,11 @@
   position: absolute;
   transform: translateY(5px);
   width: 100%;
-  border: 1px solid var(--BORDER-COLOR);
-  border-radius: 0.5em;
+  border: 1px solid vars.$border-color;
+  border-radius: vars.$border-radius;
   overflow: auto;
   max-height: 150px;
-  background-color: white;
+  background-color: #fff;
   z-index: 1;
 }
 
@@ -33,15 +35,15 @@
   padding: 5px;
   padding-left: 10px;
   cursor: pointer;
-}
 
-.dropdown-item:hover {
-  background-color: var(--LIGHT-COLOR-SECONDARY);
-}
+  &:hover {
+    background-color: vars.$light-color-secondary;
+  }
 
-.dropdown-item.selected {
-  background-color: var(--MEDIUM-COLOR);
-  color: white;
+  &.selected {
+    background-color: vars.$medium-color;
+    color: #fff;
+  }
 }
 
 .dropdown-tags {
@@ -51,9 +53,9 @@
 }
 
 .dropdown-tag-item {
-  background-color: var(--LIGHT-COLOR-SECONDARY);
+  background-color: vars.$light-color-secondary;
   padding: 0 0.5em;
-  border-radius: 0.5em;
+  border-radius: vars.$border-radius;
   display: flex;
   align-items: center;
 }
@@ -65,20 +67,20 @@
 
 .search-box {
   padding: 5px;
-  background-color: var(--LIGHT-COLOR);
-}
+  background-color: vars.$light-color;
 
-.search-box input {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 0.5em;
+  input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid vars.$border-color;
+    border-radius: vars.$border-radius;
+  }
 }
 
 .new-list-item {
-  color: var(--DARK-COLOR);
+  color: vars.$dark-color;
   cursor: pointer;
   text-align: center;
-  padding: 0.25em;
-  border: solid 1px var(--BORDER-COLOR);
+  padding: vars.$text-padding;
+  border: solid 1px vars.$border-color;
 }

@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-
-import "../../styles/atoms/Dropdown.scss";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
   faChevronUp,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import "../../styles/atoms/Dropdown.scss";
 
 export type Option = {
   label: string;
@@ -202,9 +201,7 @@ const Dropdown = ({
             : Object.entries(options as Record<string, Option[]>).map(
                 ([group, options]) => (
                   <div key={group}>
-                    <span className="dropdown-group">
-                      {group}
-                    </span>
+                    <span className="dropdown-group">{group}</span>
                     {optionsDiv(options)}
                   </div>
                 )

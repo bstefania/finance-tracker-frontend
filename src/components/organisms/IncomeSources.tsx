@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react"
-import "../../styles/organisms/IncomeSources.scss"
-import "../../styles/utils/Table.scss"
+import { useEffect, useState } from "react"
 import Category from "../atoms/Category"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
 import TransactionDetails from "./TransactionDetails"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { IncomeSource, TransactionType } from "../../types/database"
+import "../../styles/organisms/IncomeSources.scss"
+import "../../styles/utils/Table.scss"
 
 type IncomeSourcesProps = {
   type?: TransactionType
@@ -16,7 +15,6 @@ function IncomeSources({}: IncomeSourcesProps) {
   const [incomeSourcesDetailsVisible, setTransactionDetailsVisible] =
     useState(false)
   const [incomeSources, setIncomeSources] = useState<IncomeSource[]>([])
-  const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
     getIncomeSources()

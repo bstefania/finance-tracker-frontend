@@ -1,5 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react"
-import "../../styles/organisms/TransactionDetails.scss"
+import { FormEvent, useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCalendarDays,
@@ -16,6 +15,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import ExpenseTransaction from "../molecules/ExpenseTransaction"
 import InvestmentsTransaction from "../molecules/InvestmentsTransaction"
 import useWealth from "../../hooks/useWealth"
+import "../../styles/organisms/TransactionDetails.scss"
 
 function TransactionDetails(props: any) {
 
@@ -101,7 +101,7 @@ function TransactionDetails(props: any) {
 
   return !newCategory ? (
     <Modal title={"New transaction"} toggleModal={props.toggleModal}>
-      <div className="body">
+      <div className="modal-body">
         <form onSubmit={handleSubmit}>
           <div className="type">
             {transactionTypes.map((transactionType) => (

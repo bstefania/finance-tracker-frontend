@@ -4,7 +4,6 @@ import "../styles/pages/Pages.scss";
 import "../styles/pages/Home.scss";
 import Transactions from "../components/organisms/Transactions";
 import MoneyCard from "../components/molecules/MoneyCard";
-import "../styles/molecules/MoneyCard.scss";
 import MonthlyTransactions from "../components/molecules/MonthlyTransactions";
 import UpcomingTransactions from "../components/organisms/UpcomingTransactions";
 import { MoneyCardType, TransactionType } from "../types/database";

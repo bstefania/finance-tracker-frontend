@@ -1,4 +1,6 @@
-.body form {
+@use "../variables.scss" as vars;
+
+.modal-body form {
   padding: 1em;
   gap: 1em;
 }
@@ -10,53 +12,52 @@
   margin: 0.25em 0;
   padding: 0.5em 1em;
   align-items: center;
-  border: 1px solid var(--BORDER-COLOR);
-  border-radius: 0.5em;
-}
+  border: 1px solid vars.$border-color;
+  border-radius: vars.$border-radius;
 
-.modal-field:focus {
-  outline: black;
-}
+  &:focus {
+    outline: #000;
+  }
 
-.modal-field:has(textarea) {
-  align-items: flex-start;
-}
+  &:has(textarea) {
+    align-items: flex-start;
 
-.modal-field:has(textarea) .icon {
-  padding: 5px 0px;
+    .icon {
+      padding: 5px 0px;
+    }
+  }
 }
 
 .type {
   width: 100%;
   display: flex;
-  gap: var(--MAIN-PADDING);
+  gap: vars.$main-padding;
   text-align: center;
   flex-wrap: wrap;
   justify-content: center;
-}
 
-.type span {
-  padding: 0.5em var(--MAIN-PADDING);
-  border: 1px solid var(--MEDIUM-COLOR);
-  cursor: pointer;
+  span {
+    padding: 0.5em vars.$main-padding;
+    border: 1px solid vars.$medium-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: none;
+    }
+
+    &:not(.selected):hover {
+      background-color: vars.$light-color-secondary;
+    }
+  }
 }
 
 .selected {
-  background-color: var(--MEDIUM-COLOR);
-  color: white;
-}
+  background-color: vars.$medium-color;
+  color: #fff;
 
-.selected:hover {
-  background-color: var(--MEDIUM-COLOR);
-  color: white;
-}
-
-.type span:not(.selected):hover {
-  background-color: var(--LIGHT-COLOR-SECONDARY);
-}
-
-.type span:hover {
-  background-color: none;
+  &:hover {
+    background-color: vars.$medium-color;
+  }
 }
 
 .actions {

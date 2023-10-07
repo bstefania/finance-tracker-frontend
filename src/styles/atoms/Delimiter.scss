@@ -1,10 +1,12 @@
+@use "../variables.scss" as vars;
+
 .separator {
   width: 100%;
   display: flex;
   align-items: center;
   text-align: center;
-  color: grey;
-  font-size: 0.75rem;
+  color: vars.$border-color;
+  font-size: vars.$font-size-12;
   font-weight: 100;
   margin: 1em;
 }
@@ -13,7 +15,7 @@
 .separator::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid var(--SEPARATOR-COLOR);
+  border-bottom: 1px solid vars.$separator-color;
 }
 
 .separator:not(:empty)::before {

@@ -1,0 +1,86 @@
+@use "./variables.scss" as vars;
+@use "./mixins.scss";
+
+.icon {
+  color: vars.$dark-color;
+  width: vars.$font-size-16;
+  height: auto;
+
+  &--small {
+    width: vars.$font-size-8;
+  }
+  
+  &--large {
+    width: 1.5rem;
+   }
+  
+ }
+
+ .icon-with-action {
+  padding-left: 0.5em;
+  cursor: pointer;
+}
+
+
+
+.invalidField {
+  color: red;
+  background-color: rgb(255, 208, 216);
+}
+
+.radio-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.radio-buttons input {
+  width: fit-content;
+}
+
+.radio-buttons label {
+  display: flex;
+  cursor: pointer;
+  gap: 0.25em;
+}
+
+input[type=radio] {
+  accent-color: vars.$dark-color;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.circle {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.label-income {
+  @extend %label;
+  color: vars.$income-color;
+  background-color: rgba(101,172,132,0.2);
+}
+
+.label-expense {
+  @extend %label;
+  color: vars.$expense-color;
+  background-color: rgba(213, 35, 35, 0.2);
+}
+
+.label-savings {
+  @extend %label;
+  color: vars.$savings-color;
+  background-color: rgba(227,175,130, 0.2);
+}
+
+.label-investments {
+  @extend %label;
+  color: vars.$investments-color;
+  background-color: rgb(4, 89, 193, 0.2);
+}

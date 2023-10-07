@@ -1,0 +1,42 @@
+@use "../variables.scss" as vars;
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  position: relative;
+  width: fit-content;
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.svg-background, .svg {
+  background-color: vars.$dark-color;
+  border-radius: 0.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-background {
+  background-color: vars.$medium-color;
+  width: 1.75em;
+  height: 1.75em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transform: rotate(20deg) translate(-9%, -4.5%);
+}
+
+.svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.logo-icon {
+  color: white;
+}

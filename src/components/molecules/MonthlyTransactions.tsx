@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import "../../styles/molecules/MonthlyExpenses.scss";
+import { useEffect, useState } from "react";
 import { TransactionType } from "../../types/database";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { euro } from "../../utils/numberFormat";
 import Dropdown from "../atoms/Dropdown";
 import { Amounts, getAmounts } from "../../api/transactions";
+import "../../styles/molecules/MonthlyTransactions.scss";
 
 type MonthlyTransactionsProps = {
   type?: TransactionType;

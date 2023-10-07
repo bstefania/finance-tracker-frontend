@@ -2,11 +2,14 @@ import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Dropdown from "../atoms/Dropdown";
+import "../../styles/organisms/TransactionDetails.scss"
+import "../../styles/common.scss"
+import { TransactionSource } from "../../types/database";
 
 function InvestmentsTransaction() {
   const [sources, setSources] = useState([
-    { label: "Wallet", value: "income" },
-    { label: "Savings", value: "savings" },
+    { label: "Wallet", value: TransactionSource.Income },
+    { label: "Savings", value: TransactionSource.Savings },
   ]);
   const [source, setSource] = useState(null);
   const [selectedOption, setSelectedOption] = useState("deposit");

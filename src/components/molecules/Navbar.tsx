@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../atoms/Logo";
-import "../../styles/molecules/Navbar.scss";
 import { logOut } from "../../utils/authentication";
 import useAuth from "../../hooks/useAuth";
+import "../../styles/molecules/Navbar.scss";
 
 type NavbarProps = {
   header: string;
@@ -21,7 +21,7 @@ const Navbar = (props: NavbarProps) => {
         </>
       ) : (
         <>
-          <Logo name="true"/>
+          <Logo showName={true}/>
           <div className="nav-elements">
             <ul>
               <li>

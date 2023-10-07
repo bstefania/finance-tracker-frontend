@@ -1,3 +1,5 @@
+@use "../variables.scss" as vars;
+
 .category {
   display: flex;
   gap: 1em;
@@ -6,20 +8,19 @@
 .icon-parent {
   width: 40px;
   height: 40px;
-  background-color: rgb(209, 250, 209);
 
-    .icon-background {
-      width: 25px;
-      height: 25px;
-      background-color: rgb(255, 255, 255);
-    }
+  .icon-background {
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+  }
 }
 
 .details {
   display: flex;
   flex-direction: column;
-}
 
-.category-title {
-  font-size: 0.75rem;
+  .category-title {
+    font-size: vars.$font-size-12;
+  }
 }

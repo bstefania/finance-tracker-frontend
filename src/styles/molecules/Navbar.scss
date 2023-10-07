@@ -1,3 +1,4 @@
+@use "../variables.scss" as vars;
 
 .navbar {
   padding: 2em 3em;
@@ -21,7 +22,7 @@ img {
 
 
 .nav-elements ul li {
-  padding: var(--MAIN-PADDING);
+  padding: vars.$main-padding;
 }
 
 /*

@@ -1,0 +1,8 @@
+@use "../variables.scss" as vars;
+
+.error-message {
+  background-color: lightpink;
+  color: firebrick;
+  padding: vars.$text-padding;
+  margin-inline: 10rem;
+}

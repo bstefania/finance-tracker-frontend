@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react"
-import "../../styles/organisms/Transactions.scss"
-import "../../styles/utils/Table.scss"
+import { useEffect, useState } from "react"
 import Category from "../atoms/Category"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
@@ -8,12 +6,14 @@ import TransactionDetails from "./TransactionDetails"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { Transaction, TransactionType } from "../../types/database"
 import { euro } from "../../utils/numberFormat"
+import "../../styles/organisms/Transactions.scss"
+import "../../styles/utils/Table.scss"
 
 type TransactionsProps = {
   type?: TransactionType
 }
 
-function Transactions({type}: TransactionsProps) {
+function Transactions(props: TransactionsProps) {
   const [transactionDetailsVisible, setTransactionDetailsVisible] =
     useState(false)
   const [transactions, setTransactions] = useState<Transaction[]>([])

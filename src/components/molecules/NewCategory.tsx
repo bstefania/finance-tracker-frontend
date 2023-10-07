@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import Modal from "../atoms/Modal"
 import { CategoryGroup } from "../../types/database"
 import Dropdown, { Option } from "../atoms/Dropdown"
@@ -12,7 +12,6 @@ import {
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import ColorPicker from "../utils/ColorPicker"
 import { getRandomColor } from "../../utils/colorPicker"
-
 
 type NewCategoryProps = {
   show: boolean
@@ -96,7 +95,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
 
   return (
     <Modal title={"New category"} toggleModal={toggleModal}>
-      <div className="body">
+      <div className="modal-body">
         <form onSubmit={handleSubmit}>
           {!newCategoryGroup ? (
             <div className="modal-field">

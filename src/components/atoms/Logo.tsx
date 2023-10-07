@@ -1,16 +1,19 @@
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import useAuth from "../../hooks/useAuth";
+import "../../styles/atoms/Logo.scss"
 
-const Logo = (props: any) => {
+type LogoProps = {
+  showName: boolean
+}
+
+const Logo = (props: LogoProps) => {
   return (
     <div className="logo">
-      <div className="logo-svg-background"/>
-        <div className="logoSvg">
+      <div className="svg-background"/>
+        <div className="svg">
           <FontAwesomeIcon icon={faChartSimple} className="logo-icon" />
         </div>
-      {props.name && <span>WiseWallet</span>}
+      {props.showName && <span>WiseWallet</span>}
     </div>
   );
 };

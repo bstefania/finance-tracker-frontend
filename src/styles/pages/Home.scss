@@ -1,26 +1,29 @@
+@use "../variables.scss" as vars;
+
 .wealth {
-  background-color: white;
+  background-color: #fff;
   padding: 1em;
-  border-radius: 0.5em;
+  border-radius: vars.$border-radius;
   display: flex;
   flex-direction: column;
   gap: 0.25em;
-}
-.wealth > .header {
-  flex-direction: column;
-}
 
-.wealth > .header > span {
-  font-size: 1.25rem;
-  margin-bottom: 0.5em;
-}
+  .header {
+    flex-direction: column;
 
-.wealth ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
+    span {
+      font-size: 1.25rem;
+      margin-bottom: 0.5em;
+    }
+  }
 
-.wealth li:not(:last-of-type) {
-  border-bottom: 1px solid lightgray;
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    li:not(:last-of-type) {
+      border-bottom: 1px solid vars.$separator-color;
+    }
+  }
 }
