@@ -9,19 +9,19 @@ type ModalProps = {
   toggleModal: (listChanged?: boolean) => void;
 };
 
-function Modal({ children, title, toggleModal }: ModalProps) {
+function Modal(props: ModalProps) {
   return (
     <div className={"modal-background"}>
       <div className="modal-content">
         <div className="header">
-          <h1>{title}</h1>
+          <h1>{props.title}</h1>
           <FontAwesomeIcon
             icon={faClose}
             className="icon-with-action"
-            onClick={() => toggleModal()}
+            onClick={() => props.toggleModal()}
           />
         </div>
-        {children}
+        {props.children}
       </div>
     </div>
   );

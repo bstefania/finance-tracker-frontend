@@ -1,15 +1,19 @@
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { TransactionSource } from '../../types/database'
 import Dropdown from '../atoms/Dropdown'
 import "../../styles/organisms/TransactionDetails.scss"
 import "../../styles/common.scss"
 
-function SavingsTransaction() {
+type SavingsTransactionProps = {
+  setSource: Dispatch<SetStateAction<TransactionSource>>
+}
+
+function SavingsTransaction(props: SavingsTransactionProps) {
 
   const [sources, setSources] = useState([{label: 'Wallet', value: TransactionSource.Income}])
-  const [source, setSource] = useState(null)
+
   return (
     <div className="modal-field">
     <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
@@ -19,7 +23,7 @@ function SavingsTransaction() {
       options={sources}
       groups={false}
       onChange={(option: any) => {
-        setSource(option)
+        props.setSource(option)
       }}
     />
   </div>

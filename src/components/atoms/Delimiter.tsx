@@ -1,4 +1,3 @@
-import React from "react";
 import "../../styles/atoms/Delimiter.scss"
 
 type DelimiterProps = {
