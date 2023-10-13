@@ -11,6 +11,7 @@ import { MoneyCardType, TransactionType } from "../../types/database";
 import useWealth from "../../hooks/useWealth";
 import { euro, formatDecimals } from "../../utils/numberFormat";
 import "../../styles/molecules/MoneyCard.scss";
+import { Notification, showNotification } from "../../utils/errorHandling";
 
 type MoneyCardProps = {
   type: MoneyCardType;
@@ -35,10 +36,6 @@ const MoneyCard = (props: MoneyCardProps) => {
       title: "Investments",
       icon: faMoneyBillTrendUp,
     },
-    credit: {
-      title: "Credit",
-      icon: undefined,
-    },
   };
 
   useEffect(() => {
@@ -62,10 +59,15 @@ const MoneyCard = (props: MoneyCardProps) => {
   const updateWealth = async (event: any) => {
     if (event.key === "Enter") {
       if (amount === wealth?.category[props.type].value) return;
-      const data = { [props.type]: amount };
-      const updatedData = await patchWealth(data);
-      setWealth(updatedData);
-      toggleEditMode();
+      try {
+        const data = { [props.type]: amount };
+        const updatedData = await patchWealth(data);
+        setWealth(updatedData);
+        toggleEditMode();
+        // showNotification("Wealth updated successfully!", Notification.SUCCESS);
+      } catch (error: any) {
+        showNotification(error.message, Notification.ERROR);
+      }
     }
   };
 
@@ -92,7 +94,7 @@ const MoneyCard = (props: MoneyCardProps) => {
           <div className="current-amount">
             <div className="value">
               <span>
-                {euro.format(wealth?.category[props.type].value ?? 0)}{" "}
+                {euro.format(wealth?.category[props.type].value ?? 0)}
               </span>
               <FontAwesomeIcon
                 icon={faPencil}

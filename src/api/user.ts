@@ -1,29 +1,38 @@
-// export const init = {
-//   total: 0,
-//   category: {
-//     wallet: {
-//       value: 0,
-//       percentage: 0,
-//     },
-//     savings: {
-//       value: 0,
-//       percentage: 0,
-//     },
-//     investments: {
-//       value: 0,
-//       percentage: 0,
-//     },
-//   },
-// }
-
 import { BaseWealth, Wealth } from "../types/database";
+import { HttpResponse } from "../types/responses";
 import { customAxios } from "./axios";
 
-export const adjustWealth = (data: any) => {
-  const total = data.income + data.savings + data.investments + data.credit;
+export const initWealth = {
+  total: 0,
+  category: {
+    income: {
+      value: 0,
+      percentage: 0,
+    },
+    savings: {
+      value: 0,
+      percentage: 0,
+    },
+    investments: {
+      value: 0,
+      percentage: 0,
+    },
+  },
+};
+
+type ApiWealth = {
+  income: number;
+  savings: number;
+  investments: number;
+  credit: number;
+};
+
+const adjustWealth = (data: ApiWealth) => {
+  const total = data.income + data.savings + data.investments;
+
   const getPercentage = (total: number, part: number) => {
-    return total > 0 ? (part / total) * 100 : 0
-  }
+    return total > 0 ? (part / total) * 100 : 0;
+  };
 
   return {
     total,
@@ -40,22 +49,34 @@ export const adjustWealth = (data: any) => {
         value: data.investments,
         percentage: getPercentage(total, data.investments),
       },
-      credit: {
-        value: data.cred,
-        percentage: getPercentage(total, data.credit),
-      }
     },
   };
-}
+};
 
 export const getWealth = async (): Promise<Wealth> => {
-  const res = await customAxios.get("/wealth")
-  const data = res.data.data.wealth;
-  return adjustWealth(data)
+  try {
+    const res = await customAxios.get("/wealth");
+    const data = res.data.data.wealth;
+    return adjustWealth(data);
+  } catch (error: any) {
+    if (error.status === HttpResponse.NOT_FOUND) {
+      throw Error("Wealth info not found.");
+    } else {
+      throw Error("Wealth info couldn't be retrieved.");
+    }
+  }
 };
 
 export const patchWealth = async (newValues: BaseWealth) => {
-  const res = await customAxios.patch("/wealth", newValues)
-  const data = res.data.data.wealth;
-  return adjustWealth(data)
-} 
+  try {
+    const res = await customAxios.patch("/wealth", newValues);
+    const data = res.data.data.wealth;
+    return adjustWealth(data);
+  } catch (error: any) {
+    if (error.status === HttpResponse.NOT_FOUND) {
+      throw Error("Wealth info not found.");
+    } else {
+      throw Error("Wealth info couldn't be updated.");
+    }
+  }
+};

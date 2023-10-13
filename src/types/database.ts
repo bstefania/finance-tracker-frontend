@@ -2,7 +2,6 @@ export enum MoneyCardType {
   Income = "income",
   Savings = "savings",
   Investments = "investments",
-  Credit = "credit"
 }
 
 export enum TransactionType {
@@ -10,7 +9,6 @@ export enum TransactionType {
   Expense = "expense",
   Savings = "savings",
   Investments = "investments",
-  Credit = "credit"
 }
 
 export type BaseWealth = {
@@ -37,7 +35,6 @@ export type Wealth = {
     income: WealthCategory,
     savings: WealthCategory,
     investments: WealthCategory
-    credit: WealthCategory
   }
 }
 
