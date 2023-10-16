@@ -1,5 +1,5 @@
-import { useState } from "react"
-import Logo from "../atoms/Logo"
+import { useState } from "react";
+import Logo from "../atoms/Logo";
 import {
   faAngleLeft,
   faAngleRight,
@@ -12,21 +12,21 @@ import {
   faPiggyBank,
   faUserGroup,
   faWallet,
-} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link } from 'react-router-dom'
-import "../../styles/molecules/Sidebar.scss"
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import "../../styles/molecules/Sidebar.scss";
 
 function Sidebar() {
-  const [sidenavOpen, setSidenavOpen] = useState(false)
-  const [showTitle, setShowTitles] = useState(false)
+  const [sidenavOpen, setSidenavOpen] = useState(false);
+  const [showTitle, setShowTitles] = useState(false);
 
   const toggleSideNav = () => {
-    setSidenavOpen(!sidenavOpen)
+    setSidenavOpen(!sidenavOpen);
     setTimeout(() => {
-      setShowTitles(!showTitle)
-    }, 100)
-  }
+      setShowTitles(!showTitle);
+    }, 100);
+  };
 
   return (
     <div className={`sidebar ${sidenavOpen ? "sidebar--open" : ""}`}>
@@ -45,16 +45,15 @@ function Sidebar() {
       <div className="content">
         <ul className="pages">
           <li>
-          <Link to="/">
-            <FontAwesomeIcon icon={faHouse} className="icon icon--large" />
-            {showTitle && <p>Home</p>}
+            <Link to="/" className="menu-link">
+              <FontAwesomeIcon icon={faHouse} className="icon icon--large" />
+              {showTitle && <p>Home</p>}
             </Link>
           </li>
           <li>
-            
-            <Link to="/wallet">
-            <FontAwesomeIcon icon={faWallet} className="icon icon--large" />
-            {showTitle && <p>Wallet</p>}
+            <Link to="/wallet" className="menu-link">
+              <FontAwesomeIcon icon={faWallet} className="icon icon--large" />
+              {showTitle && <p>Wallet</p>}
             </Link>
           </li>
           <li>
@@ -94,7 +93,7 @@ function Sidebar() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;
