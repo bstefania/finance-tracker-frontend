@@ -66,6 +66,7 @@ export type Transaction = {
 
 export type CategoryGroupInput = {
   name: string,
+  color: string,
   sharedWith: string[],
 }
 
@@ -73,12 +74,14 @@ export type CategoryGroup = {
   id: string,
   name: string,
   owner: User,
+  color: string,
   sharedWith: User[],
 }
 
 export type CategoryInput = {
   name: string,
-  categoryGroupId: string,
+  color: string,
+  categoryGroupId: string | undefined,
   sharedWith: string[],
 }
 

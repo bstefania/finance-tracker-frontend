@@ -2,9 +2,9 @@ import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Dropdown from "../atoms/Dropdown";
+import { TransactionSource } from "../../types/database";
 import "../../styles/organisms/TransactionDetails.scss"
 import "../../styles/common.scss"
-import { TransactionSource } from "../../types/database";
 
 function InvestmentsTransaction() {
   const [sources, setSources] = useState([

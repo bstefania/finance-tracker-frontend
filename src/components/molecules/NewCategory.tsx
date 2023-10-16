@@ -1,97 +1,100 @@
-import { FormEvent, useEffect, useState } from "react"
-import Modal from "../atoms/Modal"
-import { CategoryGroup } from "../../types/database"
-import Dropdown, { Option } from "../atoms/Dropdown"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FormEvent, useEffect, useState } from "react";
+import Modal from "../atoms/Modal";
+import {  CategoryGroup, CategoryGroupInput, CategoryInput } from "../../types/database";
+import Dropdown, { Option } from "../atoms/Dropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFolder,
   faFolderTree,
   faList,
   faUserPlus,
-} from "@fortawesome/free-solid-svg-icons"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
-import ColorPicker from "../utils/ColorPicker"
-import { getRandomColor } from "../../utils/colorPicker"
+} from "@fortawesome/free-solid-svg-icons";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import ColorPicker from "../utils/ColorPicker";
+import { getRandomColor } from "../../utils/colorPicker";
+import { showNotification, Notification } from "../../utils/errorHandling";
+import {
+  getCategoryGroups,
+  postCategory,
+  postCategoryGroups,
+} from "../../api/categories";
 
 type NewCategoryProps = {
-  show: boolean
-  toggleModal: (listChanged?: boolean) => void
-}
+  show: boolean;
+  toggleModal: (listChanged?: boolean) => void;
+};
 
 function NewCategory({ toggleModal }: NewCategoryProps) {
-  const axiosPrivate = useAxiosPrivate()
-
-  const [categoryGroups, setCategoryGroups] = useState([])
-  const [name, setName] = useState("")
-  const [categoryGroup, setCategoryGroup] = useState<Option | null>(null)
-  const [sharedWith, setSharedWith] = useState<Option[]>([])
-  const [newCategoryGroup, setNewCategoryGroup] = useState(false)
-  const [newCategoryGroupName, setNewCategoryGroupName] = useState('')
-  const [color, setColor] = useState(getRandomColor())
-  const [groupColor, setGroupColor] = useState(getRandomColor())
+  const [categoryGroups, setCategoryGroups] = useState<Option[]>([]);
+  const [name, setName] = useState("");
+  const [categoryGroup, setCategoryGroup] = useState<Option | null>(null);
+  const [sharedWith, setSharedWith] = useState<Option[]>([]);
+  const [newCategoryGroup, setNewCategoryGroup] = useState(false);
+  const [newCategoryGroupName, setNewCategoryGroupName] = useState("");
+  const [color, setColor] = useState(getRandomColor());
+  const [groupColor, setGroupColor] = useState(getRandomColor());
 
   useEffect(() => {
-    getCategoryGroups()
-  }, [])
+    fetchCategoryGroups();
+  }, []);
 
-  const getCategoryGroups = () => {
-    axiosPrivate
-      .get("/categoryGroups")
-      .then((res) => {
-        const categoryGroupOptions = res.data.data.map(
-          (categoryGroup: CategoryGroup, index: string) => {
+  const fetchCategoryGroups = () => {
+    getCategoryGroups()
+      .then((data: CategoryGroup[]) => {
+        const categoryGroupOptions = data.map(
+          (categoryGroup: CategoryGroup) => {
             return {
               value: categoryGroup.id,
               label: categoryGroup.name,
-            }
+            };
           }
-        )
-        setCategoryGroups(categoryGroupOptions)
+        );
+        setCategoryGroups(categoryGroupOptions);
       })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+      .catch((error: any) => {
+        showNotification(error.message, Notification.ERROR);
+      });
+  };
 
   const toggleNewCategoryGroup = () => {
-    setNewCategoryGroup(!newCategoryGroup)
-  }
+    setNewCategoryGroup(!newCategoryGroup);
+  };
 
   const createCategoryGroup = async () => {
-    const data = {
+    const data: CategoryGroupInput = {
       name: newCategoryGroupName,
       color: groupColor,
       sharedWith: sharedWith.map((users) => users.value),
-    }
+    };
 
-    return axiosPrivate.post("/categoryGroups", data)
-  }
+    return postCategoryGroups(data);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      const data: any = {
+      const data: CategoryInput = {
         name,
         color: color,
+        categoryGroupId: undefined,
         sharedWith: sharedWith.map((users) => users.value),
-      }
+      };
 
       if (!newCategoryGroup) {
-        data.categoryGroupId = (categoryGroup as Option).value
+        data.categoryGroupId = (categoryGroup as Option).value;
       } else {
-        const res = await createCategoryGroup()
-        console.log(res.data.data)
-        data.categoryGroupId = res.data.data.id
+        // TODO: one request - transaction with rollback
+        const categoryGroupData = await createCategoryGroup();
+        data.categoryGroupId = categoryGroupData.id;
       }
 
-      console.log(data)
-      await axiosPrivate.post("/categories", data)
-      toggleModal(true)
-    } catch (error) {
-      console.log(error)
+      await postCategory(data);
+      toggleModal(true);
+    } catch (error: any) {
+      showNotification(error.message, Notification.ERROR);
     }
-  }
+  };
 
   return (
     <Modal title={"New category"} toggleModal={toggleModal}>
@@ -106,7 +109,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
                 options={categoryGroups}
                 addItem={toggleNewCategoryGroup}
                 onChange={(option: any) => {
-                  setCategoryGroup(option)
+                  setCategoryGroup(option);
                 }}
               />
             </div>
@@ -120,7 +123,10 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
                 placeholder="New category group"
                 onChange={(e) => setNewCategoryGroupName(e.target.value)}
               />
-              <ColorPicker color={groupColor} setColor={setGroupColor}></ColorPicker>
+              <ColorPicker
+                color={groupColor}
+                setColor={setGroupColor}
+              ></ColorPicker>
             </div>
           )}
           <div className="modal-field">
@@ -157,7 +163,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
         </form>
       </div>
     </Modal>
-  )
+  );
 }
 
-export default NewCategory
+export default NewCategory;

@@ -10,8 +10,8 @@ import { patchWealth } from "../../api/user";
 import { MoneyCardType, TransactionType } from "../../types/database";
 import useWealth from "../../hooks/useWealth";
 import { euro, formatDecimals } from "../../utils/numberFormat";
-import "../../styles/molecules/MoneyCard.scss";
 import { Notification, showNotification } from "../../utils/errorHandling";
+import "../../styles/molecules/MoneyCard.scss";
 
 type MoneyCardProps = {
   type: MoneyCardType;
