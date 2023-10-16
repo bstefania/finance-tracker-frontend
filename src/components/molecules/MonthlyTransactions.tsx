@@ -3,8 +3,9 @@ import { TransactionType } from "../../types/database";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { euro } from "../../utils/numberFormat";
-import Dropdown from "../atoms/Dropdown";
+import Dropdown, { Option } from "../atoms/Dropdown";
 import { Amounts, getAmounts } from "../../api/transactions";
+import { Notification, showNotification } from "../../utils/errorHandling";
 import "../../styles/molecules/MonthlyTransactions.scss";
 
 type MonthlyTransactionsProps = {
@@ -14,42 +15,52 @@ type MonthlyTransactionsProps = {
 function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
   const availableTypes = [
     { label: "Expenses", value: TransactionType.Expense },
+    { label: "Income", value: TransactionType.Income },
     { label: "Savings", value: TransactionType.Savings },
     { label: "Investments", value: TransactionType.Investments },
   ];
-  const [selectedType, setType] = useState(type ?? availableTypes[1]);
-  const [series, setSeries] = useState<number[]>([])  // amounts
-  const [labels, setLabels] = useState<string[]>([])  // categories
-  const [colors, setColors] = useState<string[]>([])
+  const [selectedType, setSelectedType] = useState(
+    type ?? availableTypes[0].value
+  );
+  const [series, setSeries] = useState<number[]>([]); // amounts
+  const [labels, setLabels] = useState<string[]>([]); // categories
+  const [colors, setColors] = useState<string[]>([]);
 
+  useEffect(() => {
+    fetchData();
+  }, [selectedType]);
 
-  useEffect(() => {    
-    getAmounts()
-    .then((data: any) => {
-        constructChartData(data)
-    })
-    .catch((err: any) => {
-      window.alert(err)
-    })
-}, [])
- 
+  const fetchData = async () => {
+    getAmounts(selectedType)
+      .then((data: Amounts) => {
+        constructChartData(data);
+      })
+      .catch((error: any) => {
+        showNotification(error.message, Notification.ERROR);
+      });
+  };
+
+  const changeType = (option: Option) => {
+    setSelectedType(option.value as TransactionType);
+  };
+
   const constructChartData = (data: Amounts) => {
-    const seriesArr: number[] = []
-    const labelsArr: string[] = []
-    const colorsArr: string[] = []
+    const seriesArr: number[] = [];
+    const labelsArr: string[] = [];
+    const colorsArr: string[] = [];
 
     Object.entries(data).forEach(([categoryGroup, categories]) => {
       Object.entries(categories).forEach(([category, values]) => {
-        seriesArr.push(values.amount)
-        labelsArr.push(category)
-        colorsArr.push(values.color)
-      })
-    })
+        seriesArr.push(values.amount);
+        labelsArr.push(category);
+        colorsArr.push(values.color);
+      });
+    });
 
-    setSeries(seriesArr)
-    setColors(colorsArr)
-    setLabels(labelsArr)
-  }
+    setSeries(seriesArr);
+    setColors(colorsArr);
+    setLabels(labelsArr);
+  };
 
   const options: ApexOptions = {
     chart: {
@@ -59,7 +70,7 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
     colors: colors,
     legend: {
       show: true,
-      position: "bottom"
+      position: "bottom",
     },
     dataLabels: {
       enabled: true,
@@ -138,8 +149,8 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
             <Dropdown
               options={availableTypes}
               placeholder=""
-              onChange={(option: any) => {
-                setType(option);
+              onChange={(option) => {
+                changeType(option as Option);
               }}
             />
           </div>
