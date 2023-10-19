@@ -15,7 +15,7 @@ import { getRandomColor } from "../../utils/colorPicker";
 import { showNotification, Notification } from "../../utils/errorHandling";
 import {
   getCategoryGroups,
-  postCategory,
+  postCategories,
   postCategoryGroups,
 } from "../../api/categories";
 
@@ -89,7 +89,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
         data.categoryGroupId = categoryGroupData.id;
       }
 
-      await postCategory(data);
+      await postCategories(data);
       toggleModal(true);
     } catch (error: any) {
       showNotification(error.message, Notification.ERROR);

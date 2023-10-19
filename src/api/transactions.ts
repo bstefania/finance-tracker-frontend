@@ -1,4 +1,4 @@
-import { TransactionType } from "../types/database";
+import { Transaction, TransactionInput, TransactionType } from "../types/database";
 import { HttpResponse } from "../types/responses";
 import { customAxios } from "./axios";
 
@@ -31,3 +31,16 @@ export const getAmounts = async (type: TransactionType) => {
     }
   }
 };
+
+export const postTransactions = async (data: TransactionInput) => {
+  try {
+    const res = await customAxios.post("/transactions", data);
+    return res.data.data as Transaction;
+  } catch (error: any) {
+    if (error.status === HttpResponse.NOT_FOUND) {
+      throw Error("Transaction info not found.");
+    } else {
+      throw Error("Transaction info couldn't be updated.");
+    }
+  }
+}

@@ -48,8 +48,9 @@ export type TransactionInput = {
   categoryId: string,
   type: TransactionType,
   amount: number,
+  source: TransactionSource,
   createdAt: Date,
-  note: string,
+  note: string | null,
   sharedWith: string[]
 } 
 

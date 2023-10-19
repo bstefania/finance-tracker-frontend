@@ -10,7 +10,6 @@ import { customAxios } from "./axios";
 export const getCategoryGroups = async () => {
   try {
     const res = await customAxios.get("/categoryGroups");
-    console.log(res.data.data);
     return res.data.data as CategoryGroup[];
   } catch (error: any) {
     if (error.status === HttpResponse.NOT_FOUND) {
@@ -23,8 +22,8 @@ export const getCategoryGroups = async () => {
 
 export const postCategoryGroups = async (data: CategoryGroupInput) => {
   try {
-    const res = customAxios.post("/categoryGroups", data);
-    return (await res).data.data as CategoryGroup;
+    const res = await customAxios.post("/categoryGroups", data);
+    return res.data.data as CategoryGroup;
   } catch (error: any) {
     if (error.status === HttpResponse.NOT_FOUND) {
       throw Error("Categroy group info not found.");
@@ -34,7 +33,20 @@ export const postCategoryGroups = async (data: CategoryGroupInput) => {
   }
 };
 
-export const postCategory = async (data: CategoryInput) => {
+export const getCategories = async () => {
+  try {
+    const res = await customAxios.get("/categories");
+    return res.data.data as Category[];
+  } catch (error: any) {
+    if (error.status === HttpResponse.NOT_FOUND) {
+      throw Error("Category info not found.");
+    } else {
+      throw Error("Category info couldn't be retrieved.");
+    }
+  }
+}
+
+export const postCategories = async (data: CategoryInput) => {
   try {
     const res = customAxios.post("/categories", data);
     return (await res).data.data as Category;
