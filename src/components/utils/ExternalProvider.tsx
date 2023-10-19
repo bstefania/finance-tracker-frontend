@@ -1,6 +1,6 @@
-import "../../styles/utils/ExternalProvider.scss";
 import { AuthProviderType } from "../../types/authentication";
 import { signInWithThirdParty } from "../../utils/authentication";
+import "../../styles/utils/ExternalProvider.scss";
 
 const externalProvider = () => {
   const options = [

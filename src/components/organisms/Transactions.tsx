@@ -1,47 +1,46 @@
-import { useEffect, useState } from "react"
-import Category from "../atoms/Category"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
-import TransactionDetails from "./TransactionDetails"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
-import { Transaction, TransactionType } from "../../types/database"
-import { euro } from "../../utils/numberFormat"
-import "../../styles/organisms/Transactions.scss"
-import "../../styles/utils/Table.scss"
+import { useEffect, useState } from "react";
+import Category from "../atoms/Category";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons";
+import TransactionDetails from "./TransactionDetails";
+import { Transaction, TransactionType } from "../../types/database";
+import { euro } from "../../utils/numberFormat";
+import { getTransactions } from "../../api/transactions";
+import { Notification, showNotification } from "../../utils/errorHandling";
+import "../../styles/organisms/Transactions.scss";
+import "../../styles/utils/Table.scss";
 
 type TransactionsProps = {
-  type?: TransactionType
-}
+  type?: TransactionType;
+};
 
 function Transactions(props: TransactionsProps) {
   const [transactionDetailsVisible, setTransactionDetailsVisible] =
-    useState(false)
-  const [transactions, setTransactions] = useState<Transaction[]>([])
-  const axiosPrivate = useAxiosPrivate()
+    useState(false);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    getTransactions()
-  }, [])
+    fetchTransactions();
+  }, []);
 
-  const getTransactions = () => {
-    axiosPrivate
-      .get("/transactions")
-      .then((res: any) => {
-        if (res.data.data) {
-          setTransactions(res.data.data)
+  const fetchTransactions = () => {
+    getTransactions()
+      .then((data: Transaction[]) => {
+        if (data) {
+          setTransactions(data);
         }
       })
-      .catch((err: any) => {
-        console.log(err)
-      })
-  }
+      .catch((error: any) => {
+        showNotification(error.message, Notification.ERROR);
+      });
+  };
 
   const toggleModal = (listChanged?: boolean) => {
-    setTransactionDetailsVisible(!transactionDetailsVisible)
+    setTransactionDetailsVisible(!transactionDetailsVisible);
     if (listChanged) {
-      getTransactions()
+      fetchTransactions();
     }
-  }
+  };
 
   return (
     <div className="table-div">
@@ -49,11 +48,11 @@ function Transactions(props: TransactionsProps) {
         <h2>Recent transactions</h2>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
-      {transactionDetailsVisible && <TransactionDetails
-        toggleModal={toggleModal}
-      /> }
+      {transactionDetailsVisible && (
+        <TransactionDetails toggleModal={toggleModal} />
+      )}
       <div className="fix-table-head">
-        <table className='transactions-table'>
+        <table className="transactions-table">
           <thead>
             <tr>
               <th>Category</th>
@@ -74,8 +73,14 @@ function Transactions(props: TransactionsProps) {
                       color={val.category.color}
                     />
                   </td>
-                  <td className={val.type.toLowerCase()}>{euro.format(val.amount)}</td>
-                  <td><span className={`label-${val.type}`}>{val.type.charAt(0).toUpperCase() + val.type.slice(1)}</span></td>
+                  <td className={val.type.toLowerCase()}>
+                    {euro.format(val.amount)}
+                  </td>
+                  <td>
+                    <span className={`label-${val.type}`}>
+                      {val.type.charAt(0).toUpperCase() + val.type.slice(1)}
+                    </span>
+                  </td>
                   <td>
                     {new Date(val.createdAt).toLocaleDateString("en-us", {
                       weekday: "long",
@@ -88,7 +93,10 @@ function Transactions(props: TransactionsProps) {
                     <div className="column-with-action">
                       {val.sharedWith.length ? (
                         <div className="user-div">
-                          <FontAwesomeIcon icon={faUser} className="user-icon" />
+                          <FontAwesomeIcon
+                            icon={faUser}
+                            className="user-icon"
+                          />
                         </div>
                       ) : (
                         <div></div>
@@ -100,7 +108,7 @@ function Transactions(props: TransactionsProps) {
                     </div>
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>
@@ -109,7 +117,7 @@ function Transactions(props: TransactionsProps) {
         <div className="not-found">No transactions found</div>
       )}
     </div>
-  )
+  );
 }
 
-export default Transactions
+export default Transactions;
