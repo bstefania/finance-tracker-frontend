@@ -1,4 +1,4 @@
 export enum AuthProviderType {
-  Google = 1,
-  Facebook = 2
+  Google = "Google",
+  Facebook = "Facebook"
 }

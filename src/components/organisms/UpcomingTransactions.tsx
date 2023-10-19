@@ -1,6 +1,5 @@
-import React from "react";
-import "../../styles/organisms/UpcomingPayments.scss";
 import { TransactionType } from "../../types/database";
+import "../../styles/organisms/UpcomingPayments.scss";
 
 type UpcomingTransactionsProps = {
   type?: TransactionType;
