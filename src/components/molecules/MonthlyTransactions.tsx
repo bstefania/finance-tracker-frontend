@@ -155,7 +155,13 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
             />
           </div>
         </div>
-        <Chart options={options} series={series} type="donut" width="100%" />
+        {series.length > 0 ? (
+          <Chart options={options} series={series} type="donut" width="100%" />
+        ) : (
+          <div className="not-found">
+            No transactions found in the current month
+          </div>
+        )}
       </div>
     </div>
   );
