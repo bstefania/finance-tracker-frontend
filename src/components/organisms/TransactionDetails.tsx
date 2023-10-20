@@ -90,12 +90,18 @@ function TransactionDetails(props: any) {
     event.preventDefault();
 
     try {
+      const createdAt = new Date(date);
+      const currentDatetime = new Date();
+      createdAt.setHours(currentDatetime.getHours());
+      createdAt.setMinutes(currentDatetime.getMinutes());
+      createdAt.setSeconds(currentDatetime.getSeconds());
+
       const data: TransactionInput = {
         type: selectedType,
         source,
         categoryId: (category as Option).value,
         amount,
-        createdAt: new Date(date),
+        createdAt,
         sharedWith: sharedWith.map((users) => users.value),
         note,
       };
