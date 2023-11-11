@@ -1,7 +1,7 @@
 export const getRandomColor = () => { 
   const h = 360 * Math.random()
   const s = 25 + 70 * Math.random()
-  const l = 65 + 30 * Math.random()
+  const l = 50 + 30 * Math.random()
   return hslToHex(h, s, l)
 }
 

@@ -71,6 +71,7 @@ function Transactions(props: TransactionsProps) {
                       category={val.category.name}
                       categoryGroup={val.category.categoryGroup.name}
                       color={val.category.color}
+                      icon={val.category.icon}
                     />
                   </td>
                   <td className={val.type.toLowerCase()}>

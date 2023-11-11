@@ -28,7 +28,7 @@ export const postCategoryGroups = async (data: CategoryGroupInput) => {
     if (error.status === HttpResponse.NOT_FOUND) {
       throw Error("Categroy group info not found.");
     } else {
-      throw Error("Category group info couldn't be updated.");
+      throw Error("Category group info couldn't be created.");
     }
   }
 };
@@ -54,7 +54,7 @@ export const postCategories = async (data: CategoryInput) => {
     if (error.status === HttpResponse.NOT_FOUND) {
       throw Error("Categroy info not found.");
     } else {
-      throw Error("Category info couldn't be updated.");
+      throw Error("Category info couldn't be created.");
     }
   }
 };

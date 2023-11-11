@@ -1,16 +1,12 @@
 import { FormEvent, useEffect, useState } from "react";
 import Modal from "../atoms/Modal";
-import {  CategoryGroup, CategoryGroupInput, CategoryInput } from "../../types/database";
+import {
+  CategoryGroup,
+  CategoryGroupInput,
+  CategoryInput,
+} from "../../types/database";
 import Dropdown, { Option } from "../atoms/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFolder,
-  faFolderTree,
-  faList,
-  faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import ColorPicker from "../utils/ColorPicker";
 import { getRandomColor } from "../../utils/colorPicker";
 import { showNotification, Notification } from "../../utils/errorHandling";
 import {
@@ -18,6 +14,8 @@ import {
   postCategories,
   postCategoryGroups,
 } from "../../api/categories";
+import IconPicker from "../utils/IconPicker";
+import "../../styles/molecules/NewCategory.scss";
 
 type NewCategoryProps = {
   show: boolean;
@@ -31,6 +29,8 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
   const [sharedWith, setSharedWith] = useState<Option[]>([]);
   const [newCategoryGroup, setNewCategoryGroup] = useState(false);
   const [newCategoryGroupName, setNewCategoryGroupName] = useState("");
+  const [icon, setIcon] = useState<string>("question-circle");
+  const [groupIcon, setGroupIcon] = useState<string>("question-circle");
   const [color, setColor] = useState(getRandomColor());
   const [groupColor, setGroupColor] = useState(getRandomColor());
 
@@ -64,6 +64,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
     const data: CategoryGroupInput = {
       name: newCategoryGroupName,
       color: groupColor,
+      icon: groupIcon,
       sharedWith: sharedWith.map((users) => users.value),
     };
 
@@ -77,6 +78,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
       const data: CategoryInput = {
         name,
         color: color,
+        icon: icon,
         categoryGroupId: undefined,
         sharedWith: sharedWith.map((users) => users.value),
       };
@@ -102,7 +104,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
         <form onSubmit={handleSubmit}>
           {!newCategoryGroup ? (
             <div className="modal-field">
-              <FontAwesomeIcon icon={faList} className="icon" />
+              <FontAwesomeIcon icon="list" className="icon" />
               <Dropdown
                 isSearchable
                 placeholder="Select Category Group"
@@ -115,7 +117,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
             </div>
           ) : (
             <div className="modal-field">
-              <FontAwesomeIcon icon={faFolderTree} className="icon" />
+              <FontAwesomeIcon icon="folder-tree" className="icon" />
               <input
                 type="text"
                 id="newCategoryGroupName"
@@ -123,14 +125,16 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
                 placeholder="New category group"
                 onChange={(e) => setNewCategoryGroupName(e.target.value)}
               />
-              <ColorPicker
+              <IconPicker
+                icon={groupIcon}
+                setIcon={setGroupIcon}
                 color={groupColor}
                 setColor={setGroupColor}
-              ></ColorPicker>
+              />
             </div>
           )}
           <div className="modal-field">
-            <FontAwesomeIcon icon={faFolder} className="icon" />
+            <FontAwesomeIcon icon="folder" className="icon" />
             <input
               type="text"
               id="name"
@@ -138,10 +142,15 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               placeholder="Category"
               onChange={(e) => setName(e.target.value)}
             />
-            <ColorPicker color={color} setColor={setColor} />
+            <IconPicker
+              icon={icon}
+              setIcon={setIcon}
+              color={color}
+              setColor={setColor}
+            />
           </div>
           <div className="modal-field">
-            <FontAwesomeIcon icon={faUserPlus} className="icon" />
+            <FontAwesomeIcon icon="user-plus" className="icon" />
             <Dropdown
               isSearchable
               isMulti

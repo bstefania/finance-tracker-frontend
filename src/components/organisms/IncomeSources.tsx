@@ -61,6 +61,7 @@ function IncomeSources({}: IncomeSourcesProps) {
                     <Category
                       category={val.category.name}
                       color={val.category.color}
+                      icon={val.category.icon}
                       categoryGroup={val.category.categoryGroup.name}
                     />
                   </td>
