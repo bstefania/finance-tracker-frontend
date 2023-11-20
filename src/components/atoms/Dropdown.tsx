@@ -6,6 +6,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/atoms/Dropdown.scss";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 export type Option = {
   label: string;
@@ -46,18 +47,7 @@ const Dropdown = ({
     }
   }, [showMenu]);
 
-  useEffect(() => {
-    const handler = (e: any) => {
-      if (inputRef.current && !inputRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-
-    window.addEventListener("click", handler);
-    return () => {
-      window.removeEventListener("click", handler);
-    };
-  });
+  useOutsideClick(inputRef, () => setShowMenu(false))
 
   const handleInputClick = (e: any) => {
     setShowMenu(!showMenu);

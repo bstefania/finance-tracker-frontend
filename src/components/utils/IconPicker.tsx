@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import AvailableIcons from "../../data/AvailableIcons";
 import CircleIcon from "../atoms/CircleIcon";
 import ColorOptions from "./ColorOptions";
 import "../../styles/utils/Picker.scss";
 import "../../styles/common.scss";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 type IconPickerProps = {
   icon: string;
@@ -14,9 +15,12 @@ type IconPickerProps = {
 
 function IconPicker(props: IconPickerProps) {
   const [pickIcon, setPickIcon] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  
+  useOutsideClick(ref, () => setPickIcon(false))
 
   return (
-    <div className="picker-icon">
+    <div className="picker-icon" ref={ref}>
       <CircleIcon
         color={props.color}
         icon={props.icon as any}

@@ -12,6 +12,7 @@ import useWealth from "../../hooks/useWealth";
 import { euro, formatDecimals } from "../../utils/numberFormat";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import "../../styles/molecules/MoneyCard.scss";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 type MoneyCardProps = {
   type: MoneyCardType;
@@ -38,19 +39,7 @@ const MoneyCard = (props: MoneyCardProps) => {
     },
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (inputRef.current && !inputRef.current.contains(event.target)) {
-        setEditMode(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  useOutsideClick(inputRef, () => setEditMode(false))
 
   const toggleEditMode = () => {
     setEditMode(!editMode);
