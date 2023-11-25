@@ -10,6 +10,7 @@ import {
 import Dropdown, { Option } from "../atoms/Dropdown";
 import {
   Category,
+  Transaction,
   TransactionInput,
   TransactionSource,
   TransactionType,
@@ -24,7 +25,12 @@ import { showNotification, Notification } from "../../utils/errorHandling";
 import { postTransactions } from "../../api/transactions";
 import "../../styles/organisms/TransactionDetails.scss";
 
-function TransactionDetails(props: any) {
+type TransactionDetailsProps = {
+  toggleModal: any;
+  existingData?: Transaction | null;
+};
+
+function TransactionDetails(props: TransactionDetailsProps) {
   const { fetchWealth } = useWealth();
 
   const transactionTypes = [
@@ -38,12 +44,13 @@ function TransactionDetails(props: any) {
   );
   const [categories, setCategories] = useState<Record<string, Option[]>>({});
 
+  const [_id, setId] = useState<string | null>(null)
   const [selectedType, setSelectedType] = useState(transactionTypes[0]);
   const [category, setCategory] = useState<Option | null>(null);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState<number>();
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [sharedWith, setSharedWith] = useState<Option[]>([]);
-  const [note, setNote] = useState(null);
+  const [note, setNote] = useState<string | null>(null);
 
   const [newCategory, setNewCategory] = useState(false);
 
@@ -54,6 +61,15 @@ function TransactionDetails(props: any) {
 
   useEffect(() => {
     fetchCategories();
+    if(props.existingData) {
+      console.log(props.existingData)
+      setId(props.existingData.id)
+      setSource(props.existingData.source)
+      setSelectedType(props.existingData.type)
+      setAmount(props.existingData.amount)
+      setDate(new Date(props.existingData.createdAt).toISOString().slice(0, 10))
+      setNote(props.existingData.note)
+    }
   }, []);
 
   const fetchCategories = async () => {
@@ -90,11 +106,14 @@ function TransactionDetails(props: any) {
     event.preventDefault();
 
     try {
+      if (!amount) throw new Error("Transaction amount is not set!")
+
       const createdAt = new Date(date);
       const currentDatetime = new Date();
       createdAt.setHours(currentDatetime.getHours());
       createdAt.setMinutes(currentDatetime.getMinutes());
       createdAt.setSeconds(currentDatetime.getSeconds());
+      console.log(category)
 
       const data: TransactionInput = {
         type: selectedType,
@@ -152,6 +171,7 @@ function TransactionDetails(props: any) {
               min="0.01"
               required
               placeholder="Amount"
+              value={amount}
               onChange={(e) => setAmount(parseFloat(e.target.value))}
             />
           </div>

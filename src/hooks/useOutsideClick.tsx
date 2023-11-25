@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react";
 
-export const useOutsideClick = (ref: RefObject<any>, callback: () => any) => {
+export const useOutsideClick = (ref: RefObject<any>, callback: () => any, type = 'click') => {
 
   useEffect(() => {
     const handleClick = (event: any) => {
@@ -9,10 +9,10 @@ export const useOutsideClick = (ref: RefObject<any>, callback: () => any) => {
       }
     };
 
-    document.addEventListener('click', handleClick, true);
+    document.addEventListener(type, handleClick);
 
     return () => {
-      document.removeEventListener('click', handleClick, true);
+      document.removeEventListener(type, handleClick);
     };
   }, [ref]);
 

@@ -19,7 +19,7 @@ table {
 
 th, td {
   text-align: left;
-  padding: 0.75em 0.5em;
+  padding: 12px 8px;
 }
 
 th, td {
@@ -31,11 +31,9 @@ tr:last-child td {
 }
 
 .column-with-action {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 0.5em;
+  width: 100px;
+  min-height: 100%;
+  position: relative;
 }
 
 .user-div {
@@ -52,20 +50,15 @@ tr:last-child td {
   color: #fff;
 }
 
-.icon-action {
-  display: none;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
 
 tbody tr:hover {
   background-color: vars.$light-color;
   border-left-width: 10px;
-}
 
-tbody tr:hover .icon-action {
-  display: block;
+  .column-with-action {
+    display: table-cell;
+  }
+
 }
 
 .not-found {
@@ -78,7 +71,7 @@ tbody tr:hover .icon-action {
 }
 
 .fix-table-head {
-  overflow-y: auto;
+  overflow: visible;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

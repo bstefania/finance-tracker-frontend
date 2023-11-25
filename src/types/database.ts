@@ -52,12 +52,13 @@ export type TransactionInput = {
   createdAt: Date,
   note: string | null,
   sharedWith: string[]
-} 
+}
 
 export type Transaction = {
   id: string,
   category: Category,
   type: TransactionType,
+  source: TransactionSource,
   amount: number,
   createdAt: string | Date,
   note: string,

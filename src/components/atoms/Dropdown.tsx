@@ -10,7 +10,7 @@ import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 export type Option = {
   label: string;
-  value: string;
+  value: any;
 };
 
 type DropdownProps = {

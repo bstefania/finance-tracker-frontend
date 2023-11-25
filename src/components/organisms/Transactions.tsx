@@ -9,16 +9,28 @@ import { getTransactions } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import "../../styles/organisms/Transactions.scss";
 import "../../styles/utils/Table.scss";
+import Actions from "../molecules/Actions";
+import { Action } from "../../types/types";
 
 type TransactionsProps = {
   type?: TransactionType;
 };
 
 function Transactions(props: TransactionsProps) {
-  const [transactionDetailsVisible, setTransactionDetailsVisible] =
-    useState(false);
+  const [showTransactionDetails, setShowTransactionDetails] = useState(false);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactionToModify, setTransactionToModify] = useState<Transaction | null>(null);
 
+  const actions: Action[] = [
+    {
+      label: "Edit",
+      onClick: (transaction: Transaction) => {
+        setTransactionToModify(transaction);
+        setShowTransactionDetails(true);
+      },
+    },
+    { label: "Delete", onClick: () => {} },
+  ];
   useEffect(() => {
     fetchTransactions();
   }, []);
@@ -36,7 +48,8 @@ function Transactions(props: TransactionsProps) {
   };
 
   const toggleModal = (listChanged?: boolean) => {
-    setTransactionDetailsVisible(!transactionDetailsVisible);
+    setTransactionToModify(null)
+    setShowTransactionDetails(!showTransactionDetails);
     if (listChanged) {
       fetchTransactions();
     }
@@ -48,8 +61,11 @@ function Transactions(props: TransactionsProps) {
         <h2>Recent transactions</h2>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
-      {transactionDetailsVisible && (
-        <TransactionDetails toggleModal={toggleModal} />
+      {showTransactionDetails && (
+        <TransactionDetails
+          toggleModal={toggleModal}
+          existingData={transactionToModify}
+        />
       )}
       <div className="fix-table-head">
         <table className="transactions-table">
@@ -60,6 +76,7 @@ function Transactions(props: TransactionsProps) {
               <th>Type</th>
               <th>Date</th>
               <th>Shared With</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -91,22 +108,16 @@ function Transactions(props: TransactionsProps) {
                     })}
                   </td>
                   <td>
-                    <div className="column-with-action">
-                      {val.sharedWith.length ? (
-                        <div className="user-div">
-                          <FontAwesomeIcon
-                            icon={faUser}
-                            className="user-icon"
-                          />
-                        </div>
-                      ) : (
-                        <div></div>
-                      )}
-                      <FontAwesomeIcon
-                        icon={faEllipsisVertical}
-                        className="icon-action"
-                      />
-                    </div>
+                    {val.sharedWith.length ? (
+                      <div className="user-div">
+                        <FontAwesomeIcon icon={faUser} className="user-icon" />
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </td>
+                  <td className="column-with-action">
+                    <Actions actions={actions} data={val} />
                   </td>
                 </tr>
               );
