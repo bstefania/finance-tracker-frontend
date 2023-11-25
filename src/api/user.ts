@@ -59,11 +59,9 @@ export const getWealth = async (): Promise<Wealth> => {
     const data = res.data.data.wealth;
     return adjustWealth(data);
   } catch (error: any) {
-    if (error.status === HttpResponse.NOT_FOUND) {
-      throw Error("Wealth info not found.");
-    } else {
-      throw Error("Wealth info couldn't be retrieved.");
-    }
+    throw Error(
+      error.response?.data?.message ?? "Wealth info couldn't be retrieved!"
+    );
   }
 };
 
@@ -73,10 +71,8 @@ export const patchWealth = async (newValues: BaseWealth) => {
     const data = res.data.data.wealth;
     return adjustWealth(data);
   } catch (error: any) {
-    if (error.status === HttpResponse.NOT_FOUND) {
-      throw Error("Wealth info not found.");
-    } else {
-      throw Error("Wealth info couldn't be updated.");
-    }
+    throw Error(
+      error.response?.data?.message ?? "Wealth info couldn't be updated!"
+    );
   }
 };

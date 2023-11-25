@@ -3,7 +3,6 @@ import {
   TransactionInput,
   TransactionType,
 } from "../types/database";
-import { HttpResponse } from "../types/responses";
 import { customAxios } from "./axios";
 
 export type Amounts = Record<
@@ -28,11 +27,9 @@ export const getAmounts = async (type: TransactionType) => {
     });
     return res.data.data as Amounts;
   } catch (error: any) {
-    if (error.status === HttpResponse.NOT_FOUND) {
-      throw Error("Amounts info not found.");
-    } else {
-      throw Error("Amounts info couldn't be retrieved.");
-    }
+    throw Error(
+      error.response?.data?.message ?? "Amounts info couldn't be retrieved!"
+    );
   }
 };
 
@@ -41,11 +38,9 @@ export const getTransactions = async () => {
     const res = await customAxios.get("/transactions");
     return res.data.data as Transaction[];
   } catch (error: any) {
-    if (error.status === HttpResponse.NOT_FOUND) {
-      throw Error("Transaction info not found.");
-    } else {
-      throw Error("Transaction info couldn't be retrieved.");
-    }
+    throw Error(
+      error.response?.data?.message ?? "Transactions couldn't be retrieved!"
+    );
   }
 };
 
@@ -54,10 +49,8 @@ export const postTransactions = async (data: TransactionInput) => {
     const res = await customAxios.post("/transactions", data);
     return res.data.data as Transaction;
   } catch (error: any) {
-    if (error.status === HttpResponse.NOT_FOUND) {
-      throw Error("Transaction info not found.");
-    } else {
-      throw Error("Transaction info couldn't be updated.");
-    }
+    throw Error(
+      error.response?.data?.message ?? "Transaction couldn't be created!"
+    );
   }
 };
