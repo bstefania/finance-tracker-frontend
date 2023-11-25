@@ -3,7 +3,7 @@ export const euro = Intl.NumberFormat(undefined, {
   currency: "EUR",
 });
 
-export const ron = Intl.NumberFormat(undefined, {
+export const ron = Intl.NumberFormat('ro-RO', {
   style: "currency",
   currency: "RON",
 });

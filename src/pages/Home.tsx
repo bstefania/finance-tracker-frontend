@@ -8,7 +8,7 @@ import MonthlyTransactions from "../components/molecules/MonthlyTransactions";
 import UpcomingTransactions from "../components/organisms/UpcomingTransactions";
 import { MoneyCardType, TransactionType } from "../types/database";
 import useWealth from "../hooks/useWealth";
-import { euro } from "../utils/numberFormat";
+import { ron } from "../utils/numberFormat";
 
 const Home = () => {
   const { wealth } = useWealth();
@@ -27,7 +27,7 @@ const Home = () => {
             <div className="wealth">
                 <div className="header">
                   <h2>Total Balance</h2>
-                  <span>{euro.format(wealth?.total ?? 0)}</span>
+                  <span>{ron.format(wealth?.total ?? 0)}</span>
                 </div>
                 <ul>
                   <li>

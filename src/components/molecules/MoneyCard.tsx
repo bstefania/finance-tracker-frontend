@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { patchWealth } from "../../api/user";
 import { MoneyCardType, TransactionType } from "../../types/database";
 import useWealth from "../../hooks/useWealth";
-import { euro, formatDecimals } from "../../utils/numberFormat";
+import { ron, formatDecimals } from "../../utils/numberFormat";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import "../../styles/molecules/MoneyCard.scss";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
@@ -83,7 +83,7 @@ const MoneyCard = (props: MoneyCardProps) => {
           <div className="current-amount">
             <div className="value">
               <span>
-                {euro.format(wealth?.category[props.type].value ?? 0)}
+                {ron.format(wealth?.category[props.type].value ?? 0)}
               </span>
               <FontAwesomeIcon
                 icon={faPencil}

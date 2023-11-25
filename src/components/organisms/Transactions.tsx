@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons";
 import TransactionDetails from "./TransactionDetails";
 import { Transaction, TransactionType } from "../../types/database";
-import { euro } from "../../utils/numberFormat";
+import { ron } from "../../utils/numberFormat";
 import { getTransactions } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import "../../styles/organisms/Transactions.scss";
@@ -92,7 +92,7 @@ function Transactions(props: TransactionsProps) {
                     />
                   </td>
                   <td className={val.type.toLowerCase()}>
-                    {euro.format(val.amount)}
+                    {ron.format(val.amount)}
                   </td>
                   <td>
                     <span className={`label-${val.type}`}>

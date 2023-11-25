@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TransactionType } from "../../types/database";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
-import { euro } from "../../utils/numberFormat";
+import { ron } from "../../utils/numberFormat";
 import Dropdown, { Option } from "../atoms/Dropdown";
 import { Amounts, getAmounts } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
@@ -99,7 +99,7 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
       enabled: true,
       y: {
         formatter: function (val) {
-          return euro.format(val);
+          return ron.format(val);
         },
       },
     },
@@ -129,7 +129,7 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
                   },
                   0
                 );
-                return euro.format(total);
+                return ron.format(total);
               },
             },
           },
