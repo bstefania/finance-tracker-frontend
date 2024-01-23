@@ -4,6 +4,7 @@ import Logo from "../atoms/Logo";
 import { logOut } from "../../utils/authentication";
 import useAuth from "../../hooks/useAuth";
 import styles from "../../styles/molecules/Navbar.module.scss";
+import Button from "../atoms/Button";
 
 type NavbarProps = {
   header: string;
@@ -17,7 +18,7 @@ const Navbar = (props: NavbarProps) => {
       {auth?.email ? (
         <>
           <h1>{props.header}</h1>
-          <button onClick={logOut}>Log out</button>
+          <Button onClick={logOut}>Log out</Button>
         </>
       ) : (
         <>

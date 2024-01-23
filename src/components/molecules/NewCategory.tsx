@@ -5,7 +5,7 @@ import {
   CategoryGroupInput,
   CategoryInput,
 } from "../../types/database";
-import Dropdown, { Option } from "../atoms/Dropdown";
+import Dropdown, { Option } from "./Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getRandomColor } from "../../utils/colorPicker";
 import { showNotification, Notification } from "../../utils/errorHandling";
@@ -16,6 +16,8 @@ import {
 } from "../../api/categories";
 import IconPicker from "../utils/IconPicker";
 import styles from "../../styles/molecules/NewCategory.module.scss";
+import Icon from "../atoms/Icon";
+import Button from "../atoms/Button";
 
 type NewCategoryProps = {
   show: boolean;
@@ -104,7 +106,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
         <form onSubmit={handleSubmit}>
           {!newCategoryGroup ? (
             <div className={styles["modal-field"]}>
-              <FontAwesomeIcon icon="list" className={styles["icon"]} />
+              <Icon icon="list"/>
               <Dropdown
                 isSearchable
                 placeholder="Select Category Group"
@@ -117,7 +119,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
             </div>
           ) : (
             <div className={styles["modal-field"]}>
-              <FontAwesomeIcon icon="folder-tree" className={styles["icon"]} />
+              <Icon icon="folder-tree" />
               <input
                 type="text"
                 id="newCategoryGroupName"
@@ -134,7 +136,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
             </div>
           )}
           <div className={styles["modal-field"]}>
-            <FontAwesomeIcon icon="folder" className={styles["icon"]} />
+            <Icon icon="folder" />
             <input
               type="text"
               id="name"
@@ -150,7 +152,7 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
             />
           </div>
           <div className={styles["modal-field"]}>
-            <FontAwesomeIcon icon="user-plus" className={styles["icon"]} />
+            <Icon icon="user-plus"/>
             <Dropdown
               isSearchable
               isMulti
@@ -160,14 +162,13 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
             />
           </div>
           <div className={styles["actions"]}>
-            <button
-              type="button"
-              className={styles["button--secondary"]}
+            <Button
+              secondary
               onClick={() => toggleModal()}
             >
               Cancel
-            </button>
-            <button type="submit">Save</button>
+            </Button>
+            <Button type="submit">Save</Button>
           </div>
         </form>
       </div>

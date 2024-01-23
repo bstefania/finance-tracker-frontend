@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 import Icon from "../atoms/Icon";
-import Category from "../atoms/Category";
+import Category from "../molecules/Category";
 import Actions from "../molecules/Actions";
 import TransactionDetails from "./TransactionDetails";
 import { Transaction, TransactionType } from "../../types/database";

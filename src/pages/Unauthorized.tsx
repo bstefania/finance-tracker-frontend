@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button from "../components/atoms/Button";
 
 const Unauthorized = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Unauthorized = () => {
       <br />
       <p>You do not have access to the requested page.</p>
       <div className="flex-grow">
-        <button onClick={goBack}>Go Back</button>
+        <Button onClick={goBack}>Go Back</Button>
       </div>
     </section>
   );

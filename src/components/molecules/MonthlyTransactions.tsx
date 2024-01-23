@@ -3,7 +3,7 @@ import { TransactionType } from "../../types/database";
 import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { ron } from "../../utils/numberFormat";
-import Dropdown, { Option } from "../atoms/Dropdown";
+import Dropdown, { Option } from "./Dropdown";
 import { Amounts, getAmounts } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import styles from "../../styles/molecules/MonthlyTransactions.module.scss";

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-import styles from "../../styles/atoms/Dropdown.module.scss";
-import Icon from "./Icon";
+import styles from "../../styles/molecules/Dropdown.module.scss";
+import Icon from "../atoms/Icon";
 
 export type Option = {
   label: string;

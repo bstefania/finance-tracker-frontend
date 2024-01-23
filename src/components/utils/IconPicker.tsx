@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import AvailableIcons from "../../data/AvailableIcons";
-import CircleIcon from "../atoms/CircleIcon";
+import CircleIcon from "../molecules/CircleIcon";
 import ColorOptions from "./ColorOptions";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import styles from "../../styles/utils/Picker.module.scss";

@@ -5,18 +5,6 @@
   display: flex;
 }
 
-ul {
-  width: 100%;
-  display: flex;
-  gap: 1em;
-  justify-content: space-between;
-
-  li {
-    list-style: none;
-    flex: 1;
-  }
-}
-
 .wealth {
   background-color: #fff;
   padding: 1em;

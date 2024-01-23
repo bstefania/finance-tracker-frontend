@@ -9,6 +9,7 @@ import Navbar from "../components/molecules/Navbar";
 import ExternalProvider from "../components/utils/ExternalProvider";
 import Delimiter from "../components/atoms/Delimiter";
 import ErrorMessage from "../components/atoms/ErrorMessage";
+import Button from "../components/atoms/Button";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -92,7 +93,7 @@ const Login = () => {
               <span className="line">
                 <a href="#">Forgot your password?</a>
               </span>
-              <button>Log in</button>
+              <Button>Log in</Button>
             </div>
           </form>
           <div>

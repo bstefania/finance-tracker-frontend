@@ -5,18 +5,17 @@
   width: vars.$font-size-16;
   height: 1rem;
   width: 1rem;
+}
 
-  &--small {
-    width: vars.$font-size-8;
-    height: vars.$font-size-8;
-  }
-  
-  &--large {
-    // TODO: use font-size
-    height: 1.5rem;
-    width: 1.5rem;
-   }
-  
+.icon--small {
+  width: vars.$font-size-8;
+  height: vars.$font-size-8;
+}
+
+.icon--large {
+  // TODO: use font-size
+  height: 1.5rem;
+  width: 1.5rem;
  }
 
  .icon-with-action {

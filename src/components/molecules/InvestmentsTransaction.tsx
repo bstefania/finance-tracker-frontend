@@ -1,15 +1,14 @@
-import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import Dropdown from "../atoms/Dropdown";
+import Icon from "../atoms/Icon";
+import Dropdown from "./Dropdown";
 import { TransactionSource } from "../../types/database";
 import styles from "../../styles/organisms/TransactionDetails.module.scss"
 
 function InvestmentsTransaction() {
-  const [sources, setSources] = useState([
+  const sources = [
     { label: "Wallet", value: TransactionSource.Income },
     { label: "Savings", value: TransactionSource.Savings },
-  ]);
+  ];
   const [source, setSource] = useState(null);
   const [selectedOption, setSelectedOption] = useState("deposit");
 
@@ -49,7 +48,7 @@ function InvestmentsTransaction() {
         </label>
       </div>
       <div className={styles["modal-field"] + ' ' + (selectedOption !== "deposit" ? styles["disabled"]: "")}>
-        <FontAwesomeIcon icon={faArrowUpFromBracket} className={styles["icon"]} />
+        <Icon icon="arrow-up-from-bracket" />
         <Dropdown
           isSearchable
           placeholder="Select Source"

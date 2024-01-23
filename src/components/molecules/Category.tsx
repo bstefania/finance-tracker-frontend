@@ -1,4 +1,4 @@
-import styles from "../../styles/atoms/Category.module.scss";
+import styles from "../../styles/molecules/Category.module.scss";
 import CircleIcon from "./CircleIcon";
 
 type CategoryProps = {

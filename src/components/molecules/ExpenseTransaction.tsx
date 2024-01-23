@@ -1,23 +1,22 @@
-import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useState } from "react";
 import { TransactionSource } from "../../types/database";
-import Dropdown from "../atoms/Dropdown";
+import Dropdown from "./Dropdown";
 import styles from "../../styles/organisms/TransactionDetails.module.scss"
+import Icon from "../atoms/Icon";
 
 type ExpenseTransactionProps = {
   setSource: Dispatch<SetStateAction<TransactionSource>>
 }
 
 function ExpenseTransaction({setSource}: ExpenseTransactionProps) {
-  const [sources, setSources] = useState([
+  const sources = [
     { label: "Wallet", value: TransactionSource.Income },
     { label: "Savings", value: TransactionSource.Savings },
-  ]);
+  ];
 
   return (
     <div className={styles["modal-field"]}>
-      <FontAwesomeIcon icon={faArrowUpFromBracket} className={styles["icon"]} />
+      <Icon icon="arrow-up-from-bracket" />
       <Dropdown
         isSearchable
         placeholder="Select Source"

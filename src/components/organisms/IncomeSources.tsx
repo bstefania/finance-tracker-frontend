@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
-import Category from "../atoms/Category"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
+import Category from "../molecules/Category"
 import TransactionDetails from "./TransactionDetails"
 import { IncomeSource, TransactionType } from "../../types/database"
+import Button from "../atoms/Button"
 import styles from "../../styles/organisms/IncomeSources.module.scss"
 
 type IncomeSourcesProps = {
@@ -13,7 +12,7 @@ type IncomeSourcesProps = {
 function IncomeSources({}: IncomeSourcesProps) {
   const [incomeSourcesDetailsVisible, setTransactionDetailsVisible] =
     useState(false)
-  const [incomeSources, setIncomeSources] = useState<IncomeSource[]>([])
+  const incomeSources: IncomeSource[] = []
 
   useEffect(() => {
     getIncomeSources()
@@ -34,7 +33,7 @@ function IncomeSources({}: IncomeSourcesProps) {
     <div className={styles["table-div"]}>
       <div className={styles["header"]}>
         <h2>Income Sources</h2>
-        <button onClick={() => toggleModal()}>+ Add</button>
+        <Button onClick={() => toggleModal()}>+ Add</Button>
       </div>
       {incomeSourcesDetailsVisible && (
         <TransactionDetails toggleModal={toggleModal} />
@@ -69,21 +68,6 @@ function IncomeSources({}: IncomeSourcesProps) {
                   <td>{val.type}</td>
                   <td>{val.recurrence}</td>
                   <td>10th of each month</td>
-                  <td>
-                    <div className={styles["column-with-action"]}>
-                      {val.sharedWith.length ? (
-                        <div className={styles["user-div"]}>
-                          <FontAwesomeIcon icon={faUser} className={styles["user-icon"]} />
-                        </div>
-                      ) : (
-                        <div></div>
-                      )}
-                      <FontAwesomeIcon
-                        icon={faEllipsisVertical}
-                        className={styles["icon-action"]}
-                      />
-                    </div>
-                  </td>
                 </tr>
               )
             })}

@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import { patchWealth } from "../../api/user";
+import Icon from "../atoms/Icon";
 import { MoneyCardType, TransactionType } from "../../types/database";
 import useWealth from "../../hooks/useWealth";
 import { ron, formatDecimals } from "../../utils/numberFormat";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import styles from "../../styles/molecules/MoneyCard.module.scss";
-import Icon from "../atoms/Icon";
 
 type MoneyCardProps = {
   type: MoneyCardType;

@@ -1,13 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendarDays,
-  faList,
-  faMoneyBill,
-  faNoteSticky,
-  faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import Dropdown, { Option } from "../atoms/Dropdown";
+import Dropdown, { Option } from "../molecules/Dropdown";
 import {
   Category,
   Transaction,
@@ -24,6 +16,8 @@ import { getCategories } from "../../api/categories";
 import { showNotification, Notification } from "../../utils/errorHandling";
 import { postTransactions } from "../../api/transactions";
 import styles from "../../styles/organisms/TransactionDetails.module.scss";
+import Icon from "../atoms/Icon";
+import Button from "../atoms/Button";
 
 type TransactionDetailsProps = {
   toggleModal: any;
@@ -44,7 +38,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
   );
   const [categories, setCategories] = useState<Record<string, Option[]>>({});
 
-  const [_id, setId] = useState<string | null>(null)
+  const [_id, setId] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState(transactionTypes[0]);
   const [category, setCategory] = useState<Option | null>(null);
   const [amount, setAmount] = useState<number>();
@@ -61,14 +55,16 @@ function TransactionDetails(props: TransactionDetailsProps) {
 
   useEffect(() => {
     fetchCategories();
-    if(props.existingData) {
-      console.log(props.existingData)
-      setId(props.existingData.id)
-      setSource(props.existingData.source)
-      setSelectedType(props.existingData.type)
-      setAmount(props.existingData.amount)
-      setDate(new Date(props.existingData.createdAt).toISOString().slice(0, 10))
-      setNote(props.existingData.note)
+    if (props.existingData) {
+      console.log(props.existingData);
+      setId(props.existingData.id);
+      setSource(props.existingData.source);
+      setSelectedType(props.existingData.type);
+      setAmount(props.existingData.amount);
+      setDate(
+        new Date(props.existingData.createdAt).toISOString().slice(0, 10)
+      );
+      setNote(props.existingData.note);
     }
   }, []);
 
@@ -106,14 +102,14 @@ function TransactionDetails(props: TransactionDetailsProps) {
     event.preventDefault();
 
     try {
-      if (!amount) throw new Error("Transaction amount is not set!")
+      if (!amount) throw new Error("Transaction amount is not set!");
 
       const createdAt = new Date(date);
       const currentDatetime = new Date();
       createdAt.setHours(currentDatetime.getHours());
       createdAt.setMinutes(currentDatetime.getMinutes());
       createdAt.setSeconds(currentDatetime.getSeconds());
-      console.log(category)
+      console.log(category);
 
       const data: TransactionInput = {
         type: selectedType,
@@ -141,7 +137,9 @@ function TransactionDetails(props: TransactionDetailsProps) {
             {transactionTypes.map((transactionType) => (
               <span
                 key={transactionType}
-                className={selectedType === transactionType ? styles["selected"] : ""}
+                className={
+                  selectedType === transactionType ? styles["selected"] : ""
+                }
                 onClick={() => setSelectedType(transactionType)}
               >
                 {transactionType}
@@ -150,7 +148,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
           </div>
           {TransactionComponent[selectedType]}
           <div className={styles["modal-field"]}>
-            <FontAwesomeIcon icon={faList} className={styles["icon"]} />
+            <Icon icon="list" />
             <Dropdown
               isSearchable
               placeholder="Select Category"
@@ -163,7 +161,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
             />
           </div>
           <div className={styles["modal-field"]}>
-            <FontAwesomeIcon icon={faMoneyBill} className={styles["icon"]} />
+            <Icon icon="money-bill" />
             <input
               type="number"
               id="amount"
@@ -176,7 +174,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
             />
           </div>
           <div className={styles["modal-field"]}>
-            <FontAwesomeIcon icon={faCalendarDays} className={styles["icon"]} />
+            <Icon icon="calendar-days" />
             <input
               type="date"
               id="date"
@@ -186,7 +184,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
             />
           </div>
           <div className={styles["modal-field"]}>
-            <FontAwesomeIcon icon={faUserPlus} className={styles["icon"]} />
+            <Icon icon="user-plus" />
             <Dropdown
               isSearchable
               isMulti
@@ -196,7 +194,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
             />
           </div>
           <div className={styles["modal-field"]}>
-            <FontAwesomeIcon icon={faNoteSticky} className={styles["icon"]} />
+            <Icon icon="note-sticky" />
             <textarea
               id="note"
               placeholder="Note..."
@@ -204,14 +202,10 @@ function TransactionDetails(props: TransactionDetailsProps) {
             />
           </div>
           <div className={styles["actions"]}>
-            <button
-              type="button"
-              className={styles["button--secondary"]}
-              onClick={props.toggleModal}
-            >
+            <Button secondary onClick={props.toggleModal}>
               Cancel
-            </button>
-            <button type="submit">Save</button>
+            </Button>
+            <Button type="submit">Save</Button>
           </div>
         </form>
       </div>

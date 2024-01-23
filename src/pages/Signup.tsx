@@ -16,6 +16,7 @@ import Navbar from "../components/molecules/Navbar";
 import ExternalProvider from "../components/utils/ExternalProvider";
 import Delimiter from "../components/atoms/Delimiter";
 import ErrorMessage from "../components/atoms/ErrorMessage";
+import Button from "../components/atoms/Button";
 
 const NAME_REGEX = /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/;
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -251,7 +252,7 @@ const Signup = () => {
               <FontAwesomeIcon icon={faInfoCircle} />
               The passwords don't match!
             </p>
-            <button
+            <Button
               className="extraMargins"
               disabled={
                 (name && !validName) ||
@@ -263,7 +264,7 @@ const Signup = () => {
               }
             >
               Sign Up
-            </button>
+            </Button>
           </form>
           <p>
             Already registered?
