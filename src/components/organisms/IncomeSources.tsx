@@ -1,33 +1,34 @@
-import { useEffect, useState } from "react"
-import Category from "../molecules/Category"
-import TransactionDetails from "./TransactionDetails"
-import { IncomeSource, TransactionType } from "../../types/database"
-import Button from "../atoms/Button"
-import styles from "../../styles/organisms/IncomeSources.module.scss"
+import { useEffect, useState } from "react";
+import Category from "../molecules/Category";
+import TransactionDetails from "./TransactionDetails";
+import { IncomeSource, TransactionType } from "../../types/database";
+import Button from "../atoms/Button";
+import styles from "../../styles/organisms/IncomeSources.module.scss";
+import NoData from "../atoms/NoData";
 
 type IncomeSourcesProps = {
-  type?: TransactionType
-}
+  type?: TransactionType;
+};
 
 function IncomeSources({}: IncomeSourcesProps) {
   const [incomeSourcesDetailsVisible, setTransactionDetailsVisible] =
-    useState(false)
-  const incomeSources: IncomeSource[] = []
+    useState(false);
+  const incomeSources: IncomeSource[] = [];
 
   useEffect(() => {
-    getIncomeSources()
-  }, [])
+    getIncomeSources();
+  }, []);
 
   const getIncomeSources = () => {
-    return []
-  }
+    return [];
+  };
 
   const toggleModal = (listChanged?: boolean) => {
-    setTransactionDetailsVisible(!incomeSourcesDetailsVisible)
+    setTransactionDetailsVisible(!incomeSourcesDetailsVisible);
     if (listChanged) {
-      getIncomeSources()
+      getIncomeSources();
     }
-  }
+  };
 
   return (
     <div className={styles["table-div"]}>
@@ -69,16 +70,20 @@ function IncomeSources({}: IncomeSourcesProps) {
                   <td>{val.recurrence}</td>
                   <td>10th of each month</td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>
       </div>
       {incomeSources.length === 0 && (
-        <div className={styles["not-found"]}>No recurrent income sources found</div>
+        <NoData
+          isLoading={false}
+          loadingText="Fetching transactions..."
+          notFoundText="No recurrent income sources found"
+        />
       )}
     </div>
-  )
+  );
 }
 
-export default IncomeSources
+export default IncomeSources;

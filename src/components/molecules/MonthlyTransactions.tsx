@@ -7,6 +7,7 @@ import Dropdown, { Option } from "./Dropdown";
 import { Amounts, getAmounts } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import styles from "../../styles/molecules/MonthlyTransactions.module.scss";
+import NoData from "../atoms/NoData";
 
 type MonthlyTransactionsProps = {
   type?: TransactionType;
@@ -158,9 +159,11 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
         {series.length > 0 ? (
           <Chart options={options} series={series} type="donut" width="100%" />
         ) : (
-          <div className={styles["not-found"]}>
-            No transactions found in the current month
-          </div>
+          <NoData
+          isLoading={false}
+          loadingText="Fetching transactions..."
+          notFoundText="No transactions found in the current month"
+        />
         )}
       </div>
     </div>

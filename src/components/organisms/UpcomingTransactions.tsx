@@ -1,5 +1,6 @@
 import { TransactionType } from "../../types/database";
 import styles from "../../styles/organisms/UpcomingPayments.module.scss";
+import NoData from "../atoms/NoData";
 
 type UpcomingTransactionsProps = {
   type?: TransactionType;
@@ -11,9 +12,11 @@ function UpcomingTransactions({ type }: UpcomingTransactionsProps) {
       <div className={styles["header"]}>
         <h2>Upcoming transactions</h2>
       </div>
-      <div className={styles["not-found"]}>
-        <span>Nothing found in the next 30 days.</span>
-      </div>
+      <NoData
+        isLoading={false}
+        loadingText="Fetching transactions..."
+        notFoundText="Nothing found in the next 30 days"
+      />
     </div>
   );
 }

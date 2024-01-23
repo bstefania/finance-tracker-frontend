@@ -10,6 +10,7 @@ import { ron } from "../../utils/numberFormat";
 import { getTransactions } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import styles from "../../styles/organisms/Transactions.module.scss";
+import NoData from "../atoms/NoData";
 
 type TransactionsProps = {
   type?: TransactionType;
@@ -124,7 +125,11 @@ function Transactions(props: TransactionsProps) {
         </table>
       </div>
       {transactions.length === 0 && (
-        <div className={styles["not-found"]}>No transactions found</div>
+        <NoData
+          isLoading={false}
+          loadingText="Fetching transactions..."
+          notFoundText="No transactions found"
+        />
       )}
     </div>
   );
