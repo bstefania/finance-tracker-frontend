@@ -1,7 +1,6 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/atoms/CircleIcon.scss";
-import "../../styles/common.scss";
+import styles from "../../styles/atoms/CircleIcon.module.scss";
 
 type CircleIconProps = {
   icon: IconDefinition;
@@ -12,12 +11,12 @@ type CircleIconProps = {
 const CircleIcon = (props: CircleIconProps) => {
   return (
     <div
-      className="icon-parent circle"
+      className={`${styles["icon-parent"]} ${styles["circle"]}`}
       style={{ backgroundColor: props.color }}
       onClick={props.onClick}
     >
-      <div className="icon-background circle">
-        <FontAwesomeIcon icon={props.icon} className="icon" />
+      <div className={`${styles["icon-background"]} ${styles["circle"]}`}>
+        <FontAwesomeIcon icon={props.icon} className={styles["icon"]} />
       </div>
     </div>
   );

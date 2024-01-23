@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import styles from "../styles/utils/Picker.module.scss"
 
 type AvailableIconsProps = {
   onClick: any;
@@ -201,14 +202,14 @@ const AvailableIcons = (props: AvailableIconsProps) => {
   );
 
   return (
-    <div className="icon-options">
+    <div className={styles["icon-options"]}>
       {icons.map((icon, index) => (
         <FontAwesomeIcon
           key={index}
           icon={icon as IconProp}
           title={icon}
-          className={`icon icon--large ${
-            selectedIndex === index ? "selected" : ""
+          className={`${styles["icon"]} ${styles["icon--large"]} ${
+            selectedIndex === index ? styles["selected"] : ""
           }`}
           onClick={(e) => {
             setSelectedIndex(index);

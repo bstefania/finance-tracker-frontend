@@ -7,10 +7,9 @@ import { Transaction, TransactionType } from "../../types/database";
 import { ron } from "../../utils/numberFormat";
 import { getTransactions } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
-import "../../styles/organisms/Transactions.scss";
-import "../../styles/utils/Table.scss";
 import Actions from "../molecules/Actions";
 import { Action } from "../../types/types";
+import styles from "../../styles/organisms/Transactions.module.scss";
 
 type TransactionsProps = {
   type?: TransactionType;
@@ -56,8 +55,8 @@ function Transactions(props: TransactionsProps) {
   };
 
   return (
-    <div className="table-div">
-      <div className="header">
+    <div className={styles["table-div"]}>
+      <div className={styles["header"]}>
         <h2>Recent transactions</h2>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
@@ -67,8 +66,8 @@ function Transactions(props: TransactionsProps) {
           existingData={transactionToModify}
         />
       )}
-      <div className="fix-table-head">
-        <table className="transactions-table">
+      <div className={styles["fix-table-head"]}>
+        <table className={styles["transactions-table"]}>
           <thead>
             <tr>
               <th>Category</th>
@@ -95,7 +94,7 @@ function Transactions(props: TransactionsProps) {
                     {ron.format(val.amount)}
                   </td>
                   <td>
-                    <span className={`label-${val.type}`}>
+                    <span className={styles[`label-${val.type}`]}>
                       {val.type.charAt(0).toUpperCase() + val.type.slice(1)}
                     </span>
                   </td>
@@ -109,14 +108,14 @@ function Transactions(props: TransactionsProps) {
                   </td>
                   <td>
                     {val.sharedWith.length ? (
-                      <div className="user-div">
-                        <FontAwesomeIcon icon={faUser} className="user-icon" />
+                      <div className={styles["user-div"]}>
+                        <FontAwesomeIcon icon={faUser} className={styles["user-icon"]} />
                       </div>
                     ) : (
                       <div></div>
                     )}
                   </td>
-                  <td className="column-with-action">
+                  <td className={styles["column-with-action"]}>
                     <Actions actions={actions} data={val} />
                   </td>
                 </tr>
@@ -126,7 +125,7 @@ function Transactions(props: TransactionsProps) {
         </table>
       </div>
       {transactions.length === 0 && (
-        <div className="not-found">No transactions found</div>
+        <div className={styles["not-found"]}>No transactions found</div>
       )}
     </div>
   );

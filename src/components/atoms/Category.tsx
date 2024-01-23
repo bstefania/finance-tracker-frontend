@@ -1,5 +1,4 @@
-import { faMoneyBill } from "@fortawesome/free-solid-svg-icons";
-import "../../styles/atoms/Category.scss";
+import styles from "../../styles/atoms/Category.module.scss";
 import CircleIcon from "./CircleIcon";
 
 type CategoryProps = {
@@ -11,10 +10,10 @@ type CategoryProps = {
 
 const Category = (props: CategoryProps) => {
   return (
-    <div className="category">
+    <div className={styles["category"]}>
       <CircleIcon color={props.color} icon={props.icon as any} />
-      <div className="details">
-        <span className="category-title">{props.categoryGroup}</span>
+      <div className={styles["details"]}>
+        <span className={styles["category-title"]}>{props.categoryGroup}</span>
         <span>{props.category}</span>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { TransactionType } from "../../types/database";
-import "../../styles/organisms/UpcomingPayments.scss";
+import styles from "../../styles/organisms/UpcomingPayments.module.scss";
 
 type UpcomingTransactionsProps = {
   type?: TransactionType;
@@ -7,11 +7,11 @@ type UpcomingTransactionsProps = {
 
 function UpcomingTransactions({ type }: UpcomingTransactionsProps) {
   return (
-    <div className="upcoming-payments">
-      <div className="header">
+    <div className={styles["upcoming-payments"]}>
+      <div className={styles["header"]}>
         <h2>Upcoming transactions</h2>
       </div>
-      <div className="not-found">
+      <div className={styles["not-found"]}>
         <span>Nothing found in the next 30 days.</span>
       </div>
     </div>

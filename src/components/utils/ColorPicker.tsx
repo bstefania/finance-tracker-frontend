@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { ChromePicker } from "react-color";
-import "../../styles/utils/Picker.scss";
+import styles from "../../styles/utils/Picker.module.scss";
 
 type ColorPickerProps = {
   color: string;
@@ -13,14 +13,14 @@ function ColorPicker({ color, setColor }: ColorPickerProps) {
 
   return (
     <div
-      className="picker-button"
+      className={styles["picker-button"]}
       onClick={() => {
         setPickAColor(!pickAColor);
       }}
       style={{ backgroundColor: color }}
     >
       {pickAColor && (
-        <div className="picker-parent">
+        <div className={styles["picker-parent"]}>
           <ChromePicker
             color={color}
             onChange={(newColor) => setColor(newColor.hex)}

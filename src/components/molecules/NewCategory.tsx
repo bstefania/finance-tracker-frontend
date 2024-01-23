@@ -15,7 +15,7 @@ import {
   postCategoryGroups,
 } from "../../api/categories";
 import IconPicker from "../utils/IconPicker";
-import "../../styles/molecules/NewCategory.scss";
+import styles from "../../styles/molecules/NewCategory.module.scss";
 
 type NewCategoryProps = {
   show: boolean;
@@ -100,11 +100,11 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
 
   return (
     <Modal title={"New category"} toggleModal={toggleModal}>
-      <div className="modal-body">
+      <div className={styles["modal-body"]}>
         <form onSubmit={handleSubmit}>
           {!newCategoryGroup ? (
-            <div className="modal-field">
-              <FontAwesomeIcon icon="list" className="icon" />
+            <div className={styles["modal-field"]}>
+              <FontAwesomeIcon icon="list" className={styles["icon"]} />
               <Dropdown
                 isSearchable
                 placeholder="Select Category Group"
@@ -116,8 +116,8 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               />
             </div>
           ) : (
-            <div className="modal-field">
-              <FontAwesomeIcon icon="folder-tree" className="icon" />
+            <div className={styles["modal-field"]}>
+              <FontAwesomeIcon icon="folder-tree" className={styles["icon"]} />
               <input
                 type="text"
                 id="newCategoryGroupName"
@@ -133,8 +133,8 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               />
             </div>
           )}
-          <div className="modal-field">
-            <FontAwesomeIcon icon="folder" className="icon" />
+          <div className={styles["modal-field"]}>
+            <FontAwesomeIcon icon="folder" className={styles["icon"]} />
             <input
               type="text"
               id="name"
@@ -149,8 +149,8 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               setColor={setColor}
             />
           </div>
-          <div className="modal-field">
-            <FontAwesomeIcon icon="user-plus" className="icon" />
+          <div className={styles["modal-field"]}>
+            <FontAwesomeIcon icon="user-plus" className={styles["icon"]} />
             <Dropdown
               isSearchable
               isMulti
@@ -159,10 +159,10 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
               onChange={(option: any) => setSharedWith(option)}
             />
           </div>
-          <div className="actions">
+          <div className={styles["actions"]}>
             <button
               type="button"
-              className="button--secondary"
+              className={styles["button--secondary"]}
               onClick={() => toggleModal()}
             >
               Cancel

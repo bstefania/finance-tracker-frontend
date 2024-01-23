@@ -1,5 +1,4 @@
 import { BaseWealth, Wealth } from "../types/database";
-import { HttpResponse } from "../types/responses";
 import { customAxios } from "./axios";
 
 export const initWealth = {

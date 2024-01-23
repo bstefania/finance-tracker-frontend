@@ -5,14 +5,14 @@ import {
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { patchWealth } from "../../api/user";
 import { MoneyCardType, TransactionType } from "../../types/database";
 import useWealth from "../../hooks/useWealth";
 import { ron, formatDecimals } from "../../utils/numberFormat";
 import { Notification, showNotification } from "../../utils/errorHandling";
-import "../../styles/molecules/MoneyCard.scss";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+import styles from "../../styles/molecules/MoneyCard.module.scss";
 
 type MoneyCardProps = {
   type: MoneyCardType;
@@ -61,18 +61,18 @@ const MoneyCard = (props: MoneyCardProps) => {
   };
 
   return (
-    <div className="money-card">
-      <div className="title">
+    <div className={styles["money-card"]}>
+      <div className={styles["title"]}>
         <span>{details[props.type].title}</span>
-        <span className={`label-${props.type}`}>
+        <span className={styles[`label-${props.type}`]}>
           {formatDecimals(wealth?.category[props.type].percentage)}%
         </span>
       </div>
-      <div className="amount">
+      <div className={styles["amount"]}>
         {editMode ? (
           <input
             type="number"
-            className="edit-field"
+            className={styles["edit-field"]}
             ref={inputRef}
             autoFocus
             value={amount}
@@ -80,14 +80,14 @@ const MoneyCard = (props: MoneyCardProps) => {
             onKeyDown={updateWealth}
           />
         ) : (
-          <div className="current-amount">
-            <div className="value">
+          <div className={styles["current-amount"]}>
+            <div className={styles["value"]}>
               <span>
                 {ron.format(wealth?.category[props.type].value ?? 0)}
               </span>
               <FontAwesomeIcon
                 icon={faPencil}
-                className="edit-icon"
+                className={styles["edit-icon"]}
                 onClick={toggleEditMode}
               />
             </div>

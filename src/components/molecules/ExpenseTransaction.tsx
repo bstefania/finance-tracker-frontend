@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useState } from "react";
 import { TransactionSource } from "../../types/database";
 import Dropdown from "../atoms/Dropdown";
-import "../../styles/organisms/TransactionDetails.scss"
-import "../../styles/common.scss"
+import styles from "../../styles/organisms/TransactionDetails.module.scss"
 
 type ExpenseTransactionProps = {
   setSource: Dispatch<SetStateAction<TransactionSource>>
@@ -17,8 +16,8 @@ function ExpenseTransaction({setSource}: ExpenseTransactionProps) {
   ]);
 
   return (
-    <div className="modal-field">
-      <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
+    <div className={styles["modal-field"]}>
+      <FontAwesomeIcon icon={faArrowUpFromBracket} className={styles["icon"]} />
       <Dropdown
         isSearchable
         placeholder="Select Source"

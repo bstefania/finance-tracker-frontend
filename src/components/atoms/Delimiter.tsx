@@ -1,4 +1,4 @@
-import "../../styles/atoms/Delimiter.scss"
+import styles from "../../styles/atoms/Delimiter.module.scss"
 
 type DelimiterProps = {
   text: string
@@ -6,7 +6,7 @@ type DelimiterProps = {
 
 function Delimiter(props: DelimiterProps) {
   return (
-    <div className="separator">{props.text}</div>
+    <div className={styles["separator"]}>{props.text}</div>
   );
 }
 

@@ -6,7 +6,7 @@ import { ron } from "../../utils/numberFormat";
 import Dropdown, { Option } from "../atoms/Dropdown";
 import { Amounts, getAmounts } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
-import "../../styles/molecules/MonthlyTransactions.scss";
+import styles from "../../styles/molecules/MonthlyTransactions.module.scss";
 
 type MonthlyTransactionsProps = {
   type?: TransactionType;
@@ -139,13 +139,13 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
   };
 
   return (
-    <div className="monthly-expenses">
-      <div className="header">
+    <div className={styles["monthly-expenses"]}>
+      <div className={styles["header"]}>
         <h2>Monthly transactions</h2>
       </div>
-      <div className="donut">
-        <div className="filters">
-          <div className="filter">
+      <div className={styles["donut"]}>
+        <div className={styles["filters"]}>
+          <div className={styles["filter"]}>
             <Dropdown
               options={availableTypes}
               placeholder=""
@@ -158,7 +158,7 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
         {series.length > 0 ? (
           <Chart options={options} series={series} type="donut" width="100%" />
         ) : (
-          <div className="not-found">
+          <div className={styles["not-found"]}>
             No transactions found in the current month
           </div>
         )}

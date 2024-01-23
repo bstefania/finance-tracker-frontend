@@ -9,6 +9,7 @@ type WealthContextType = {
   fetchWealth: () => void;
 };
 
+// initial data
 const WealthContext = createContext<WealthContextType>({
   wealth: null,
   setWealth: () => {},

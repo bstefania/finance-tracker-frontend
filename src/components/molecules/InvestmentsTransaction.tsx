@@ -1,10 +1,9 @@
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import { useState } from "react";
 import Dropdown from "../atoms/Dropdown";
 import { TransactionSource } from "../../types/database";
-import "../../styles/organisms/TransactionDetails.scss"
-import "../../styles/common.scss"
+import styles from "../../styles/organisms/TransactionDetails.module.scss"
 
 function InvestmentsTransaction() {
   const [sources, setSources] = useState([
@@ -20,7 +19,7 @@ function InvestmentsTransaction() {
 
   return (
     <>
-      <div className="radio-buttons">
+      <div className={styles["radio-buttons"]}>
         <label>
           <input
             type="radio"
@@ -49,8 +48,8 @@ function InvestmentsTransaction() {
           Loss
         </label>
       </div>
-      <div className={"modal-field " + (selectedOption !== "deposit" ? "disabled": "")}>
-        <FontAwesomeIcon icon={faArrowUpFromBracket} className="icon" />
+      <div className={styles["modal-field"] + ' ' + (selectedOption !== "deposit" ? styles["disabled"]: "")}>
+        <FontAwesomeIcon icon={faArrowUpFromBracket} className={styles["icon"]} />
         <Dropdown
           isSearchable
           placeholder="Select Source"

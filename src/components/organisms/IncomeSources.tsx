@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons"
 import TransactionDetails from "./TransactionDetails"
 import { IncomeSource, TransactionType } from "../../types/database"
-import "../../styles/organisms/IncomeSources.scss"
-import "../../styles/utils/Table.scss"
+import styles from "../../styles/organisms/IncomeSources.module.scss"
 
 type IncomeSourcesProps = {
   type?: TransactionType
@@ -32,16 +31,16 @@ function IncomeSources({}: IncomeSourcesProps) {
   }
 
   return (
-    <div className="table-div">
-      <div className="header">
+    <div className={styles["table-div"]}>
+      <div className={styles["header"]}>
         <h2>Income Sources</h2>
         <button onClick={() => toggleModal()}>+ Add</button>
       </div>
       {incomeSourcesDetailsVisible && (
         <TransactionDetails toggleModal={toggleModal} />
       )}
-      <div className="fix-table-head">
-        <table className='income-sources-table'>
+      <div className={styles["fix-table-head"]}>
+        <table className={styles["income-sources-table"]}>
           <thead>
             <tr>
               <th>Category</th>
@@ -66,22 +65,22 @@ function IncomeSources({}: IncomeSourcesProps) {
                     />
                   </td>
                   <td>{val.name}</td>
-                  <td className="income">{val.amount} EUR</td>
+                  <td className={styles["income"]}>{val.amount} EUR</td>
                   <td>{val.type}</td>
                   <td>{val.recurrence}</td>
                   <td>10th of each month</td>
                   <td>
-                    <div className="column-with-action">
+                    <div className={styles["column-with-action"]}>
                       {val.sharedWith.length ? (
-                        <div className="user-div">
-                          <FontAwesomeIcon icon={faUser} className="user-icon" />
+                        <div className={styles["user-div"]}>
+                          <FontAwesomeIcon icon={faUser} className={styles["user-icon"]} />
                         </div>
                       ) : (
                         <div></div>
                       )}
                       <FontAwesomeIcon
                         icon={faEllipsisVertical}
-                        className="icon-action"
+                        className={styles["icon-action"]}
                       />
                     </div>
                   </td>
@@ -92,7 +91,7 @@ function IncomeSources({}: IncomeSourcesProps) {
         </table>
       </div>
       {incomeSources.length === 0 && (
-        <div className="not-found">No recurrent income sources found</div>
+        <div className={styles["not-found"]}>No recurrent income sources found</div>
       )}
     </div>
   )

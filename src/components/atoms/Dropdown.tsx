@@ -5,8 +5,8 @@ import {
   faChevronUp,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import "../../styles/atoms/Dropdown.scss";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
+import styles from "../../styles/atoms/Dropdown.module.scss";
 
 export type Option = {
   label: string;
@@ -47,7 +47,7 @@ const Dropdown = ({
     }
   }, [showMenu]);
 
-  useOutsideClick(inputRef, () => setShowMenu(false))
+  useOutsideClick(inputRef, () => setShowMenu(false));
 
   const handleInputClick = (e: any) => {
     setShowMenu(!showMenu);
@@ -59,15 +59,18 @@ const Dropdown = ({
     }
     if (isMulti) {
       return (
-        <div className="dropdown-tags">
+        <div className={styles["dropdown-tags"]}>
           {(selectedValue as Option[]).map((option) => (
-            <div key={option.value} className="dropdown-tag-item">
+            <div key={option.value} className={styles["dropdown-tag-item"]}>
               {option.label}
               <span
                 onClick={(e) => onTagRemove(e, option)}
-                className="dropdown-tag-close"
+                className={styles["dropdown-tag-close"]}
               >
-                <FontAwesomeIcon icon={faXmark} className="icon-with-action" />
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className={styles["icon-with-action"]}
+                />
               </span>
             </div>
           ))}
@@ -159,7 +162,9 @@ const Dropdown = ({
       <div
         onClick={() => onItemClick(option)}
         key={option.value}
-        className={`dropdown-item ${isSelected(option) && "selected"}`}
+        className={`${styles["dropdown-item"]} ${
+          isSelected(option) && styles["selected"]
+        }`}
       >
         {option.label}
       </div>
@@ -167,22 +172,26 @@ const Dropdown = ({
   };
 
   return (
-    <div className="dropdown-container">
-      <div ref={inputRef} onClick={handleInputClick} className="dropdown-input">
-        <div className="dropdown-selected-value">{getDisplay()}</div>
-        <div className="dropdown-tools">
-          <div className="dropdown-tool">
+    <div className={styles["dropdown-container"]}>
+      <div
+        ref={inputRef}
+        onClick={handleInputClick}
+        className={styles["dropdown-input"]}
+      >
+        <div className={styles["dropdown-selected-value"]}>{getDisplay()}</div>
+        <div className={styles["dropdown-tools"]}>
+          <div className={styles["dropdown-tool"]}>
             <FontAwesomeIcon
               icon={!showMenu ? faChevronDown : faChevronUp}
-              className="icon-with-action"
+              className={styles["icon-with-action"]}
             />
           </div>
         </div>
       </div>
       {showMenu && (
-        <div className="dropdown-menu">
+        <div className={styles["dropdown-menu"]}>
           {isSearchable && (
-            <div className="search-box">
+            <div className={styles["search-box"]}>
               <input onChange={onSearch} value={searchValue} ref={searchRef} />
             </div>
           )}
@@ -191,13 +200,13 @@ const Dropdown = ({
             : Object.entries(options as Record<string, Option[]>).map(
                 ([group, options]) => (
                   <div key={group}>
-                    <span className="dropdown-group">{group}</span>
+                    <span className={styles["dropdown-group"]}>{group}</span>
                     {optionsDiv(options)}
                   </div>
                 )
               )}
           {addItem && (
-            <div className="new-list-item" onClick={addItem}>
+            <div className={styles["new-list-item"]} onClick={addItem}>
               + Add new
             </div>
           )}

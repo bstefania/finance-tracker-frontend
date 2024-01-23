@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "../atoms/Logo";
 import { logOut } from "../../utils/authentication";
 import useAuth from "../../hooks/useAuth";
-import "../../styles/molecules/Navbar.scss";
+import styles from "../../styles/molecules/Navbar.module.scss";
 
 type NavbarProps = {
   header: string;
@@ -13,7 +13,7 @@ const Navbar = (props: NavbarProps) => {
   const { auth } = useAuth();
 
   return (
-    <nav className="navbar">
+    <nav className={styles["navbar"]}>
       {auth?.email ? (
         <>
           <h1>{props.header}</h1>
@@ -22,7 +22,7 @@ const Navbar = (props: NavbarProps) => {
       ) : (
         <>
           <Logo showName={true}/>
-          <div className="nav-elements">
+          <div className={styles["nav-elements"]}>
             <ul>
               <li>
                 <NavLink to="/">Home</NavLink>

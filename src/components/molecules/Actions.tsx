@@ -2,9 +2,7 @@ import { Action } from "../../types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-import "../../styles/atoms/Dropdown.scss";
-import "../../styles/molecules/Actions.scss";
-
+import styles from "../../styles/molecules/Actions.module.scss";
 
 type ActionsProps = {
   className?: string;
@@ -19,19 +17,27 @@ const Actions = (props: ActionsProps) => {
   useOutsideClick(menuRef, () => setShowMenu(false));
 
   return (
-    <div ref={menuRef} className={`actions ${props.className}`}>
+    <div
+      ref={menuRef}
+      className={`${styles["actions"]} ${
+        props.className ? styles[props.className] : ""
+      }`}
+    >
       <FontAwesomeIcon
         icon="ellipsis-vertical"
-        className="icon-action"
+        className={styles["icon-action"]}
         onClick={() => setShowMenu(!showMenu)}
       />
       {showMenu && (
-        <div className="dropdown-menu actions-list">
+        <div className={`${styles["dropdown-menu"]} ${styles["actions-list"]}`}>
           {props.actions.map((action) => (
             <div
               key={action.label}
-              onClick={() => {action.onClick(props.data); setShowMenu(false) }}
-              className="dropdown-item"
+              onClick={() => {
+                action.onClick(props.data);
+                setShowMenu(false);
+              }}
+              className={styles["dropdown-item"]}
             >
               {action.label}
             </div>

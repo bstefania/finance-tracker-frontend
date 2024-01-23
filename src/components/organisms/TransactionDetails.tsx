@@ -23,7 +23,7 @@ import useWealth from "../../hooks/useWealth";
 import { getCategories } from "../../api/categories";
 import { showNotification, Notification } from "../../utils/errorHandling";
 import { postTransactions } from "../../api/transactions";
-import "../../styles/organisms/TransactionDetails.scss";
+import styles from "../../styles/organisms/TransactionDetails.module.scss";
 
 type TransactionDetailsProps = {
   toggleModal: any;
@@ -135,13 +135,13 @@ function TransactionDetails(props: TransactionDetailsProps) {
 
   return !newCategory ? (
     <Modal title={"New transaction"} toggleModal={props.toggleModal}>
-      <div className="modal-body">
+      <div className={styles["modal-body"]}>
         <form onSubmit={handleSubmit}>
-          <div className="type">
+          <div className={styles["type"]}>
             {transactionTypes.map((transactionType) => (
               <span
                 key={transactionType}
-                className={selectedType === transactionType ? "selected" : ""}
+                className={selectedType === transactionType ? styles["selected"] : ""}
                 onClick={() => setSelectedType(transactionType)}
               >
                 {transactionType}
@@ -149,8 +149,8 @@ function TransactionDetails(props: TransactionDetailsProps) {
             ))}
           </div>
           {TransactionComponent[selectedType]}
-          <div className="modal-field">
-            <FontAwesomeIcon icon={faList} className="icon" />
+          <div className={styles["modal-field"]}>
+            <FontAwesomeIcon icon={faList} className={styles["icon"]} />
             <Dropdown
               isSearchable
               placeholder="Select Category"
@@ -162,8 +162,8 @@ function TransactionDetails(props: TransactionDetailsProps) {
               }}
             />
           </div>
-          <div className="modal-field">
-            <FontAwesomeIcon icon={faMoneyBill} className="icon" />
+          <div className={styles["modal-field"]}>
+            <FontAwesomeIcon icon={faMoneyBill} className={styles["icon"]} />
             <input
               type="number"
               id="amount"
@@ -175,8 +175,8 @@ function TransactionDetails(props: TransactionDetailsProps) {
               onChange={(e) => setAmount(parseFloat(e.target.value))}
             />
           </div>
-          <div className="modal-field">
-            <FontAwesomeIcon icon={faCalendarDays} className="icon" />
+          <div className={styles["modal-field"]}>
+            <FontAwesomeIcon icon={faCalendarDays} className={styles["icon"]} />
             <input
               type="date"
               id="date"
@@ -185,8 +185,8 @@ function TransactionDetails(props: TransactionDetailsProps) {
               placeholder="Date"
             />
           </div>
-          <div className="modal-field">
-            <FontAwesomeIcon icon={faUserPlus} className="icon" />
+          <div className={styles["modal-field"]}>
+            <FontAwesomeIcon icon={faUserPlus} className={styles["icon"]} />
             <Dropdown
               isSearchable
               isMulti
@@ -195,18 +195,18 @@ function TransactionDetails(props: TransactionDetailsProps) {
               onChange={(option: any) => setSharedWith(option)}
             />
           </div>
-          <div className="modal-field">
-            <FontAwesomeIcon icon={faNoteSticky} className="icon" />
+          <div className={styles["modal-field"]}>
+            <FontAwesomeIcon icon={faNoteSticky} className={styles["icon"]} />
             <textarea
               id="note"
               placeholder="Note..."
               onChange={(note: any) => setNote(note)}
             />
           </div>
-          <div className="actions">
+          <div className={styles["actions"]}>
             <button
               type="button"
-              className="button--secondary"
+              className={styles["button--secondary"]}
               onClick={props.toggleModal}
             >
               Cancel

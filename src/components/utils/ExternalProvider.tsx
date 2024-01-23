@@ -1,6 +1,6 @@
 import { AuthProviderType } from "../../types/authentication";
 import { signInWithThirdParty } from "../../utils/authentication";
-import "../../styles/utils/ExternalProvider.scss";
+import styles from "../../styles/utils/ExternalProvider.module.scss";
 
 const externalProvider = () => {
   const options = [
@@ -15,14 +15,14 @@ const externalProvider = () => {
   ];
 
   return (
-    <div className="external-provider">
+    <div className={styles["external-provider"]}>
       {options.map((option) => (
         <div
-          className="external-provider-button"
+          className={styles["external-provider-button"]}
           onClick={() => signInWithThirdParty(option.type)}
         >
-          <img src={option.img} className="provider-icon" alt="" />
-          <span className="text-container">Continue with {option.type}</span>
+          <img src={option.img} className={styles["provider-icon"]} alt="" />
+          <span className={styles["text-container"]}>Continue with {option.type}</span>
         </div>
       ))}
     </div>

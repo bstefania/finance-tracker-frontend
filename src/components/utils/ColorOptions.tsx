@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getRandomColor } from "../../utils/colorPicker";
-import "../../styles/utils/ColorOptions.scss";
+import styles from "../../styles/utils/ColorOptions.module.scss";
 
 const COLOR_NR = 12;
 
@@ -22,23 +22,23 @@ const ColorOptions = (props: ColorOptionsProps) => {
   }, []);
 
   return (
-    <div className="color-options">
+    <div className={styles["color-options"]}>
       {availableColors.map((color, index) => (
         <div
           key={index}
-          className={`background circle ${
-            color === props.chosenColor ? "selected-color" : ""
+          className={`${styles["background"]} ${styles["circle"]} ${
+            color === props.chosenColor ? styles["selected-color"] : ""
           }`}
         >
           <div
-            className="color circle"
+            className={`${styles["color"]} ${styles["circle"]}`}
             style={{ backgroundColor: color }}
             onClick={() => props.onClick(color)}
           />
         </div>
       ))}
-      <div className="background-add circle">
-        <div className="circle add-color">+</div>
+      <div className={`${styles["background-add"]} ${styles["circle"]}`}>
+        <div className={`${styles["add-color"]} ${styles["circle"]}`}>+</div>
       </div>
     </div>
   );

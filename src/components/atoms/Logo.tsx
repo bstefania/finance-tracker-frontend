@@ -1,6 +1,6 @@
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../styles/atoms/Logo.scss"
+import styles from "../../styles/atoms/Logo.module.scss"
 
 type LogoProps = {
   showName: boolean
@@ -8,10 +8,10 @@ type LogoProps = {
 
 const Logo = (props: LogoProps) => {
   return (
-    <div className="logo">
-      <div className="svg-background"/>
-        <div className="svg">
-          <FontAwesomeIcon icon={faChartSimple} className="logo-icon" />
+    <div className={styles["logo"]}>
+      <div className={styles["svg-background"]}/>
+        <div className={styles["svg"]}>
+          <FontAwesomeIcon icon={faChartSimple} className={styles["logo-icon"]} />
         </div>
       {props.showName && <span>WiseWallet</span>}
     </div>
