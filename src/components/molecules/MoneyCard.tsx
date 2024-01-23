@@ -1,18 +1,11 @@
-import {
-  faMoneyBillTrendUp,
-  faPencil,
-  faPiggyBank,
-  faWallet,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import { patchWealth } from "../../api/user";
 import { MoneyCardType, TransactionType } from "../../types/database";
 import useWealth from "../../hooks/useWealth";
 import { ron, formatDecimals } from "../../utils/numberFormat";
 import { Notification, showNotification } from "../../utils/errorHandling";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
 import styles from "../../styles/molecules/MoneyCard.module.scss";
+import Icon from "../atoms/Icon";
 
 type MoneyCardProps = {
   type: MoneyCardType;
@@ -27,24 +20,22 @@ const MoneyCard = (props: MoneyCardProps) => {
   const details: Partial<Record<TransactionType, any>> = {
     income: {
       title: "Wallet",
-      icon: faWallet,
+      icon: 'wallet',
     },
     savings: {
       title: "Savings",
-      icon: faPiggyBank,
+      icon: 'piggy-bank',
     },
     investments: {
       title: "Investments",
-      icon: faMoneyBillTrendUp,
+      icon: 'money-bill-trend-up',
     },
   };
 
-  useOutsideClick(inputRef, () => setEditMode(false))
-
   const toggleEditMode = () => {
-    setEditMode(!editMode);
+    setEditMode((oldValue) => !oldValue);
   };
-
+  
   const updateWealth = async (event: any) => {
     if (event.key === "Enter") {
       if (amount === wealth?.category[props.type].value) return;
@@ -71,6 +62,7 @@ const MoneyCard = (props: MoneyCardProps) => {
       <div className={styles["amount"]}>
         {editMode ? (
           <input
+            id="amount"
             type="number"
             className={styles["edit-field"]}
             ref={inputRef}
@@ -78,6 +70,7 @@ const MoneyCard = (props: MoneyCardProps) => {
             value={amount}
             onChange={(e) => setAmount(parseFloat(e.target.value))}
             onKeyDown={updateWealth}
+            onBlur={toggleEditMode}
           />
         ) : (
           <div className={styles["current-amount"]}>
@@ -85,8 +78,8 @@ const MoneyCard = (props: MoneyCardProps) => {
               <span>
                 {ron.format(wealth?.category[props.type].value ?? 0)}
               </span>
-              <FontAwesomeIcon
-                icon={faPencil}
+              <Icon
+                icon="pencil"
                 className={styles["edit-icon"]}
                 onClick={toggleEditMode}
               />
