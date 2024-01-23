@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronDown,
-  faChevronUp,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import styles from "../../styles/atoms/Dropdown.module.scss";
+import Icon from "./Icon";
 
 export type Option = {
   label: string;
@@ -67,10 +62,7 @@ const Dropdown = ({
                 onClick={(e) => onTagRemove(e, option)}
                 className={styles["dropdown-tag-close"]}
               >
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  className={styles["icon-with-action"]}
-                />
+                <Icon icon="xmark" withAction />
               </span>
             </div>
           ))}
@@ -181,10 +173,7 @@ const Dropdown = ({
         <div className={styles["dropdown-selected-value"]}>{getDisplay()}</div>
         <div className={styles["dropdown-tools"]}>
           <div className={styles["dropdown-tool"]}>
-            <FontAwesomeIcon
-              icon={!showMenu ? faChevronDown : faChevronUp}
-              className={styles["icon-with-action"]}
-            />
+            <Icon icon={!showMenu ? "chevron-down" : "chevron-up"} withAction />
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
-import { faClose } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/atoms/Modal.module.scss";
+import Icon from "./Icon";
 
 type ModalProps = {
   children: any;
@@ -14,11 +13,7 @@ function Modal(props: ModalProps) {
       <div className={styles["modal-content"]}>
         <div className={styles["header"]}>
           <h1>{props.title}</h1>
-          <FontAwesomeIcon
-            icon={faClose}
-            className={styles["icon-with-action"]}
-            onClick={() => props.toggleModal()}
-          />
+          <Icon icon="close" withAction onClick={() => props.toggleModal()} />
         </div>
         {props.children}
       </div>
