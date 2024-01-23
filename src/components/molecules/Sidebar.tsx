@@ -1,26 +1,55 @@
 import { useState } from "react";
 import Logo from "../atoms/Logo";
-import {
-  faAngleLeft,
-  faAngleRight,
-  faCalendarDays,
-  faCircleUser,
-  faCreditCard,
-  faGears,
-  faHouse,
-  faMoneyBillTrendUp,
-  faPiggyBank,
-  faUserGroup,
-  faWallet,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import styles from "../../styles/molecules/Sidebar.module.scss";
+import Icon, { IconType } from "../atoms/Icon";
 
 function Sidebar() {
   const [sidenavOpen, setSidenavOpen] = useState(false);
   const [showTitle, setShowTitles] = useState(false);
 
+  const links = [
+    {
+      icon: "house",
+      title: "Home",
+      link: "/",
+    },
+    {
+      icon: "wallet",
+      title: "Wallet",
+      link: "/wallet",
+    },
+    {
+      icon: "credit-card",
+      title: "Spendings",
+      link: "/spendings",
+    },
+    {
+      icon: "piggy-bank",
+      title: "Savings",
+      link: "/savings",
+    },
+    {
+      icon: "money-bill-trend-up",
+      title: "Investments",
+      link: "/investments",
+    },
+    {
+      icon: "user-group",
+      title: "Friends",
+      link: "/friends",
+    },
+    {
+      icon: "gears",
+      title: "Settings",
+      link: "/settings",
+    },
+    {
+      icon: "calendar-days",
+      title: "Calendar",
+      link: "/calendar",
+    },
+  ];
   const toggleSideNav = () => {
     setSidenavOpen(!sidenavOpen);
     setTimeout(() => {
@@ -29,66 +58,35 @@ function Sidebar() {
   };
 
   return (
-    <div className={`${styles["sidebar"]} ${sidenavOpen ? styles["sidebar--open"] : ""}`}>
+    <div
+      className={`${styles["sidebar"]} ${
+        sidenavOpen ? styles["sidebar--open"] : ""
+      }`}
+    >
       <div className={styles["header"]}>
         <div className={styles["logo-and-button"]}>
           <Logo showName={showTitle} />
           <div className={styles["open-button"]} onClick={toggleSideNav}>
-            <FontAwesomeIcon
-              icon={sidenavOpen ? faAngleLeft : faAngleRight}
-              className={`${styles["icon"]} ${styles["icon--small"]}`}
-            />
+            <Icon icon={sidenavOpen ? "angle-left" : "angle-right"} />
           </div>
         </div>
         <hr />
       </div>
       <div className={styles["content"]}>
         <ul className={styles["pages"]}>
-          <li>
-            <Link to="/" className={styles["menu-link"]}>
-              <FontAwesomeIcon icon={faHouse} className={`${styles["icon"]} ${styles["icon--large"]}`} />
-              {showTitle && <p>Home</p>}
-            </Link>
-          </li>
-          <li>
-            <Link to="/wallet" className={styles["menu-link"]}>
-              <FontAwesomeIcon icon={faWallet} className={`${styles["icon"]} ${styles["icon--large"]}`} />
-              {showTitle && <p>Wallet</p>}
-            </Link>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faCreditCard} className={`${styles["icon"]} ${styles["icon--large"]}`} />
-            {showTitle && <p>Spendings</p>}
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faPiggyBank} className={`${styles["icon"]} ${styles["icon--large"]}`} />
-            {showTitle && <p>Savings</p>}
-          </li>
-          <li>
-            <FontAwesomeIcon
-              icon={faMoneyBillTrendUp}
-              className={`${styles["icon"]} ${styles["icon--large"]}`}
-            />
-            {showTitle && <p>Investments</p>}
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faUserGroup} className={`${styles["icon"]} ${styles["icon--large"]}`} />
-            {showTitle && <p>Friends</p>}
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faGears} className={`${styles["icon"]} ${styles["icon--large"]}`} />
-            {showTitle && <p>Settings</p>}
-          </li>
-          <li>
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              className={`${styles["icon"]} ${styles["icon--large"]}`}
-            />
-            {showTitle && <p>Calendar</p>}
-          </li>
+          {links.map((link) => {
+            return (
+              <li>
+                <Link to={link.link} className={styles["menu-link"]}>
+                  <Icon icon={link.icon as IconType} large />
+                  {showTitle && <p>{link.title}</p>}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <div className={styles["page-ref"]}>
-          <FontAwesomeIcon icon={faCircleUser} className={`${styles["icon"]} ${styles["icon--large"]}`} />
+          <Icon icon="circle-user" large />
           {showTitle && <p>Account</p>}
         </div>
       </div>
