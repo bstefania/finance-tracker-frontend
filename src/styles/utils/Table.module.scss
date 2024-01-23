@@ -19,66 +19,8 @@
   align-items: center;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  text-align: left;
-  padding: 12px 8px;
-}
-
-th, td {
-  border-bottom: 1px solid vars.$separator-color;
-}
-
-tr:last-child td {
-  border: none;
-}
-
-.column-with-action {
-  width: 100px;
-  min-height: 100%;
-  position: relative;
-}
-
-.user-div {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: grey;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-icon {
-  color: #fff;
-}
-
-
-tbody tr:hover {
-  background-color: vars.$light-color;
-  border-left-width: 10px;
-
-  .column-with-action {
-    display: table-cell;
-  }
-
-}
-
-.not-found {
-  text-align: center;
-  flex-grow: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: grey;
-}
-
 .fix-table-head {
-  overflow: visible;
+  overflow: auto;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -95,4 +37,61 @@ tbody tr:hover {
   position: sticky;
   top: 0;
   background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  z-index: 20;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px 8px;
+}
+
+th, td {
+  border-bottom: 1px solid vars.$separator-color;
+}
+
+tr:last-child td {
+  border: none;
+}
+
+tbody tr:hover {
+  background-color: vars.$light-color;
+}
+
+.column-with-action {
+  width: 100px;
+  min-height: 100%;
+  position: relative;
+  display: table-cell;
+}
+
+.user-div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon {
+  color: #fff;
+}
+
+// move
+.not-found {
+  text-align: center;
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
 }
