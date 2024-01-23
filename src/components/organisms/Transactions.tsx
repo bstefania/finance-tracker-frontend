@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
+import Button from "../atoms/Button";
+import Icon from "../atoms/Icon";
 import Category from "../atoms/Category";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical, faUser } from "@fortawesome/free-solid-svg-icons";
+import Actions from "../molecules/Actions";
 import TransactionDetails from "./TransactionDetails";
 import { Transaction, TransactionType } from "../../types/database";
+import { Action } from "../../types/types";
 import { ron } from "../../utils/numberFormat";
 import { getTransactions } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
-import Actions from "../molecules/Actions";
-import { Action } from "../../types/types";
 import styles from "../../styles/organisms/Transactions.module.scss";
 
 type TransactionsProps = {
@@ -18,7 +18,8 @@ type TransactionsProps = {
 function Transactions(props: TransactionsProps) {
   const [showTransactionDetails, setShowTransactionDetails] = useState(false);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [transactionToModify, setTransactionToModify] = useState<Transaction | null>(null);
+  const [transactionToModify, setTransactionToModify] =
+    useState<Transaction | null>(null);
 
   const actions: Action[] = [
     {
@@ -47,7 +48,7 @@ function Transactions(props: TransactionsProps) {
   };
 
   const toggleModal = (listChanged?: boolean) => {
-    setTransactionToModify(null)
+    setTransactionToModify(null);
     setShowTransactionDetails(!showTransactionDetails);
     if (listChanged) {
       fetchTransactions();
@@ -58,7 +59,7 @@ function Transactions(props: TransactionsProps) {
     <div className={styles["table-div"]}>
       <div className={styles["header"]}>
         <h2>Recent transactions</h2>
-        <button onClick={() => toggleModal()}>+ Add</button>
+        <Button onClick={() => toggleModal()}>+ Add</Button>
       </div>
       {showTransactionDetails && (
         <TransactionDetails
@@ -79,7 +80,7 @@ function Transactions(props: TransactionsProps) {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((val, index) => {
+            {transactions.map((val, _) => {
               return (
                 <tr key={val.id}>
                   <td>
@@ -90,9 +91,7 @@ function Transactions(props: TransactionsProps) {
                       icon={val.category.icon}
                     />
                   </td>
-                  <td className={val.type.toLowerCase()}>
-                    {ron.format(val.amount)}
-                  </td>
+                  <td>{ron.format(val.amount)}</td>
                   <td>
                     <span className={styles[`label-${val.type}`]}>
                       {val.type.charAt(0).toUpperCase() + val.type.slice(1)}
@@ -109,7 +108,7 @@ function Transactions(props: TransactionsProps) {
                   <td>
                     {val.sharedWith.length ? (
                       <div className={styles["user-div"]}>
-                        <FontAwesomeIcon icon={faUser} className={styles["user-icon"]} />
+                        <Icon icon="user" className={styles["user-icon"]} />
                       </div>
                     ) : (
                       <div></div>
