@@ -1,0 +1,24 @@
+@use "../variables.scss" as vars;
+
+.main-section {
+  display: flex;
+  flex-grow: 1;
+  gap: 1em;
+}
+
+main {
+  width: 100%;
+  min-width: 600px;
+  flex-grow: 1;
+  flex-direction: column;
+  display: flex;
+  gap: 1em;
+}
+
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 100%;
+  gap: 1em; 
+}

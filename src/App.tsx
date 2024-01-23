@@ -1,7 +1,7 @@
 import "./App.scss";
 import Login from "./pages/Login"
 import { Routes, Route } from "react-router-dom"
-import Layout from "./components/organisms/Layout";
+import Layout from "./components/layouts/Layout";
 import Missing from "./pages/Missing";
 import Wallet from "./pages/Wallet";
 import Home from "./pages/Home";

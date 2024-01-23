@@ -1,37 +1,28 @@
-import Navbar from "../components/molecules/Navbar"
-import Sidebar from "../components/molecules/Sidebar"
-import "../styles/pages/Pages.scss"
-import Transactions from "../components/organisms/Transactions"
-import MoneyCard from "../components/molecules/MoneyCard"
-import MonthlyTransactions from "../components/molecules/MonthlyTransactions"
-import UpcomingTransactions from "../components/organisms/UpcomingTransactions"
-import { MoneyCardType, TransactionType } from "../types/database"
-import IncomeSources from "../components/organisms/IncomeSources"
+import Transactions from "../components/organisms/Transactions";
+import MoneyCard from "../components/molecules/MoneyCard";
+import MonthlyTransactions from "../components/molecules/MonthlyTransactions";
+import UpcomingTransactions from "../components/organisms/UpcomingTransactions";
+import { MoneyCardType, TransactionType } from "../types/database";
+import IncomeSources from "../components/organisms/IncomeSources";
+import TransactionsLayout from "../components/layouts/TransactionsLayout";
+import styles from "../styles/pages/Wallet.module.scss";
 
 const Balance = () => {
   return (
-    <div className="page">
-      <Sidebar />
-      <div className="page-content">
-        <Navbar header="Wallet" />
-        <article>
-          <section className="main-section">
-            <main>
-              <Transactions type={TransactionType.Income} />
-              <IncomeSources />
-            </main>
-            <div className="right-sidebar">
-              <MoneyCard
-                type={MoneyCardType.Income}
-              />
-              <MonthlyTransactions type={TransactionType.Expense} />
-              <UpcomingTransactions type={TransactionType.Expense} />
-            </div>
-          </section>
-        </article>
-      </div>
-    </div>
-  )
-}
+    <TransactionsLayout header="Wallet">
+      <section className={styles["main-section"]}>
+        <main>
+          <Transactions type={TransactionType.Income} />
+          <IncomeSources />
+        </main>
+        <div className={styles["right-sidebar"]}>
+          <MoneyCard type={MoneyCardType.Income} />
+          <MonthlyTransactions type={TransactionType.Expense} />
+          <UpcomingTransactions type={TransactionType.Expense} />
+        </div>
+      </section>
+    </TransactionsLayout>
+  );
+};
 
-export default Balance
+export default Balance;
