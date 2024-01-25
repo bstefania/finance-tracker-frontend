@@ -28,7 +28,6 @@ function Icon({ icon, withAction, small, large, ...extraProps }: IconProps) {
   }
 
   const className = classList.join(" ");
-  console.log(className)
 
   return <FontAwesomeIcon icon={icon}  {...extraProps}  className={className}/>;
 }
