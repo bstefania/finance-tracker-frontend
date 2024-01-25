@@ -15,7 +15,9 @@ function Modal(props: ModalProps) {
           <h1>{props.title}</h1>
           <Icon icon="close" withAction onClick={() => props.toggleModal()} />
         </div>
+        <div className={styles["modal-body"]}>
         {props.children}
+        </div>
       </div>
     </div>
   );

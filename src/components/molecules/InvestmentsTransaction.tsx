@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Icon from "../atoms/Icon";
-import Dropdown from "./Dropdown";
 import { TransactionSource } from "../../types/database";
-import styles from "../../styles/organisms/TransactionDetails.module.scss"
+import styles from "../../styles/organisms/TransactionDetails.module.scss";
+import Input from "./Input";
 
 function InvestmentsTransaction() {
   const sources = [
@@ -47,18 +46,18 @@ function InvestmentsTransaction() {
           Loss
         </label>
       </div>
-      <div className={styles["modal-field"] + ' ' + (selectedOption !== "deposit" ? styles["disabled"]: "")}>
-        <Icon icon="arrow-up-from-bracket" />
-        <Dropdown
-          isSearchable
-          placeholder="Select Source"
-          options={sources}
-          groups={false}
-          onChange={(option: any) => {
-            setSource(option);
-          }}
-        />
-      </div>
+      <Input
+        disabled={selectedOption !== "deposit"}
+        icon="arrow-up-from-bracket"
+        isDropdown
+        isSearchable
+        placeholder="Select Source"
+        options={sources}
+        groups={false}
+        onChange={(option: any) => {
+          setSource(option);
+        }}
+      />
     </>
   );
 }

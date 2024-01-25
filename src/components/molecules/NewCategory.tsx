@@ -5,8 +5,7 @@ import {
   CategoryGroupInput,
   CategoryInput,
 } from "../../types/database";
-import Dropdown, { Option } from "./Dropdown";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Option } from "./Dropdown";
 import { getRandomColor } from "../../utils/colorPicker";
 import { showNotification, Notification } from "../../utils/errorHandling";
 import {
@@ -16,8 +15,8 @@ import {
 } from "../../api/categories";
 import IconPicker from "../utils/IconPicker";
 import styles from "../../styles/molecules/NewCategory.module.scss";
-import Icon from "../atoms/Icon";
 import Button from "../atoms/Button";
+import Input from "./Input";
 
 type NewCategoryProps = {
   show: boolean;
@@ -102,76 +101,67 @@ function NewCategory({ toggleModal }: NewCategoryProps) {
 
   return (
     <Modal title={"New category"} toggleModal={toggleModal}>
-      <div className={styles["modal-body"]}>
-        <form onSubmit={handleSubmit}>
-          {!newCategoryGroup ? (
-            <div className={styles["modal-field"]}>
-              <Icon icon="list"/>
-              <Dropdown
-                isSearchable
-                placeholder="Select Category Group"
-                options={categoryGroups}
-                addItem={toggleNewCategoryGroup}
-                onChange={(option: any) => {
-                  setCategoryGroup(option);
-                }}
-              />
-            </div>
-          ) : (
-            <div className={styles["modal-field"]}>
-              <Icon icon="folder-tree" />
-              <input
-                type="text"
-                id="newCategoryGroupName"
-                required
-                placeholder="New category group"
-                onChange={(e) => setNewCategoryGroupName(e.target.value)}
-              />
-              <IconPicker
-                icon={groupIcon}
-                setIcon={setGroupIcon}
-                color={groupColor}
-                setColor={setGroupColor}
-              />
-            </div>
-          )}
-          <div className={styles["modal-field"]}>
-            <Icon icon="folder" />
-            <input
-              type="text"
-              id="name"
-              required
-              placeholder="Category"
-              onChange={(e) => setName(e.target.value)}
-            />
+      <form onSubmit={handleSubmit}>
+        {!newCategoryGroup ? (
+          <Input
+            icon="list"
+            isDropdown
+            isSearchable
+            placeholder="Select Category Group"
+            options={categoryGroups}
+            addItem={toggleNewCategoryGroup}
+            onChange={(option: any) => {
+              setCategoryGroup(option);
+            }}
+          />
+        ) : (
+          <Input
+            icon="folder-tree"
+            type="text"
+            id="newCategoryGroupName"
+            required
+            placeholder="New category group"
+            onChange={(e: any) => setNewCategoryGroupName(e.target.value)}
+          >
             <IconPicker
-              icon={icon}
-              setIcon={setIcon}
-              color={color}
-              setColor={setColor}
+              icon={groupIcon}
+              setIcon={setGroupIcon}
+              color={groupColor}
+              setColor={setGroupColor}
             />
-          </div>
-          <div className={styles["modal-field"]}>
-            <Icon icon="user-plus"/>
-            <Dropdown
-              isSearchable
-              isMulti
-              placeholder="Shared with"
-              options={[]}
-              onChange={(option: any) => setSharedWith(option)}
-            />
-          </div>
-          <div className={styles["actions"]}>
-            <Button
-              secondary
-              onClick={() => toggleModal()}
-            >
-              Cancel
-            </Button>
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      </div>
+          </Input>
+        )}
+        <Input
+          icon="folder"
+          type="text"
+          id="name"
+          required
+          placeholder="Category"
+          onChange={(e: any) => setName(e.target.value)}
+        >
+          <IconPicker
+            icon={icon}
+            setIcon={setIcon}
+            color={color}
+            setColor={setColor}
+          />
+        </Input>
+        <Input
+          icon="user-plus"
+          isDropdown
+          isSearchable
+          isMulti
+          placeholder="Shared with"
+          options={[]}
+          onChange={(option: any) => setSharedWith(option)}
+        />
+        <div className={styles["actions"]}>
+          <Button secondary onClick={() => toggleModal()}>
+            Cancel
+          </Button>
+          <Button type="submit">Save</Button>
+        </div>
+      </form>
     </Modal>
   );
 }

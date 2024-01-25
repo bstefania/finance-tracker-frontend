@@ -1,0 +1,33 @@
+@use "../variables.scss" as vars;
+
+.type {
+  width: 100%;
+  display: flex;
+  gap: vars.$main-padding;
+  text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  span {
+    padding: 0.5em vars.$main-padding;
+    border: 1px solid vars.$medium-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: none;
+    }
+
+    &:not(.selected):hover {
+      background-color: vars.$light-color-secondary;
+    }
+  }
+}
+
+.selected {
+  background-color: vars.$medium-color;
+  color: #fff;
+
+  &:hover {
+    background-color: vars.$medium-color;
+  }
+}

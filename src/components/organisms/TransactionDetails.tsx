@@ -1,23 +1,25 @@
 import { FormEvent, useEffect, useState } from "react";
-import Dropdown, { Option } from "../molecules/Dropdown";
+import { Option } from "../molecules/Dropdown";
 import {
-  Category,
+  TRANSACTION_TYPES,
   Transaction,
   TransactionInput,
   TransactionSource,
-  TransactionType,
 } from "../../types/database";
 import Modal from "../atoms/Modal";
 import NewCategory from "../molecules/NewCategory";
 import ExpenseTransaction from "../molecules/ExpenseTransaction";
 import InvestmentsTransaction from "../molecules/InvestmentsTransaction";
-import useWealth from "../../hooks/useWealth";
-import { getCategories } from "../../api/categories";
 import { showNotification, Notification } from "../../utils/errorHandling";
 import { postTransactions } from "../../api/transactions";
 import styles from "../../styles/organisms/TransactionDetails.module.scss";
-import Icon from "../atoms/Icon";
 import Button from "../atoms/Button";
+import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
+import { fetchCategories } from "../../store/categoriesSlice";
+import Input from "../molecules/Input";
+import { useInput } from "../../hooks/useInput";
+import TransactionTypes from "../atoms/TransactionTypes";
+import { insertTransaction } from "../../store/transactionsSlice";
 
 type TransactionDetailsProps = {
   toggleModal: any;
@@ -25,28 +27,30 @@ type TransactionDetailsProps = {
 };
 
 function TransactionDetails(props: TransactionDetailsProps) {
-  const { fetchWealth } = useWealth();
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector((state) => state.categories.entities);
 
-  const transactionTypes = [
-    TransactionType.Expense,
-    TransactionType.Savings,
-    TransactionType.Investments,
-    TransactionType.Income,
-  ];
+  const [newCategory, setNewCategory] = useState(false);
+
+  const [selectedType, setSelectedType] = useState(TRANSACTION_TYPES[0]);
   const [source, setSource] = useState<TransactionSource>(
     TransactionSource.Income
   );
-  const [categories, setCategories] = useState<Record<string, Option[]>>({});
-
-  const [_id, setId] = useState<string | null>(null);
-  const [selectedType, setSelectedType] = useState(transactionTypes[0]);
+  const [categoryDropdown, setCategoryDropdown] = useState<
+    Record<string, Option[]>
+  >({});
   const [category, setCategory] = useState<Option | null>(null);
-  const [amount, setAmount] = useState<number>();
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const { value: amount, handleInputChange: handleAmountChange, hasError: invalidAmount } = useInput(
+    props.existingData?.amount,
+    (amount) => !amount || amount < 0
+  );
+  const { value: date, handleInputChange: handleDateChange } = useInput(
+    props.existingData?.createdAt
+      ? new Date(props.existingData.createdAt).toISOString().slice(0, 10)
+      : new Date().toISOString().slice(0, 10)
+  );
   const [sharedWith, setSharedWith] = useState<Option[]>([]);
   const [note, setNote] = useState<string | null>(null);
-
-  const [newCategory, setNewCategory] = useState(false);
 
   const TransactionComponent: Record<string, JSX.Element> = {
     expense: <ExpenseTransaction setSource={setSource} />,
@@ -54,62 +58,53 @@ function TransactionDetails(props: TransactionDetailsProps) {
   };
 
   useEffect(() => {
-    fetchCategories();
-    if (props.existingData) {
-      console.log(props.existingData);
-      setId(props.existingData.id);
-      setSource(props.existingData.source);
-      setSelectedType(props.existingData.type);
-      setAmount(props.existingData.amount);
-      setDate(
-        new Date(props.existingData.createdAt).toISOString().slice(0, 10)
-      );
-      setNote(props.existingData.note);
-    }
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
+  
+  useEffect(() => {
+    setUpCategoryOptions();
+  }, [categories])
 
-  const fetchCategories = async () => {
-    getCategories()
-      .then((data: Category[]) => {
-        const categoryOptions: Record<string, Option[]> = {};
-        data.forEach((category: Category) => {
-          const categoryGroup = category.categoryGroup.name;
-          const categoryOption = {
-            value: category.id,
-            label: category.name,
-          };
-          if (categoryGroup in categoryOptions) {
-            categoryOptions[categoryGroup].push(categoryOption);
-          } else {
-            categoryOptions[categoryGroup] = [categoryOption];
-          }
-        });
-        setCategories(categoryOptions);
-      })
-      .catch((error: any) => {
-        showNotification(error.message, Notification.ERROR);
+  const setUpCategoryOptions = async () => {
+    setCategoryDropdown(() => {
+      const options: Record<string, Option[]> = {};
+
+      Object.entries(categories).forEach(([categoryId, category], _index) => {
+        const categoryGroup = category.categoryGroup.name;
+        const categoryOption = {
+          value: categoryId,
+          label: category.name,
+        };
+        if (categoryGroup in options) {
+          options[categoryGroup].push(categoryOption);
+        } else {
+          options[categoryGroup] = [categoryOption];
+        }
       });
+
+      return options;
+    });
   };
 
-  const toggleNewCategory = (listChanged?: boolean) => {
-    setNewCategory(!newCategory);
-    if (listChanged) {
-      getCategories();
-    }
+  useEffect(() => {
+    console.log(categoryDropdown)
+  }, [categoryDropdown])
+
+  const toggleNewCategory = () => {
+    setNewCategory((oldValue) => !oldValue);
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      if (!amount) throw new Error("Transaction amount is not set!");
+      if (invalidAmount) return;
 
       const createdAt = new Date(date);
       const currentDatetime = new Date();
       createdAt.setHours(currentDatetime.getHours());
       createdAt.setMinutes(currentDatetime.getMinutes());
       createdAt.setSeconds(currentDatetime.getSeconds());
-      console.log(category);
 
       const data: TransactionInput = {
         type: selectedType,
@@ -121,94 +116,78 @@ function TransactionDetails(props: TransactionDetailsProps) {
         note,
       };
 
-      await postTransactions(data);
-      fetchWealth();
-      props.toggleModal(true);
+      dispatch(insertTransaction(data))
+      props.toggleModal();
     } catch (error: any) {
       showNotification(error.message, Notification.ERROR);
     }
   };
 
   return !newCategory ? (
-    <Modal title={"New transaction"} toggleModal={props.toggleModal}>
-      <div className={styles["modal-body"]}>
-        <form onSubmit={handleSubmit}>
-          <div className={styles["type"]}>
-            {transactionTypes.map((transactionType) => (
-              <span
-                key={transactionType}
-                className={
-                  selectedType === transactionType ? styles["selected"] : ""
-                }
-                onClick={() => setSelectedType(transactionType)}
-              >
-                {transactionType}
-              </span>
-            ))}
-          </div>
-          {TransactionComponent[selectedType]}
-          <div className={styles["modal-field"]}>
-            <Icon icon="list" />
-            <Dropdown
-              isSearchable
-              placeholder="Select Category"
-              options={categories}
-              groups={true}
-              addItem={toggleNewCategory}
-              onChange={(option: any) => {
-                setCategory(option);
-              }}
-            />
-          </div>
-          <div className={styles["modal-field"]}>
-            <Icon icon="money-bill" />
-            <input
-              type="number"
-              id="amount"
-              step="0.01"
-              min="0.01"
-              required
-              placeholder="Amount"
-              value={amount}
-              onChange={(e) => setAmount(parseFloat(e.target.value))}
-            />
-          </div>
-          <div className={styles["modal-field"]}>
-            <Icon icon="calendar-days" />
-            <input
-              type="date"
-              id="date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
-              placeholder="Date"
-            />
-          </div>
-          <div className={styles["modal-field"]}>
-            <Icon icon="user-plus" />
-            <Dropdown
-              isSearchable
-              isMulti
-              placeholder="Shared with"
-              options={[]}
-              onChange={(option: any) => setSharedWith(option)}
-            />
-          </div>
-          <div className={styles["modal-field"]}>
-            <Icon icon="note-sticky" />
-            <textarea
-              id="note"
-              placeholder="Note..."
-              onChange={(note: any) => setNote(note)}
-            />
-          </div>
-          <div className={styles["actions"]}>
-            <Button secondary onClick={props.toggleModal}>
-              Cancel
-            </Button>
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      </div>
+    <Modal title="New transaction" toggleModal={props.toggleModal}>
+      <form onSubmit={handleSubmit}>
+        <TransactionTypes
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
+        />
+        {TransactionComponent[selectedType]}
+        <Input
+          icon="list"
+          isDropdown
+          isSearchable
+          placeholder="Select Category"
+          options={categoryDropdown}
+          groups={true}
+          addItem={toggleNewCategory}
+          onChange={(option: any) => {
+            setCategory(option);
+          }}
+        />
+        <Input
+          icon="money-bill"
+          id="amount"
+          name="amount"
+          type="number"
+          step="0.01"
+          min="0.01"
+          required
+          placeholder="Amount"
+          value={amount}
+          onChange={handleAmountChange}
+        />
+        <Input
+          icon="calendar-days"
+          id="date"
+          name="date"
+          type="date"
+          placeholder="Date"
+          value={date}
+          onChange={handleDateChange}
+        />
+        <Input
+          icon="user-plus"
+          isDropdown
+          isSearchable
+          isMulti
+          placeholder="Shared with"
+          options={[]}
+          onChange={(option: any) => setSharedWith(option)}
+        />
+        <Input
+          icon="note-sticky"
+          id="note"
+          name="note"
+          placeholder="Note..."
+          isTextArea
+          onChange={(note: any) => setNote(note)}
+        />
+        <div className={styles["actions"]}>
+          <Button secondary onClick={props.toggleModal}>
+            Cancel
+          </Button>
+          <Button type="submit">Save</Button>
+        </div>
+      </form>
     </Modal>
   ) : (
     <NewCategory show={newCategory} toggleModal={toggleNewCategory} />

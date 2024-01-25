@@ -7,20 +7,35 @@ import TransactionDetails from "./TransactionDetails";
 import { Transaction, TransactionType } from "../../types/database";
 import { Action } from "../../types/types";
 import { ron } from "../../utils/numberFormat";
-import { getTransactions } from "../../api/transactions";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import styles from "../../styles/organisms/Transactions.module.scss";
 import NoData from "../atoms/NoData";
+import { fetchTransactions } from "../../store/transactionsSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 
 type TransactionsProps = {
   type?: TransactionType;
 };
 
 function Transactions(props: TransactionsProps) {
+  const dispatch = useAppDispatch();
+  const transactions = useAppSelector((state) => state.transactions.entities);
+  const status = useAppSelector((state) => state.transactions.status);
+  const error = useAppSelector((state) => state.transactions.error);
+
   const [showTransactionDetails, setShowTransactionDetails] = useState(false);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [transactionToModify, setTransactionToModify] =
-    useState<Transaction | null>(null);
+  const [transactionToModify, setTransactionToModify] = useState<Transaction | null>(null);
+
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
+
+
+  useEffect(() => {
+    if (error) {
+      showNotification(error, Notification.ERROR);
+    }
+  }, [error]);
 
   const actions: Action[] = [
     {
@@ -32,28 +47,10 @@ function Transactions(props: TransactionsProps) {
     },
     { label: "Delete", onClick: () => {} },
   ];
-  useEffect(() => {
-    fetchTransactions();
-  }, []);
 
-  const fetchTransactions = () => {
-    getTransactions()
-      .then((data: Transaction[]) => {
-        if (data) {
-          setTransactions(data);
-        }
-      })
-      .catch((error: any) => {
-        showNotification(error.message, Notification.ERROR);
-      });
-  };
-
-  const toggleModal = (listChanged?: boolean) => {
+  const toggleModal = () => {
     setTransactionToModify(null);
-    setShowTransactionDetails(!showTransactionDetails);
-    if (listChanged) {
-      fetchTransactions();
-    }
+    setShowTransactionDetails(oldValue => !oldValue);
   };
 
   return (
@@ -81,7 +78,7 @@ function Transactions(props: TransactionsProps) {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((val, _) => {
+            {Object.entries(transactions).map(([key, val], index) => {
               return (
                 <tr key={val.id}>
                   <td>
@@ -124,9 +121,9 @@ function Transactions(props: TransactionsProps) {
           </tbody>
         </table>
       </div>
-      {transactions.length === 0 && (
+      {Object.keys(transactions).length === 0 && (
         <NoData
-          isLoading={false}
+          isLoading={status === "loading"}
           loadingText="Fetching transactions..."
           notFoundText="No transactions found"
         />

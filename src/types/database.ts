@@ -11,6 +11,13 @@ export enum TransactionType {
   Investments = "investments",
 }
 
+export const TRANSACTION_TYPES = [
+  TransactionType.Expense,
+  TransactionType.Savings,
+  TransactionType.Investments,
+  TransactionType.Income,
+];
+
 export type BaseWealth = {
   income?: number,
   savings?: number,

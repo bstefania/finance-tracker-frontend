@@ -1,64 +1,9 @@
 @use "../variables.scss" as vars;
 @import "../common.module.scss";
 
-.modal-body form {
+form {
   padding: 1em;
   gap: 1em;
-}
-
-.modal-field {
-  width: 100%;
-  display: flex;
-  gap: 0.5em;
-  margin: 0.25em 0;
-  padding: 0.5em 1em;
-  align-items: center;
-  border: 1px solid vars.$border-color;
-  border-radius: vars.$border-radius;
-
-  &:focus {
-    outline: #000;
-  }
-
-  &:has(textarea) {
-    align-items: flex-start;
-
-    .icon {
-      padding: 5px 0px;
-    }
-  }
-}
-
-.type {
-  width: 100%;
-  display: flex;
-  gap: vars.$main-padding;
-  text-align: center;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  span {
-    padding: 0.5em vars.$main-padding;
-    border: 1px solid vars.$medium-color;
-    cursor: pointer;
-
-    &:hover {
-      background-color: none;
-    }
-
-    &:not(.selected):hover {
-      background-color: vars.$light-color-secondary;
-    }
-  }
-}
-
-.selected {
-  background-color: vars.$medium-color;
-  color: #fff;
-
-  &:hover {
-    background-color: vars.$medium-color;
-  }
 }
 
 .actions {

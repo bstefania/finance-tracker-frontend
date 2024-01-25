@@ -1,0 +1,12 @@
+@use "../variables.scss" as vars;
+
+.notification-background {
+  position: absolute;
+  top: 24px;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  background-color: vars.$medium-color;
+  color: white;
+  padding: 1rem;
+}
