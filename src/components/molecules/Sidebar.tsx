@@ -76,7 +76,7 @@ function Sidebar() {
         <ul className={styles["pages"]}>
           {links.map((link) => {
             return (
-              <li>
+              <li key={link.title}>
                 <Link to={link.link} className={styles["menu-link"]}>
                   <Icon icon={link.icon as IconType} large />
                   {showTitle && <p>{link.title}</p>}
