@@ -1,0 +1,25 @@
+@use "../variables.scss" as vars;
+@import "../common.module.scss";
+
+.modal-field {
+  width: 100%;
+  display: flex;
+  gap: 0.5em;
+  margin: 0.25em 0;
+  padding: 0.5em 1em;
+  align-items: center;
+  border: 1px solid vars.$border-color;
+  border-radius: vars.$border-radius;
+
+  &:focus {
+    outline: #000;
+  }
+
+  &:has(textarea) {
+    align-items: flex-start;
+
+    .icon {
+      padding: 5px 0px;
+    }
+  }
+}
