@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export const useInput = (defaultValue: any, validationFn: (value: any) => boolean = () => true) => {
-  const [enteredValue, setEnteredValue] = useState(defaultValue);
+export const useInput = <T>(defaultValue: T, validationFn: (value: T) => boolean = () => true) => {
+  const [enteredValue, setEnteredValue] = useState<T>(defaultValue);
   const [didEdit, setDidEdit] = useState(false);
 
   const valueIsValid = validationFn(enteredValue);
 
   const handleInputChange = (event: any) => {
-    setEnteredValue(event.target.value);
+    setEnteredValue(event.target.value as unknown as T);
     setDidEdit(true);
   }
 
