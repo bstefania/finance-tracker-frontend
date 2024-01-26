@@ -4,12 +4,19 @@ import MoneyCard from "../components/molecules/MoneyCard";
 import MonthlyTransactions from "../components/molecules/MonthlyTransactions";
 import UpcomingTransactions from "../components/organisms/UpcomingTransactions";
 import { MoneyCardType, TransactionType } from "../types/database";
-import useWealth from "../hooks/useWealth";
 import { ron } from "../utils/numberFormat";
 import styles from "../styles/pages/Home.module.scss";
+import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
+import { useEffect } from "react";
+import { userActions } from "../store/userSlice";
 
 const Home = () => {
-  const { wealth } = useWealth();
+  const dispatch = useAppDispatch();
+  const wealth = useAppSelector((state) => state.user.wealth);
+
+  useEffect(() => {
+    dispatch(userActions.fetchWealth());
+  }, [dispatch]);
 
   return (
     <TransactionsLayout header="Home">

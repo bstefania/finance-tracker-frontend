@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import "./config/firebaseConfig";
 import { AuthProvider } from "./context/AuthProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { WealthProvider } from "./context/WealthProvider";
 import store from "./store";
 import { Provider } from "react-redux";
 
@@ -17,13 +16,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <WealthProvider>
-          <Provider store={store}>
-            <Routes>
-              <Route path="/*" element={<App />} />
-            </Routes>
-          </Provider>
-        </WealthProvider>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </Provider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

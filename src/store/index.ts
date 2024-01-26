@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import categoryGroupsReducer from "./categoryGroupsSlice";
 import categoriesReducer from "./categoriesSlice";
 import transactionsReducer from "./transactionsSlice";
+import userSlice from "./userSlice";
 import uiReducer from "./uiSlice";
 
 const store = configureStore({
@@ -10,6 +11,7 @@ const store = configureStore({
     categoryGroups: categoryGroupsReducer,
     categories: categoriesReducer,
     transactions: transactionsReducer,
+    user: userSlice,
     ui: uiReducer,
   }
 })

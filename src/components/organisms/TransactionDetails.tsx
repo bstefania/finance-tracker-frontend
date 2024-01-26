@@ -11,7 +11,6 @@ import NewCategory from "../molecules/NewCategory";
 import ExpenseTransaction from "../molecules/ExpenseTransaction";
 import InvestmentsTransaction from "../molecules/InvestmentsTransaction";
 import { showNotification, Notification } from "../../utils/errorHandling";
-import { postTransactions } from "../../api/transactions";
 import styles from "../../styles/organisms/TransactionDetails.module.scss";
 import Button from "../atoms/Button";
 import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
@@ -40,11 +39,11 @@ function TransactionDetails(props: TransactionDetailsProps) {
     Record<string, Option[]>
   >({});
   const [category, setCategory] = useState<Option | null>(null);
-  const { value: amount, handleInputChange: handleAmountChange, hasError: invalidAmount } = useInput(
-    props.existingData?.amount,
-    (amount) => !amount || amount < 0
+  const { value: amount, handleInputChange: handleAmountChange, hasError: invalidAmount } = useInput<number | null>(
+    null,
+    (amount) => amount !== null && amount > 0
   );
-  const { value: date, handleInputChange: handleDateChange } = useInput(
+  const { value: date, handleInputChange: handleDateChange } = useInput<string>(
     props.existingData?.createdAt
       ? new Date(props.existingData.createdAt).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10)
@@ -87,7 +86,6 @@ function TransactionDetails(props: TransactionDetailsProps) {
   };
 
   useEffect(() => {
-    console.log(categoryDropdown)
   }, [categoryDropdown])
 
   const toggleNewCategory = () => {
@@ -98,7 +96,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
     event.preventDefault();
 
     try {
-      if (invalidAmount) return;
+      if (invalidAmount) throw Error("Invalid amount!");
 
       const createdAt = new Date(date);
       const currentDatetime = new Date();
@@ -110,7 +108,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
         type: selectedType,
         source,
         categoryId: (category as Option).value,
-        amount,
+        amount: amount as number,
         createdAt,
         sharedWith: sharedWith.map((users) => users.value),
         note,

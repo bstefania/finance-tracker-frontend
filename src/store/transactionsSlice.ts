@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { getTransactions, postTransactions } from "../api/transactions";
 import { Transaction, TransactionInput } from "../types/database";
+import { userActions } from "./userSlice";
 
 type State = EntityState<Transaction, string> & {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -30,8 +31,10 @@ export const fetchTransactions = createAsyncThunk(
 
 export const insertTransaction = createAsyncThunk(
   "transactions/insertTransaction",
-  async (transactionInput: TransactionInput) => {
-    return postTransactions(transactionInput)
+  async (transactionInput: TransactionInput, thunkAPI) => {
+    const response = await postTransactions(transactionInput)
+    thunkAPI.dispatch(userActions.fetchWealth());
+    return response;
   }
 );
 
