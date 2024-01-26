@@ -18,38 +18,62 @@ import { fetchCategories } from "../../store/categoriesSlice";
 import Input from "../molecules/Input";
 import { useInput } from "../../hooks/useInput";
 import TransactionTypes from "../atoms/TransactionTypes";
-import { insertTransaction } from "../../store/transactionsSlice";
+import { transactionsActions } from "../../store/transactionsSlice";
 
 type TransactionDetailsProps = {
   toggleModal: any;
-  existingData?: Transaction | null;
+  transactionIdToModify?: string;
 };
 
 function TransactionDetails(props: TransactionDetailsProps) {
   const dispatch = useAppDispatch();
+
+  const transactionToModify: Transaction | undefined = useAppSelector(
+    (state) => {
+      if (props.transactionIdToModify) {
+        return state.transactions.entities[props.transactionIdToModify];
+      }
+    }
+  );
+
   const categories = useAppSelector((state) => state.categories.entities);
 
   const [newCategory, setNewCategory] = useState(false);
 
-  const [selectedType, setSelectedType] = useState(TRANSACTION_TYPES[0]);
+  const [selectedType, setSelectedType] = useState(
+    transactionToModify?.type ?? TRANSACTION_TYPES[0]
+  );
   const [source, setSource] = useState<TransactionSource>(
-    TransactionSource.Income
+    transactionToModify?.source ?? TransactionSource.Income
   );
   const [categoryDropdown, setCategoryDropdown] = useState<
     Record<string, Option[]>
   >({});
-  const [category, setCategory] = useState<Option | null>(null);
-  const { value: amount, handleInputChange: handleAmountChange, hasError: invalidAmount } = useInput<number | null>(
-    null,
+  const [category, setCategory] = useState<Option | undefined>(() => {
+    if (transactionToModify?.category) {
+      return {
+        value: transactionToModify?.category.id,
+        label: transactionToModify?.category.name,
+      };
+    }
+  });
+  const {
+    value: amount,
+    handleInputChange: handleAmountChange,
+    hasError: invalidAmount,
+  } = useInput<number | null>(
+    transactionToModify?.amount ?? null,
     (amount) => amount !== null && amount > 0
   );
   const { value: date, handleInputChange: handleDateChange } = useInput<string>(
-    props.existingData?.createdAt
-      ? new Date(props.existingData.createdAt).toISOString().slice(0, 10)
+    transactionToModify?.createdAt
+      ? new Date(transactionToModify.createdAt).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10)
   );
   const [sharedWith, setSharedWith] = useState<Option[]>([]);
-  const [note, setNote] = useState<string | null>(null);
+  const [note, setNote] = useState<string | null>(
+    transactionToModify?.note ?? null
+  );
 
   const TransactionComponent: Record<string, JSX.Element> = {
     expense: <ExpenseTransaction setSource={setSource} />,
@@ -59,10 +83,10 @@ function TransactionDetails(props: TransactionDetailsProps) {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
-  
+
   useEffect(() => {
     setUpCategoryOptions();
-  }, [categories])
+  }, [categories]);
 
   const setUpCategoryOptions = async () => {
     setCategoryDropdown(() => {
@@ -84,9 +108,6 @@ function TransactionDetails(props: TransactionDetailsProps) {
       return options;
     });
   };
-
-  useEffect(() => {
-  }, [categoryDropdown])
 
   const toggleNewCategory = () => {
     setNewCategory((oldValue) => !oldValue);
@@ -114,7 +135,8 @@ function TransactionDetails(props: TransactionDetailsProps) {
         note,
       };
 
-      dispatch(insertTransaction(data))
+      dispatch(transactionsActions.insertTransaction(data));
+      // TODO: toggle modal only after the transaction is inserted
       props.toggleModal();
     } catch (error: any) {
       showNotification(error.message, Notification.ERROR);
@@ -132,6 +154,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
         <Input
           icon="list"
           isDropdown
+          defaultValue={category}
           isSearchable
           placeholder="Select Category"
           options={categoryDropdown}
@@ -150,7 +173,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
           min="0.01"
           required
           placeholder="Amount"
-          value={amount}
+          value={amount ?? ''}
           onChange={handleAmountChange}
         />
         <Input

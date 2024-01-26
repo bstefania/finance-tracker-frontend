@@ -10,6 +10,7 @@ export type Option = {
 
 type DropdownProps = {
   placeholder: string;
+  defaultValue?: Option;
   options: Option[] | Record<string, Option[]>;
   groups?: boolean;
   isMulti?: boolean;
@@ -20,6 +21,7 @@ type DropdownProps = {
 
 const Dropdown = ({
   placeholder,
+  defaultValue,
   options,
   groups = false,
   isMulti = false,
@@ -29,7 +31,7 @@ const Dropdown = ({
 }: DropdownProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedValue, setSelectedValue] = useState<Option[] | Option | null>(
-    isMulti ? [] : (options as Option[])[0]
+    isMulti ? [] : (defaultValue ?? (options as Option[])[0])
   );
   const [searchValue, setSearchValue] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);

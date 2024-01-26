@@ -4,13 +4,13 @@ import Icon from "../atoms/Icon";
 import Category from "../molecules/Category";
 import Actions from "../molecules/Actions";
 import TransactionDetails from "./TransactionDetails";
-import { Transaction, TransactionType } from "../../types/database";
+import { TransactionType } from "../../types/database";
 import { Action } from "../../types/types";
 import { ron } from "../../utils/numberFormat";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import styles from "../../styles/organisms/Transactions.module.scss";
 import NoData from "../atoms/NoData";
-import { fetchTransactions } from "../../store/transactionsSlice";
+import { transactionsActions } from "../../store/transactionsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 
 type TransactionsProps = {
@@ -24,10 +24,10 @@ function Transactions(props: TransactionsProps) {
   const error = useAppSelector((state) => state.transactions.error);
 
   const [showTransactionDetails, setShowTransactionDetails] = useState(false);
-  const [transactionToModify, setTransactionToModify] = useState<Transaction | null>(null);
+  const [transactionIdToModify, setTransactionIdToModify] = useState<string>();
 
   useEffect(() => {
-    dispatch(fetchTransactions());
+    dispatch(transactionsActions.fetchTransactions());
   }, [dispatch]);
 
 
@@ -40,16 +40,18 @@ function Transactions(props: TransactionsProps) {
   const actions: Action[] = [
     {
       label: "Edit",
-      onClick: (transaction: Transaction) => {
-        setTransactionToModify(transaction);
+      onClick: (transactionId: string) => {
+        setTransactionIdToModify(transactionId);
         setShowTransactionDetails(true);
       },
     },
-    { label: "Delete", onClick: () => {} },
+    { label: "Delete", onClick: (transactionId: string) => {
+      dispatch(transactionsActions.deleteTransaction(transactionId))
+    } },
   ];
 
   const toggleModal = () => {
-    setTransactionToModify(null);
+    setTransactionIdToModify(undefined);
     setShowTransactionDetails(oldValue => !oldValue);
   };
 
@@ -62,7 +64,7 @@ function Transactions(props: TransactionsProps) {
       {showTransactionDetails && (
         <TransactionDetails
           toggleModal={toggleModal}
-          existingData={transactionToModify}
+          transactionIdToModify={transactionIdToModify}
         />
       )}
       <div className={styles["fix-table-head"]}>
@@ -78,25 +80,25 @@ function Transactions(props: TransactionsProps) {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(transactions).map(([key, val], index) => {
+            {Object.entries(transactions).map(([transactionId, transaction], index) => {
               return (
-                <tr key={val.id}>
+                <tr key={transaction.id}>
                   <td>
                     <Category
-                      category={val.category.name}
-                      categoryGroup={val.category.categoryGroup.name}
-                      color={val.category.color}
-                      icon={val.category.icon}
+                      category={transaction.category.name}
+                      categoryGroup={transaction.category.categoryGroup.name}
+                      color={transaction.category.color}
+                      icon={transaction.category.icon}
                     />
                   </td>
-                  <td>{ron.format(val.amount)}</td>
+                  <td>{ron.format(transaction.amount)}</td>
                   <td>
-                    <span className={styles[`label-${val.type}`]}>
-                      {val.type.charAt(0).toUpperCase() + val.type.slice(1)}
+                    <span className={styles[`label-${transaction.type}`]}>
+                      {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
                     </span>
                   </td>
                   <td>
-                    {new Date(val.createdAt).toLocaleDateString("en-us", {
+                    {new Date(transaction.createdAt).toLocaleDateString("en-us", {
                       weekday: "long",
                       year: "numeric",
                       month: "short",
@@ -104,7 +106,7 @@ function Transactions(props: TransactionsProps) {
                     })}
                   </td>
                   <td>
-                    {val.sharedWith.length ? (
+                    {transaction.sharedWith.length ? (
                       <div className={styles["user-div"]}>
                         <Icon icon="user" className={styles["user-icon"]} />
                       </div>
@@ -113,7 +115,7 @@ function Transactions(props: TransactionsProps) {
                     )}
                   </td>
                   <td className={styles["column-with-action"]}>
-                    <Actions actions={actions} data={val} />
+                    <Actions actions={actions} data={transactionId} />
                   </td>
                 </tr>
               );

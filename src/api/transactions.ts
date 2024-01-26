@@ -54,3 +54,14 @@ export const postTransactions = async (data: TransactionInput) => {
     );
   }
 };
+
+export const deleteTransactions = async (id: string) => {
+  try {
+    const res = await customAxios.delete(`/transactions/${id}`);
+    return res.data.data;
+  } catch (error: any) {
+    throw Error(
+      error.response?.data?.message ?? "Transaction couldn't be deleted!"
+    );
+  }
+};
