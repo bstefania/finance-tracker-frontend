@@ -4,7 +4,7 @@ import MoneyCard from "../components/molecules/MoneyCard";
 import MonthlyTransactions from "../components/molecules/MonthlyTransactions";
 import UpcomingTransactions from "../components/organisms/UpcomingTransactions";
 import { MoneyCardType, TransactionType } from "../types/database";
-import { ron } from "../utils/numberFormat";
+import { ron } from "../utils/dataFormatter";
 import styles from "../styles/pages/Home.module.scss";
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
 import { useEffect } from "react";

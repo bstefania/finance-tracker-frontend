@@ -6,7 +6,7 @@ import Actions from "../molecules/Actions";
 import TransactionDetails from "./TransactionDetails";
 import { TransactionType } from "../../types/database";
 import { Action } from "../../types/types";
-import { ron } from "../../utils/numberFormat";
+import { ron } from "../../utils/dataFormatter";
 import { Notification, showNotification } from "../../utils/errorHandling";
 import styles from "../../styles/organisms/Transactions.module.scss";
 import NoData from "../atoms/NoData";

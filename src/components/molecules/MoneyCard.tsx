@@ -1,5 +1,5 @@
 import { MoneyCardType, TransactionType } from "../../types/database";
-import { ron, formatDecimals } from "../../utils/numberFormat";
+import { ron, formatDecimals } from "../../utils/dataFormatter";
 import styles from "../../styles/molecules/MoneyCard.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 import { useEffect } from "react";

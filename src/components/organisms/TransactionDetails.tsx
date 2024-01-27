@@ -19,6 +19,7 @@ import Input from "../molecules/Input";
 import { useInput } from "../../hooks/useInput";
 import TransactionTypes from "../atoms/TransactionTypes";
 import { transactionsActions } from "../../store/transactionsSlice";
+import { formatDate } from "../../utils/dataFormatter";
 
 type TransactionDetailsProps = {
   toggleModal: any;
@@ -67,8 +68,8 @@ function TransactionDetails(props: TransactionDetailsProps) {
   );
   const { value: date, handleInputChange: handleDateChange } = useInput<string>(
     transactionToModify?.createdAt
-      ? new Date(transactionToModify.createdAt).toISOString().slice(0, 10)
-      : new Date().toISOString().slice(0, 10)
+      ? formatDate(transactionToModify.createdAt)
+      : formatDate(new Date())
   );
   const [sharedWith, setSharedWith] = useState<Option[]>([]);
   const [note, setNote] = useState<string | null>(
@@ -127,7 +128,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
 
       const data: TransactionInput = {
         type: selectedType,
-        source,
+        source: source,
         categoryId: (category as Option).value,
         amount: amount as number,
         createdAt,
@@ -135,7 +136,15 @@ function TransactionDetails(props: TransactionDetailsProps) {
         note,
       };
 
-      dispatch(transactionsActions.insertTransaction(data));
+      if(!transactionToModify) {
+        dispatch(transactionsActions.insertTransaction(data));
+      } else {
+        dispatch(transactionsActions.updateTransaction({
+          id: transactionToModify.id,
+          newValues: data
+        }));
+      }
+
       // TODO: toggle modal only after the transaction is inserted
       props.toggleModal();
     } catch (error: any) {

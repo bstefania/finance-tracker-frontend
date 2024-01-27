@@ -8,6 +8,7 @@ import {
   deleteTransactions,
   getTransactions,
   postTransactions,
+  patchTransactions
 } from "../api/transactions";
 import { Transaction, TransactionInput } from "../types/database";
 import { userActions } from "./userSlice";
@@ -37,6 +38,18 @@ export const insertTransaction = createAsyncThunk(
   "transactions/insertTransaction",
   async (transactionInput: TransactionInput, thunkAPI) => {
     const response = await postTransactions(transactionInput);
+    thunkAPI.dispatch(fetchTransactions())
+    thunkAPI.dispatch(userActions.fetchWealth());
+    return response;
+  }
+);
+
+export const updateTransaction = createAsyncThunk(
+  "transactions/updateTransaction",
+  async (input: {id: string, newValues: TransactionInput}, thunkAPI) => {
+    // TODO: send only changed values
+    const response = await patchTransactions(input.id, input.newValues);
+    thunkAPI.dispatch(fetchTransactions())
     thunkAPI.dispatch(userActions.fetchWealth());
     return response;
   }
@@ -73,7 +86,6 @@ const transactionsSlice = createSlice({
       })
       .addCase(insertTransaction.fulfilled, (state, action) => {
         state.status = "succeeded";
-        transactionsAdapter.addOne(state, action.payload);
       })
       .addCase(insertTransaction.rejected, (state, action) => {
         state.status = "failed";
@@ -98,5 +110,6 @@ export const transactionsActions = {
   fetchTransactions,
   insertTransaction,
   deleteTransaction,
+  updateTransaction
 };
 export default transactionsSlice.reducer;
