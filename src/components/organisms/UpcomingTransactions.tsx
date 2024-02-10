@@ -8,7 +8,7 @@ type UpcomingTransactionsProps = {
 
 function UpcomingTransactions({ type }: UpcomingTransactionsProps) {
   return (
-    <div className={styles["upcoming-payments"]}>
+    <div className={`${styles["widget"]} ${styles["upcoming-payments"]}`}>
       <div className={styles["header"]}>
         <h2>Upcoming transactions</h2>
       </div>

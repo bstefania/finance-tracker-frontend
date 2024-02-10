@@ -48,5 +48,8 @@ const categoryGroupsSlice = createSlice({
   },
 });
 
-export const categoryGroupsActions = categoryGroupsSlice.actions;
+export const categoryGroupsActions = {
+  fetchCategoryGroups,
+  ...categoryGroupsSlice.actions
+}
 export default categoryGroupsSlice.reducer;

@@ -113,7 +113,7 @@ function MonthlyTransactions({ type }: MonthlyTransactionsProps) {
   
 
   return (
-    <div className={styles["monthly-expenses"]}>
+    <div className={`${styles["widget"]} ${styles["monthly-expenses"]}`}>
       <div className={styles["header"]}>
         <h2>Monthly transactions</h2>
       </div>

@@ -1,18 +1,12 @@
 @use "../variables.scss" as vars;
 @import "./common.module.scss";
+@import "../common.module.scss";
 
 .transactions {
   display: flex;
 }
 
 .wealth {
-  background-color: #fff;
-  padding: 1em;
-  border-radius: vars.$border-radius;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
-
   .header {
     flex-direction: column;
 

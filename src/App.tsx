@@ -10,6 +10,7 @@ import LinkPage from "./pages/LinkPage";
 import Signup from './pages/Signup';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import Settings from "./pages/Settings";
 
 function App() {
   library.add(fas);
@@ -27,6 +28,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route path="/" element={<Home />}/>
           <Route path="wallet" element={<Wallet />}/>
+          <Route path="settings" element={<Settings />}/>
         </Route>
 
         <Route path="missing" element={<Missing />}/>

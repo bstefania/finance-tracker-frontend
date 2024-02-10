@@ -14,6 +14,12 @@ type State = EntityState<Category, string> & {
 
 const categoriesAdapter = createEntityAdapter<Category>();
 
+export const selectCategoriesByGroup = (state: State, categoryGroupId: string | null) => {
+  if (!categoryGroupId) return [];
+  const allCategories = categoriesAdapter.getSelectors().selectAll(state);
+  return allCategories.filter(category => category.categoryGroup.id === categoryGroupId);
+};
+
 const initialState: State = categoriesAdapter.getInitialState({
   status: 'idle',
   error: null,
@@ -48,5 +54,10 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const categoriesActions = categoriesSlice.actions;
+export const categoriesActions = {
+  fetchCategories,
+  selectCategoriesByGroup,
+  ...categoriesSlice.actions
+}
+
 export default categoriesSlice.reducer;
