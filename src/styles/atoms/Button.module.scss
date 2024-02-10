@@ -2,8 +2,7 @@
 
 button {
   width: fit-content;
-  padding: 0.5em 1.5em;
-  margin: 0 0.5em;
+  padding: 0.25em 1em;
   border-radius: 0.5em;
   font-size: vars.$font-size-16;
   background-color: vars.$dark-color;
@@ -14,10 +13,30 @@ button {
   &:disabled {
     opacity: 0.5;
   }
+
+  &:hover {
+    background-color: vars.$medium-color;
+  }
 }
 
 .button--secondary {
   background-color: white;
-  color: black;
   border: 1px solid vars.$dark-color; 
+}
+
+.button--tertiary {
+  background-color: white;
+
+  &:hover {
+    background-color: vars.$light-color;
+    // color: white;
+
+    // &.button--icon {
+    //   fill: white;
+    // }
+  }
+}
+
+.button--icon {
+  padding: 0.25em;
 }
