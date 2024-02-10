@@ -13,7 +13,7 @@
   
   &:hover {
     cursor: pointer;
-    border: solid 2px vars.$border-color;
+    border: solid 2px vars.$separator-color;
   }
   
   &.selected-color {
@@ -33,7 +33,7 @@
 
   &:hover { 
     cursor: pointer;
-    border: solid 2px vars.$border-color;
+    border: solid 2px vars.$separator-color;
   }
 }
 

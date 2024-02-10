@@ -1,4 +1,9 @@
 @import "../utils/Table.module.scss";
+@import "../common.module.scss";
+
+.transactions {
+  height: 100%;
+}
 
 .transactions-table thead th:nth-child(1) {
   width: 25%;

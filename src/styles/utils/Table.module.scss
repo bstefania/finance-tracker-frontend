@@ -2,15 +2,8 @@
 @import "../common.module.scss";
 
 .table-div {
-  width: 100%;
   min-height: 470px;
   max-height: 500px;
-  background-color: #fff;
-  border-radius: vars.$border-radius;
-  padding: 1.5em;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
 }
 
 .header {
@@ -22,16 +15,6 @@
 .fix-table-head {
   overflow: auto;
   height: 100%;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.fix-table-head::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.fix-table-head {
-  -ms-overflow-style: none;  /* IE and Edge */
 }
 
 .fix-table-head thead th {

@@ -1,5 +1,29 @@
 @use "./variables.scss" as vars;
-@use "./mixins.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+
+  h2 {
+    font-size: vars.$font-size-20;
+  }
+
+  h3 {
+    font-size: vars.$font-size-18;
+  }
+}
+
+.widget {
+  width: 100%;
+  background-color: #fff;
+  border-radius: vars.$border-radius;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
 
 .invalidField {
   color: red;
@@ -37,28 +61,4 @@ input[type=radio] {
   display: flex;
   align-items: center;
   justify-content: center; 
-}
-
-.label-income {
-  @extend %label;
-  color: vars.$income-color;
-  background-color: rgba(101,172,132,0.2);
-}
-
-.label-expense {
-  @extend %label;
-  color: vars.$expense-color;
-  background-color: rgba(213, 35, 35, 0.2);
-}
-
-.label-savings {
-  @extend %label;
-  color: vars.$savings-color;
-  background-color: rgba(227,175,130, 0.2);
-}
-
-.label-investments {
-  @extend %label;
-  color: vars.$investments-color;
-  background-color: rgb(4, 89, 193, 0.2);
 }

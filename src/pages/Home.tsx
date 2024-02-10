@@ -25,7 +25,7 @@ const Home = () => {
           <Transactions />
         </main>
         <div className={styles["right-sidebar"]}>
-          <div className={styles["wealth"]}>
+          <div className={`${styles["widget"]} ${styles["wealth"]}`}>
             <div className={styles["header"]}>
               <h2>Total Balance</h2>
               <span>{ron.format(wealth?.total ?? 0)}</span>

@@ -20,7 +20,7 @@
   position: absolute;
   transform: translateY(5px);
   width: 100%;
-  border: 1px solid vars.$border-color;
+  border: 1px solid vars.$separator-color;
   border-radius: vars.$border-radius;
   overflow: auto;
   max-height: 150px;
@@ -75,7 +75,7 @@
   input {
     width: 100%;
     padding: 5px;
-    border: 1px solid vars.$border-color;
+    border: 1px solid vars.$separator-color;
     border-radius: vars.$border-radius;
   }
 }
@@ -85,5 +85,5 @@
   cursor: pointer;
   text-align: center;
   padding: vars.$text-padding;
-  border: solid 1px vars.$border-color;
+  border: solid 1px vars.$separator-color;
 }

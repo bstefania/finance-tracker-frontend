@@ -4,6 +4,7 @@ import styles from "../../styles/molecules/MoneyCard.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
 import { useEffect } from "react";
 import { userActions } from "../../store/userSlice";
+import Label from "../atoms/Label";
 
 type MoneyCardProps = {
   type: MoneyCardType;
@@ -59,9 +60,9 @@ const MoneyCard = (props: MoneyCardProps) => {
     <div className={styles["money-card"]}>
       <div className={styles["title"]}>
         <span>{details[props.type].title}</span>
-        <span className={styles[`label-${props.type}`]}>
+        <Label transactionType={props.type}>
           {formatDecimals(wealth?.category[props.type].percentage)}%
-        </span>
+        </Label>
       </div>
       <div className={styles["amount"]}>
         {/* {editMode ? (

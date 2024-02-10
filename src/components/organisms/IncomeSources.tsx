@@ -39,7 +39,7 @@ function IncomeSources({}: IncomeSourcesProps) {
       {incomeSourcesDetailsVisible && (
         <TransactionDetails toggleModal={toggleModal} />
       )}
-      <div className={styles["fix-table-head"]}>
+      <div className={`${styles["fix-table-head"]} no-scrollbar`}>
         <table className={styles["income-sources-table"]}>
           <thead>
             <tr>

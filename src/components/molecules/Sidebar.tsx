@@ -14,41 +14,41 @@ function Sidebar() {
       title: "Home",
       link: "/",
     },
-    {
-      icon: "wallet",
-      title: "Wallet",
-      link: "/wallet",
-    },
-    {
-      icon: "credit-card",
-      title: "Spendings",
-      link: "/spendings",
-    },
-    {
-      icon: "piggy-bank",
-      title: "Savings",
-      link: "/savings",
-    },
-    {
-      icon: "money-bill-trend-up",
-      title: "Investments",
-      link: "/investments",
-    },
-    {
-      icon: "user-group",
-      title: "Friends",
-      link: "/friends",
-    },
+    // {
+    //   icon: "wallet",
+    //   title: "Wallet",
+    //   link: "/wallet",
+    // },
+    // {
+    //   icon: "credit-card",
+    //   title: "Spendings",
+    //   link: "/spendings",
+    // },
+    // {
+    //   icon: "piggy-bank",
+    //   title: "Savings",
+    //   link: "/savings",
+    // },
+    // {
+    //   icon: "money-bill-trend-up",
+    //   title: "Investments",
+    //   link: "/investments",
+    // },
+    // {
+    //   icon: "user-group",
+    //   title: "Friends",
+    //   link: "/friends",
+    // },
     {
       icon: "gears",
       title: "Settings",
       link: "/settings",
     },
-    {
-      icon: "calendar-days",
-      title: "Calendar",
-      link: "/calendar",
-    },
+    // {
+    //   icon: "calendar-days",
+    //   title: "Calendar",
+    //   link: "/calendar",
+    // },
   ];
   const toggleSideNav = () => {
     setSidenavOpen(!sidenavOpen);
@@ -85,10 +85,10 @@ function Sidebar() {
             );
           })}
         </ul>
-        <div className={styles["page-ref"]}>
+        {/* <div className={styles["page-ref"]}>
           <Icon icon="circle-user" large />
           {showTitle && <p>Account</p>}
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import styles from "../../styles/organisms/Transactions.module.scss";
 import NoData from "../atoms/NoData";
 import { transactionsActions } from "../../store/transactionsSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
+import Label from "../atoms/Label";
 
 type TransactionsProps = {
   type?: TransactionType;
@@ -56,7 +57,7 @@ function Transactions(props: TransactionsProps) {
   };
 
   return (
-    <div className={styles["table-div"]}>
+    <div className={`${styles["widget"]} ${styles["table-div"]} ${styles["transactions"]}`}>
       <div className={styles["header"]}>
         <h2>Recent transactions</h2>
         <Button onClick={() => toggleModal()}>+ Add</Button>
@@ -67,7 +68,7 @@ function Transactions(props: TransactionsProps) {
           transactionIdToModify={transactionIdToModify}
         />
       )}
-      <div className={styles["fix-table-head"]}>
+      <div className={`${styles["fix-table-head"]} no-scrollbar`}>
         <table className={styles["transactions-table"]}>
           <thead>
             <tr>
@@ -93,9 +94,9 @@ function Transactions(props: TransactionsProps) {
                   </td>
                   <td>{ron.format(transaction.amount)}</td>
                   <td>
-                    <span className={styles[`label-${transaction.type}`]}>
+                    <Label transactionType={transaction.type}>
                       {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
-                    </span>
+                    </Label>
                   </td>
                   <td>
                     {new Date(transaction.createdAt).toLocaleDateString("en-us", {

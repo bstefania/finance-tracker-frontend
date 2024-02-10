@@ -1,19 +1,12 @@
 @use "../variables.scss" as vars;
+@use "../common.module.scss";
 
 .monthly-expenses {
-  width: 100%;
-  background-color: #fff;
-  padding: vars.$main-padding;
-  display: flex;
-  gap: 0.5em;
-  flex-direction: column;
-  align-items: center;
-  border-radius: vars.$border-radius;
 }
 
 .donut {
   padding: 1em 1em;
-  border: vars.$border-color solid 1px;
+  border: vars.$separator-color solid 1px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -26,7 +19,7 @@
   justify-content: flex-end;
 
   .filter {
-    border: solid 1px vars.$border-color;
+    border: solid 1px vars.$separator-color;
     padding-inline: vars.$text-padding;
     border-radius: vars.$border-radius;
     width: 50%;

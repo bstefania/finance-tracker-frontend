@@ -9,7 +9,7 @@ type State = {
 
 const initialState: State = {
   status: 'idle',
-  error: 'xfdsfdgf',
+  error: undefined,
 };
 
 const uiSlice = createSlice({
