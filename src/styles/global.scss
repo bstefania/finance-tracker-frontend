@@ -87,21 +87,19 @@ ul {
 
 // classes 
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
 .App {
   display: flex;
   flex-direction: column;
   background-color: vars.$light-color;
   align-items: center;
-}
-
-.header {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-
-  h2 {
-    flex-grow: 1;
-    font-size: vars.$font-size-20;
-    font-weight: 700;
-  }
 }
