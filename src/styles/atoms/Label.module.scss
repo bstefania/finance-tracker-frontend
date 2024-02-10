@@ -1,0 +1,31 @@
+@use "../mixins.scss";
+@use "../variables.scss" as vars;
+
+.label {
+  height: fit-content;
+  font-size: 12px;
+}
+
+.label-income {
+  @extend %label;
+  color: vars.$income-color;
+  background-color: rgba(101,172,132,0.2);
+}
+
+.label-expense {
+  @extend %label;
+  color: vars.$expense-color;
+  background-color: rgba(213, 35, 35, 0.2);
+}
+
+.label-savings {
+  @extend %label;
+  color: vars.$savings-color;
+  background-color: rgba(227,175,130, 0.2);
+}
+
+.label-investments {
+  @extend %label;
+  color: vars.$investments-color;
+  background-color: rgb(4, 89, 193, 0.2);
+}
