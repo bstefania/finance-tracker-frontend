@@ -6,6 +6,7 @@ import NoData from "../atoms/NoData";
 import { categoryGroupsActions } from "../../store/categoryGroupsSlice";
 import CategoryGroupMenuItem from "../molecules/CategoryGroupMenuItem";
 import CategoryGroupEditor from "./CategoryGroupEditor";
+import NewCategoryLevel, { CategoryLevel } from "../molecules/NewCategoryLevel";
 
 type CategoriesProps = {};
 
@@ -15,6 +16,8 @@ function CategoryGroupSettings({}: CategoriesProps) {
   const status = useAppSelector((state) => state.categoryGroups.status);
   const error = useAppSelector((state) => state.categoryGroups.error);
   const [selectedCategoryGroup, setSelectedCategoryGroup] = useState<string | null>(null);
+
+  const [newCategoryGroup, setNewCategoryGroup] = useState(false);
 
   useEffect(() => {
     dispatch(categoryGroupsActions.fetchCategoryGroups());
@@ -26,15 +29,16 @@ function CategoryGroupSettings({}: CategoriesProps) {
     }
   }, [categoryGroups])
 
-  const toggleModal = () => {
-    console.log("Modal toggled");
-  };
+  const toggleNewCategoryGroup = () => {
+    setNewCategoryGroup(oldValue => !oldValue);
+  }
 
   return (
+    <>
     <div className={styles["widget"]}>
       <div className={styles["header"]}>
         <h2>Category groups</h2>
-        <Button onClick={() => toggleModal()}>+ Add</Button>
+        <Button onClick={toggleNewCategoryGroup}>+ Add</Button>
       </div>
       <div className={styles["editor"]}>
         <div className={styles["category-groups"]}>
@@ -57,6 +61,8 @@ function CategoryGroupSettings({}: CategoriesProps) {
           />
         )}
     </div>
+    <NewCategoryLevel level={CategoryLevel.CATEGORY_GROUP} open={newCategoryGroup} toggleModal={toggleNewCategoryGroup} />
+    </>
   );
 }
 

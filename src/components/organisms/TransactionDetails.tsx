@@ -7,7 +7,7 @@ import {
   TransactionSource,
 } from "../../types/database";
 import Modal from "../atoms/Modal";
-import NewCategory from "../molecules/NewCategory";
+import NewCategoryLevel, { CategoryLevel } from "../molecules/NewCategoryLevel";
 import ExpenseTransaction from "../molecules/ExpenseTransaction";
 import InvestmentsTransaction from "../molecules/InvestmentsTransaction";
 import { showNotification, Notification } from "../../utils/errorHandling";
@@ -153,7 +153,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
   };
 
   return !newCategory ? (
-    <Modal title="New transaction" toggleModal={props.toggleModal}>
+    <Modal title="New transaction" open={newCategory} toggleModal={props.toggleModal}>
       <form onSubmit={handleSubmit}>
         <TransactionTypes
           selectedType={selectedType}
@@ -220,7 +220,7 @@ function TransactionDetails(props: TransactionDetailsProps) {
       </form>
     </Modal>
   ) : (
-    <NewCategory show={newCategory} toggleModal={toggleNewCategory} />
+    <NewCategoryLevel level={CategoryLevel.CATEGORY} open={newCategory} toggleModal={toggleNewCategory} />
   );
 }
 

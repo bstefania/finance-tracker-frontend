@@ -4,8 +4,8 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { getCategoryGroups } from "../api/categories";
-import { CategoryGroup } from "../types/database";
+import { getCategoryGroups, postCategoryGroups } from "../api/categories";
+import { CategoryGroup, CategoryGroupInput } from "../types/database";
 
 type State = EntityState<CategoryGroup, string> & {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -25,6 +25,15 @@ export const fetchCategoryGroups = createAsyncThunk(
   "categoryGroups/fetchCategoryGroups",
   async () => {
     return getCategoryGroups();
+  }
+);
+
+export const insertCategoryGroup = createAsyncThunk(
+  "categoryGroups/insertCategoryGroup",
+  async (categoryGroupInput: CategoryGroupInput, thunkAPI) => {
+    const response = await postCategoryGroups(categoryGroupInput);
+    thunkAPI.dispatch(fetchCategoryGroups());
+    return response;
   }
 );
 
@@ -50,6 +59,7 @@ const categoryGroupsSlice = createSlice({
 
 export const categoryGroupsActions = {
   fetchCategoryGroups,
+  insertCategoryGroup,
   ...categoryGroupsSlice.actions
 }
 export default categoryGroupsSlice.reducer;
